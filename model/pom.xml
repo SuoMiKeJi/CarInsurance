@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>car-insurance</artifactId>
+        <groupId>com.suomi</groupId>
+        <version>1.0.0.0.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.suomi.carinsurance</groupId>
+    <artifactId>model</artifactId>
+    <packaging>jar</packaging>
+
+    <name>CarInsurance Model</name>
+
+    <dependencies>
+
+        <!-- 常用插件 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+
+    </dependencies>
+
+</project>

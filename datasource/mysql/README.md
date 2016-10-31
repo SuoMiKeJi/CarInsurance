@@ -1,7 +1,4 @@
-# CarInsurance
-索米车险大数据平台。
-
-开发分支： devp
+# Mysql 数据持久层模块
 
 命名规范：
 1、命名 - 尽量见名知义
@@ -16,11 +13,10 @@
 11、Mapper文件名 - 必须与类的主名一样。
 12、ibatis配置文件名 - 必须是mybatis_config.xml。
 
+xxx.xxx.read 读数据库包名
+xxx.xxx.write 写数据库包名
 
+持久层[读]主文件名必须以 ReadMapper 结尾，即：IXxxxReadMapper
+持久层[写]主文件名必须以 WriteMapper 结尾，即：IXxxxWriteMapper
 
-项目配置说明：
-操作系统环境变量配置 RUNTIME_ENVIRONMENT 运行环境变量设置，取值为 local/development/release/produce (分别代表 本地/研发/预发布/生产 环境)。
-
-
-
-
+sql目录是mysql脚本。

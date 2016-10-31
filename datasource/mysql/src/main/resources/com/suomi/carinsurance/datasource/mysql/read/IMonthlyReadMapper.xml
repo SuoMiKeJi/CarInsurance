@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.suomi.carinsurance.datasource.mysql.read.IMonthlyReadMapper">
+
+    <!-- 通过查询条件获取月度统计数据列表 -->
+    <select id="findAll" resultType="monthly" parameterType="searchMonthly">
+        SELECT
+        <include refid="allField"/>
+        FROM monthly AS monthly
+        <if test="vehicleId!=null">WHERE monthly.ID=#{vehicleId}</if>
+    </select>
+
+
+    <sql id="allField">
+        monthly.ID        AS vehicleId,
+        monthly.Period    AS period,
+        monthly.Mileage   AS mileage,
+        monthly.Time      AS duration,
+        monthly.AvgSpeed  AS avgSpeed,
+        monthly.AvgAcc    AS avgAcceleration,
+        monthly.AvgDcc    AS avgDeceleration
+    </sql>
+
+</mapper>

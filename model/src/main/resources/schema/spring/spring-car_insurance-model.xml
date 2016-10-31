@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- 每月统计数据 -->
+    <bean id="monthly" class="com.suomi.carinsurance.model.statistics.Monthly"/>
+    <bean id="searchMonthly" class="com.suomi.carinsurance.search.statistics.SearchMonthly"/>
+
+    <!-- 年度统计数据 -->
+    <bean id="yearly" class="com.suomi.carinsurance.model.statistics.Yearly"/>
+    <bean id="searchYearly" class="com.suomi.carinsurance.search.statistics.SearchYearly"/>
+
+    <!-- 评估统计数据 -->
+    <bean id="evaluationStatistics" class="com.suomi.carinsurance.model.statistics.EvaluationStatistics"/>
+    <bean id="searchEvaluationStatistics" class="com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics"/>
+
+</beans>
