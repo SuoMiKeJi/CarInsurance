@@ -19,3 +19,7 @@
 * xxx.xxx.read 读数据库包名
 * xxx.xxx.write 写数据库包名
 * sql目录是mysql脚本。
+
+
+###### Mysql配置文件：
+src/main/resources/config/mysql-xxx.properties
