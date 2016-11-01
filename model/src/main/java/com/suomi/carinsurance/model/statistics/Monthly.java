@@ -25,7 +25,7 @@ import java.util.Date;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- * <p/>
+ *
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

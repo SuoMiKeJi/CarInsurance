@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- * <p/>
+ *
  */
 @RequestMapping("/es")
 public class EvaluationStatisticsController extends AbstractController {

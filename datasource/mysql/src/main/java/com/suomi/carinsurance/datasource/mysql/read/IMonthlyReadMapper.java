@@ -24,7 +24,7 @@ import java.util.List;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- * <p/>
+ *
  */
 public interface IMonthlyReadMapper {
 

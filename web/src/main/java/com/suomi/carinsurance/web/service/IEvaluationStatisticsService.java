@@ -22,7 +22,7 @@ import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- * <p/>
+ *
  */
 public interface IEvaluationStatisticsService {
 
@@ -34,4 +34,6 @@ public interface IEvaluationStatisticsService {
      * @return 返回数据列表。
      */
     EvaluationStatistics find(SearchEvaluationStatistics search);
+
+    void exportExcel();
 }
