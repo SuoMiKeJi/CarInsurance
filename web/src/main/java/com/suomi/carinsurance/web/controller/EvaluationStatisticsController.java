@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  */
 @RequestMapping("/es")
-public class EvaluationStatisticsController extends AbstractController {
+        public class EvaluationStatisticsController extends AbstractController {
 
     private final static String MODEL = "evaluation_statistics";
 

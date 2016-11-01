@@ -50,9 +50,11 @@
 
     <!-- 项目配置文件 -->
     <bean id="propertyConfigurer" class="net.lizhaoweb.spring.mvc.config.PropertyConfigurer">
+        <property name="fileEncoding" value="UTF-8"/>
         <property name="locations">
             <list>
-                <value>classpath*:config/configuration.properties</value>
+                <value>classpath*:config/system-configuration.properties</value>
+                <value>classpath*:config/custom-configuration.properties</value>
             </list>
         </property>
     </bean>

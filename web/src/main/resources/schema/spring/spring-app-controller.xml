@@ -13,4 +13,10 @@
         <property name="service" ref="evaluationStatisticsService"/>
     </bean>
 
+    <!-- 保险定价因子 -->
+    <bean class="com.suomi.carinsurance.web.controller.InsurancePricingFactorController">
+        <property name="excelService" ref="excelService"/>
+        <property name="service" ref="evaluationStatisticsService"/>
+    </bean>
+
 </beans>

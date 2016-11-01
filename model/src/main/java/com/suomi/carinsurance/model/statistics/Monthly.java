@@ -10,10 +10,12 @@
  */
 package com.suomi.carinsurance.model.statistics;
 
+import com.suomi.carinsurance.annotation.ExcelField;
 import com.suomi.carinsurance.model.AbstractModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -25,7 +27,6 @@ import java.util.Date;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -35,38 +36,45 @@ public class Monthly extends AbstractModel {
      * 时期
      * 时间段
      */
+    @ExcelField(name = "时间段")
     private int period;
 
     /**
      * 月份
      * 时间段
      */
+    @ExcelField(name = "时间段")
     private Date month;
 
     /**
      * 行驶量程数。
      * 里程数
      */
-    private double mileage;
+    @ExcelField(name = "里程数")
+    private BigDecimal mileage;
 
     /**
      * 行驶时长。
      * 行驶时间
      */
-    private double duration;
+    @ExcelField(name = "行驶时间")
+    private BigDecimal duration;
 
     /**
      * 平均速度。
      */
-    private double avgSpeed;
+    @ExcelField(name = "平均速度")
+    private BigDecimal avgSpeed;
 
     /**
      * 平均加速度。
      */
-    private double avgAcceleration;
+    @ExcelField(name = "平均加速度")
+    private BigDecimal avgAcceleration;
 
     /**
      * 平均减速度。
      */
-    private double avgDeceleration;
+    @ExcelField(name = "平均减速度")
+    private BigDecimal avgDeceleration;
 }

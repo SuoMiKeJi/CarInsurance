@@ -132,6 +132,13 @@
             <artifactId>mybatis-spring</artifactId>
         </dependency>
 
+        <!-- Excel -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+
         <!-- 自定义 -->
         <dependency>
             <groupId>net.lizhaoweb.common.util</groupId>

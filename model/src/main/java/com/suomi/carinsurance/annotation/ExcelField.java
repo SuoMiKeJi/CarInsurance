@@ -3,34 +3,36 @@
  * STUPID BIRD PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  * @Project : CarInsurance
- * @Package : com.suomi.carinsurance.model.statistics
+ * @Package : com.suomi.carinsurance.annotation
  * @author <a href="http://www.lizhaoweb.net">李召(John.Lee)</a>
  * @EMAIL 404644381@qq.com
- * @Time : 10:14
+ * @Time : 11:32
  */
-package com.suomi.carinsurance.model.statistics;
+package com.suomi.carinsurance.annotation;
 
-import com.suomi.carinsurance.annotation.ExcelField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * <h1>数据模型 - 年度统计(数据库)</h1>
+ * <h1>注解 - Excel字段</h1>
  *
  * @author <a href="http://www.lizhaoweb.cn">李召(John.Lee)</a>
  * @version 1.0.0.0.1
- * @notes Created on 2016年10月31日<br>
+ * @notes Created on 2016年11月01日<br>
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class Yearly extends EvaluationStatistics {
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ExcelField {
 
     /**
-     * 年份
+     * Excel字段名。
+     *
+     * @return String
      */
-    @ExcelField(name = "年份")
-    private Integer year;
+    String name();
 }

@@ -3,34 +3,44 @@
  * STUPID BIRD PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  * @Project : CarInsurance
- * @Package : com.suomi.carinsurance.model.statistics
+ * @Package : com.suomi.carinsurance.export
  * @author <a href="http://www.lizhaoweb.net">李召(John.Lee)</a>
  * @EMAIL 404644381@qq.com
- * @Time : 10:14
+ * @Time : 12:41
  */
-package com.suomi.carinsurance.model.statistics;
+package com.suomi.carinsurance.export;
 
-import com.suomi.carinsurance.annotation.ExcelField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 /**
- * <h1>数据模型 - 年度统计(数据库)</h1>
+ * <h1>配置 - 导出 - Excel - 工作薄</h1>
  *
  * @author <a href="http://www.lizhaoweb.cn">李召(John.Lee)</a>
  * @version 1.0.0.0.1
- * @notes Created on 2016年10月31日<br>
+ * @notes Created on 2016年11月01日<br>
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class Yearly extends EvaluationStatistics {
+public class ExcelWorkbook {
 
     /**
-     * 年份
+     * 唯一标识
      */
-    @ExcelField(name = "年份")
-    private Integer year;
+    private String id;
+
+    /**
+     * 工作薄名字。
+     */
+    private String name;
+
+    /**
+     * Excel Sheet 列表。
+     */
+    @JsonProperty(value = "sheets")
+    private List<ExcelSheet> sheetList;
 }

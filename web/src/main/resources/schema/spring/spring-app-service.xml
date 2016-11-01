@@ -8,4 +8,6 @@
 
     <bean id="evaluationStatisticsService" class="com.suomi.carinsurance.web.service.impl.EvaluationStatisticsService"/>
 
+    <bean id="excelService" class="com.suomi.carinsurance.export.excel.ExcelService"/>
+
 </beans>

@@ -28,6 +28,12 @@
             <artifactId>spring-beans</artifactId>
         </dependency>
 
+        <!-- JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

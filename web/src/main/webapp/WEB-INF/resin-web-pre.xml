@@ -48,10 +48,6 @@
         <servlet-name>resin-file</servlet-name>
         <url-pattern>*.swf</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>resin-file</servlet-name>
-        <url-pattern>*.xlsx</url-pattern>
-    </servlet-mapping>
 
     <!-- 配置Spring核心控制器 -->
     <servlet>

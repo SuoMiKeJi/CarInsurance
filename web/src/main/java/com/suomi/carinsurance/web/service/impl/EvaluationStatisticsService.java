@@ -51,7 +51,7 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
      * {@inheritDoc}
      */
     @Override
-    public void exportExcel() {
-
+    public List<EvaluationStatistics> findAll(SearchEvaluationStatistics search) {
+        return readMapper.findAll(search);
     }
 }

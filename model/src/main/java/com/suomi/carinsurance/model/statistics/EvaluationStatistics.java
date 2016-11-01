@@ -10,6 +10,7 @@
  */
 package com.suomi.carinsurance.model.statistics;
 
+import com.suomi.carinsurance.annotation.ExcelField;
 import com.suomi.carinsurance.model.AbstractModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,7 +26,6 @@ import java.math.BigDecimal;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -36,415 +36,603 @@ public class EvaluationStatistics extends AbstractModel {
      * 省份。
      * 省
      */
+    @ExcelField(name = "省份")
     private String province;
 
     /**
      * 城市
      */
+    @ExcelField(name = "城市")
     private String city;
 
     /**
      * 性别
      */
+    @ExcelField(name = "性别")
     private String gender;
 
     /**
      * 年龄
      */
+    @ExcelField(name = "年龄")
     private String age;
 
     /**
      * 车辆描述
      */
+    @ExcelField(name = "车辆描述")
     private String vehicleDescription;
 
     /**
      * 车辆颜色
      */
+    @ExcelField(name = "车辆颜色")
     private String vehicleColor;
 
     /**
      * 车辆价值
      */
+    @ExcelField(name = "车辆价值")
     private BigDecimal vehicleValue;
 
     /**
      * 注册日期
      */
+    @ExcelField(name = "注册日期")
     private String regdate;
 
     /**
      * 行程次数
      */
-    private double tripCount;
+    @ExcelField(name = "行程次数")
+    private BigDecimal tripCount;
 
     /**
      * 行驶时长。
      * 行驶时间
      */
-    private double duration;
+    @ExcelField(name = "行驶时间")
+    private BigDecimal duration;
 
     /**
      * 行驶量程数。
      * 里程数
      */
-    private double mileage;
+    @ExcelField(name = "里程数")
+    private BigDecimal mileage;
 
     /**
      * 风险评级
      */
-    private double riskRating;
+    @ExcelField(name = "风险评级")
+    private BigDecimal riskRating;
 
     /**
      * 超过比例
      */
-    private double riskRatingProportion;
+    @ExcelField(name = "超过比例")
+    private BigDecimal riskRatingProportion;
 
     /**
      * 建议折扣
      */
-    private double suggestedDiscount;
+    @ExcelField(name = "建议折扣")
+    private BigDecimal suggestedDiscount;
 
     /**
      * 欺骗风险
      */
-    private double fraudRisk;
+    @ExcelField(name = "欺骗风险")
+    private BigDecimal fraudRisk;
 
     /**
      * 月平均行驶时间(单位：小时)
      * 月平均时间
      */
-    private double monthAvgTime;
+    @ExcelField(name = "月平均时间")
+    private BigDecimal monthAvgTime;
 
     /**
      * 月平均驾驶里程(单位：公里)
      * 月平均里程
      */
-    private double monthAvgMileage;
+    @ExcelField(name = "月平均里程")
+    private BigDecimal monthAvgMileage;
 
     /**
      * 清晨（5-6）比例
      */
-    private double earlyMorningPercentage;
+    @ExcelField(name = "清晨比例")
+    private BigDecimal earlyMorningPercentage;
 
     /**
      * 早高峰（7-10）比例
      */
-    private double morningPeakPercentage;
+    @ExcelField(name = "早高峰比例")
+    private BigDecimal morningPeakPercentage;
 
     /**
      * 白天（11-16）比例
      */
-    private double dayPercentage;
+    @ExcelField(name = "白天比例")
+    private BigDecimal dayPercentage;
 
     /**
      * 晚高峰（17-20）比例
      */
-    private double evenignPeakPercentage;
+    @ExcelField(name = "晚高峰比例")
+    private BigDecimal evenignPeakPercentage;
 
     /**
      * 夜间（21-4）比例
      */
-    private double nightProportion;
+    @ExcelField(name = "夜间比例")
+    private BigDecimal nightProportion;
 
     /**
      * 连续开车超过1小时概率
      */
-    private double drivingMoreThan1HoursProportion;
+    @ExcelField(name = "连续开车超过1小时概率")
+    private BigDecimal drivingMoreThan1HoursProportion;
 
     /**
      * 连续开车超过2小时概率
      */
-    private double drivingMoreThan2HoursProportion;
+    @ExcelField(name = "连续开车超过2小时概率")
+    private BigDecimal drivingMoreThan2HoursProportion;
 
     /**
      * 连续开车超过3小时概率
      */
-    private double drivingMoreThan3HoursProportion;
+    @ExcelField(name = "连续开车超过3小时概率")
+    private BigDecimal drivingMoreThan3HoursProportion;
 
     /**
      * 连续开车超过100公里概率
      */
-    private double drivingOver100KM;
+    @ExcelField(name = "连续开车超过100公里概率")
+    private BigDecimal drivingOver100KM;
 
     /**
      * 连续开车超过200公里概率
      */
-    private double drivingOver200KM;
+    @ExcelField(name = "连续开车超过200公里概率")
+    private BigDecimal drivingOver200KM;
 
     /**
      * 连续开车超过300公里概率
      */
-    private double drivingOver300KM;
+    @ExcelField(name = "连续开车超过300公里概率")
+    private BigDecimal drivingOver300KM;
 
     /**
      * 平均速度
      */
-    private double avgSpeed;
+    @ExcelField(name = "平均速度")
+    private BigDecimal avgSpeed;
 
     /**
      * 90速度
      */
-    private double baseSpeed90;
+    @ExcelField(name = "90速度")
+    private BigDecimal baseSpeed90;
 
     /**
      * 95速度
      */
-    private double baseSpeed95;
+    @ExcelField(name = "95速度")
+    private BigDecimal baseSpeed95;
 
     /**
      * 99速度
      */
-    private double baseSpeed99;
+    @ExcelField(name = "99速度")
+    private BigDecimal baseSpeed99;
 
     /**
      * 999速度
      */
-    private double baseSpeed999;
+    @ExcelField(name = "999速度")
+    private BigDecimal baseSpeed999;
 
     /**
      * 平均速度比例
      * 速度超过概率
      */
-    private double avgSpeedProportion;
+    @ExcelField(name = "速度超过概率")
+    private BigDecimal avgSpeedProportion;
 
     /**
      * 平均加速度
      * 平均加速度速度
      */
-    private double avgAcceleration;
+    @ExcelField(name = "平均加速度")
+    private BigDecimal avgAcceleration;
 
     /**
      * 90加速度
      */
-    private double acceleration90;
+    @ExcelField(name = "90加速度")
+    private BigDecimal acceleration90;
 
     /**
      * 95加速度
      */
-    private double acceleration95;
+    @ExcelField(name = "95加速度")
+    private BigDecimal acceleration95;
 
     /**
      * 99加速度
      */
-    private double acceleration99;
+    @ExcelField(name = "99加速度")
+    private BigDecimal acceleration99;
 
     /**
      * 999加速度
      */
-    private double acceleration999;
+    @ExcelField(name = "999加速度")
+    private BigDecimal acceleration999;
 
     /**
      * 平均加速度比例
      * 加速度超过概率
      */
-    private double avgAccelerationProportion;
+    @ExcelField(name = "加速度超过概率")
+    private BigDecimal avgAccelerationProportion;
 
     /**
      * 平均减速度
      */
-    private double avgDeceleration;
+    @ExcelField(name = "平均减速度")
+    private BigDecimal avgDeceleration;
 
     /**
      * 90减速度
      */
-    private double deceleration90;
+    @ExcelField(name = "90减速度")
+    private BigDecimal deceleration90;
 
     /**
      * 95减速度
      */
-    private double deceleration95;
+    @ExcelField(name = "95减速度")
+    private BigDecimal deceleration95;
 
     /**
      * 99减速度
      */
-    private double deceleration99;
+    @ExcelField(name = "99减速度")
+    private BigDecimal deceleration99;
 
     /**
      * 999减速度
      */
-    private double deceleration999;
+    @ExcelField(name = "999减速度")
+    private BigDecimal deceleration999;
 
     /**
      * 平均减速度比例
      * 减速度超过概率
      */
-    private double avgDecelerationProportion;
+    @ExcelField(name = "减速度超过概率")
+    private BigDecimal avgDecelerationProportion;
 
     /**
      * 月平均行驶时间比例
      * 时间超过概率
      */
-    private double monthAvgTimeProportion;
+    @ExcelField(name = "时间超过概率")
+    private BigDecimal monthAvgTimeProportion;
 
     /**
      * 月平均行驶里程比例
      * 里程超过概率
      */
-    private double monthAvgMileageProportion;
+    @ExcelField(name = "里程超过概率")
+    private BigDecimal monthAvgMileageProportion;
 
     /**
      * 疲劳驾驶概率
      */
-    private double fatigueDrivingProbability;
+    @ExcelField(name = "疲劳驾驶概率")
+    private BigDecimal fatigueDrivingProbability;
 
     /**
      * 疲劳驾驶概率比例
      * 疲劳超过概率
      */
-    private double fatigueDrivingProbabilityProportion;
+    @ExcelField(name = "疲劳超过概率")
+    private BigDecimal fatigueDrivingProbabilityProportion;
 
 
-
-
-
-    /* ======================================== 速度阶梯 ======================================== */;
+    /* ======================================== 速度阶梯 ======================================== */
+    @ExcelField(name = "速度0")
     private BigDecimal speed0;
+    @ExcelField(name = "速度5")
     private BigDecimal speed5;
+    @ExcelField(name = "速度10")
     private BigDecimal speed10;
+    @ExcelField(name = "速度15")
     private BigDecimal speed15;
+    @ExcelField(name = "速度20")
     private BigDecimal speed20;
+    @ExcelField(name = "速度25")
     private BigDecimal speed25;
+    @ExcelField(name = "速度30")
     private BigDecimal speed30;
+    @ExcelField(name = "速度35")
     private BigDecimal speed35;
+    @ExcelField(name = "速度40")
     private BigDecimal speed40;
+    @ExcelField(name = "速度45")
     private BigDecimal speed45;
+    @ExcelField(name = "速度50")
     private BigDecimal speed50;
+    @ExcelField(name = "速度55")
     private BigDecimal speed55;
+    @ExcelField(name = "速度60")
     private BigDecimal speed60;
+    @ExcelField(name = "速度65")
     private BigDecimal speed65;
+    @ExcelField(name = "速度70")
     private BigDecimal speed70;
+    @ExcelField(name = "速度75")
     private BigDecimal speed75;
+    @ExcelField(name = "速度80")
     private BigDecimal speed80;
+    @ExcelField(name = "速度85")
     private BigDecimal speed85;
+    @ExcelField(name = "速度90")
     private BigDecimal speed90;
+    @ExcelField(name = "速度95")
     private BigDecimal speed95;
+    @ExcelField(name = "速度100")
     private BigDecimal speed100;
+    @ExcelField(name = "速度105")
     private BigDecimal speed105;
+    @ExcelField(name = "速度110")
     private BigDecimal speed110;
+    @ExcelField(name = "速度115")
     private BigDecimal speed115;
+    @ExcelField(name = "速度120")
     private BigDecimal speed120;
+    @ExcelField(name = "速度125")
     private BigDecimal speed125;
+    @ExcelField(name = "速度130")
     private BigDecimal speed130;
+    @ExcelField(name = "速度135")
     private BigDecimal speed135;
+    @ExcelField(name = "速度140")
     private BigDecimal speed140;
+    @ExcelField(name = "速度145")
     private BigDecimal speed145;
+    @ExcelField(name = "速度150")
     private BigDecimal speed150;
+    @ExcelField(name = "速度155")
     private BigDecimal speed155;
+    @ExcelField(name = "速度160")
     private BigDecimal speed160;
+    @ExcelField(name = "速度165")
     private BigDecimal speed165;
+    @ExcelField(name = "速度170")
     private BigDecimal speed170;
+    @ExcelField(name = "速度175")
     private BigDecimal speed175;
+    @ExcelField(name = "速度180")
     private BigDecimal speed180;
+    @ExcelField(name = "速度185")
     private BigDecimal speed185;
+    @ExcelField(name = "速度190")
     private BigDecimal speed190;
+    @ExcelField(name = "速度195")
     private BigDecimal speed195;
+    @ExcelField(name = "速度200")
     private BigDecimal speed200;
+    @ExcelField(name = "速度205")
     private BigDecimal speed205;
+    @ExcelField(name = "速度210")
     private BigDecimal speed210;
+    @ExcelField(name = "速度215")
     private BigDecimal speed215;
+    @ExcelField(name = "速度220")
     private BigDecimal speed220;
+    @ExcelField(name = "速度225")
     private BigDecimal speed225;
+    @ExcelField(name = "速度230")
     private BigDecimal speed230;
+    @ExcelField(name = "速度235")
     private BigDecimal speed235;
+    @ExcelField(name = "速度240")
     private BigDecimal speed240;
+    @ExcelField(name = "速度245")
     private BigDecimal speed245;
+    @ExcelField(name = "速度250")
     private BigDecimal speed250;
+    @ExcelField(name = "速度255")
     private BigDecimal speed255;
+    @ExcelField(name = "速度260")
     private BigDecimal speed260;
+    @ExcelField(name = "速度265")
     private BigDecimal speed265;
+    @ExcelField(name = "速度270")
     private BigDecimal speed270;
+    @ExcelField(name = "速度275")
     private BigDecimal speed275;
+    @ExcelField(name = "速度280")
     private BigDecimal speed280;
+    @ExcelField(name = "速度285")
     private BigDecimal speed285;
+    @ExcelField(name = "速度290")
     private BigDecimal speed290;
+    @ExcelField(name = "速度295")
     private BigDecimal speed295;
+    @ExcelField(name = "速度300")
     private BigDecimal speed300;
 
 
     /* ======================================== 加速度阶梯 ======================================== */
+    @ExcelField(name = "加速度0.5")
     private BigDecimal acceleration0_5;
+    @ExcelField(name = "加速度1")
     private BigDecimal acceleration1;
+    @ExcelField(name = "加速度1.5")
     private BigDecimal acceleration1_5;
+    @ExcelField(name = "加速度2")
     private BigDecimal acceleration2;
+    @ExcelField(name = "加速度2.5")
     private BigDecimal acceleration2_5;
+    @ExcelField(name = "加速度3")
     private BigDecimal acceleration3;
+    @ExcelField(name = "加速度3.5")
     private BigDecimal acceleration3_5;
+    @ExcelField(name = "加速度4")
     private BigDecimal acceleration4;
+    @ExcelField(name = "加速度4.5")
     private BigDecimal acceleration4_5;
+    @ExcelField(name = "加速度5")
     private BigDecimal acceleration5;
+    @ExcelField(name = "加速度5.5")
     private BigDecimal acceleration5_5;
+    @ExcelField(name = "加速度6")
     private BigDecimal acceleration6;
+    @ExcelField(name = "加速度6.5")
     private BigDecimal acceleration6_5;
+    @ExcelField(name = "加速度7")
     private BigDecimal acceleration7;
+    @ExcelField(name = "加速度7.5")
     private BigDecimal acceleration7_5;
+    @ExcelField(name = "加速度8")
     private BigDecimal acceleration8;
+    @ExcelField(name = "加速度8.5")
     private BigDecimal acceleration8_5;
+    @ExcelField(name = "加速度9")
     private BigDecimal acceleration9;
+    @ExcelField(name = "加速度9.5")
     private BigDecimal acceleration9_5;
+    @ExcelField(name = "加速度10")
     private BigDecimal acceleration10;
+    @ExcelField(name = "加速度10.5")
     private BigDecimal acceleration10_5;
+    @ExcelField(name = "加速度11")
     private BigDecimal acceleration11;
+    @ExcelField(name = "加速度11.5")
     private BigDecimal acceleration11_5;
+    @ExcelField(name = "加速度12")
     private BigDecimal acceleration12;
+    @ExcelField(name = "加速度12.5")
     private BigDecimal acceleration12_5;
+    @ExcelField(name = "加速度13")
     private BigDecimal acceleration13;
+    @ExcelField(name = "加速度13.5")
     private BigDecimal acceleration13_5;
+    @ExcelField(name = "加速度14")
     private BigDecimal acceleration14;
+    @ExcelField(name = "加速度14.5")
     private BigDecimal acceleration14_5;
+    @ExcelField(name = "加速度15")
     private BigDecimal acceleration15;
+    @ExcelField(name = "加速度15.5")
     private BigDecimal acceleration15_5;
+    @ExcelField(name = "加速度16")
     private BigDecimal acceleration16;
+    @ExcelField(name = "加速度16.5")
     private BigDecimal acceleration16_5;
+    @ExcelField(name = "加速度17")
     private BigDecimal acceleration17;
+    @ExcelField(name = "加速度17.5")
     private BigDecimal acceleration17_5;
+    @ExcelField(name = "加速度18")
     private BigDecimal acceleration18;
+    @ExcelField(name = "加速度18.5")
     private BigDecimal acceleration18_5;
+    @ExcelField(name = "加速度19")
     private BigDecimal acceleration19;
+    @ExcelField(name = "加速度19.5")
     private BigDecimal acceleration19_5;
+    @ExcelField(name = "加速度20")
     private BigDecimal acceleration20;
+    @ExcelField(name = "加速度20.5")
     private BigDecimal acceleration20_5;
+    @ExcelField(name = "加速度21")
     private BigDecimal acceleration21;
+    @ExcelField(name = "加速度21.5")
     private BigDecimal acceleration21_5;
+    @ExcelField(name = "加速度22")
     private BigDecimal acceleration22;
+    @ExcelField(name = "加速度22.5")
     private BigDecimal acceleration22_5;
+    @ExcelField(name = "加速度23")
     private BigDecimal acceleration23;
+    @ExcelField(name = "加速度23.5")
     private BigDecimal acceleration23_5;
+    @ExcelField(name = "加速度24")
     private BigDecimal acceleration24;
+    @ExcelField(name = "加速度24.5")
     private BigDecimal acceleration24_5;
+    @ExcelField(name = "加速度25")
     private BigDecimal acceleration25;
+    @ExcelField(name = "加速度25.5")
     private BigDecimal acceleration25_5;
+    @ExcelField(name = "加速度26")
     private BigDecimal acceleration26;
+    @ExcelField(name = "加速度26.5")
     private BigDecimal acceleration26_5;
+    @ExcelField(name = "加速度27")
     private BigDecimal acceleration27;
+    @ExcelField(name = "加速度27.5")
     private BigDecimal acceleration27_5;
+    @ExcelField(name = "加速度28")
     private BigDecimal acceleration28;
+    @ExcelField(name = "加速度28.5")
     private BigDecimal acceleration28_5;
+    @ExcelField(name = "加速度29")
     private BigDecimal acceleration29;
+    @ExcelField(name = "加速度29.5")
     private BigDecimal acceleration29_5;
+    @ExcelField(name = "加速度30")
     private BigDecimal acceleration30;
 
 
     /* ======================================== 减速度阶梯 ======================================== */
+    @ExcelField(name = "减速度0.5")
     private BigDecimal deceleration0_5;
+    @ExcelField(name = "减速度1")
     private BigDecimal deceleration1;
+    @ExcelField(name = "减速度1.5")
     private BigDecimal deceleration1_5;
+    @ExcelField(name = "减速度2")
     private BigDecimal deceleration2;
+    @ExcelField(name = "减速度2.5")
     private BigDecimal deceleration2_5;
+    @ExcelField(name = "减速度3")
     private BigDecimal deceleration3;
+    @ExcelField(name = "减速度3.5")
     private BigDecimal deceleration3_5;
+    @ExcelField(name = "减速度4")
     private BigDecimal deceleration4;
+    @ExcelField(name = "减速度4.5")
     private BigDecimal deceleration4_5;
+    @ExcelField(name = "减速度5")
     private BigDecimal deceleration5;
+    @ExcelField(name = "减速度5.5")
     private BigDecimal deceleration5_5;
+    @ExcelField(name = "减速度6")
     private BigDecimal deceleration6;
+    @ExcelField(name = "减速度6.5")
     private BigDecimal deceleration6_5;
+    @ExcelField(name = "减速度7")
     private BigDecimal deceleration7;
+    @ExcelField(name = "减速度7.5")
     private BigDecimal deceleration7_5;
+    @ExcelField(name = "减速度8")
     private BigDecimal deceleration8;
+    @ExcelField(name = "减速度8.5")
     private BigDecimal deceleration8_5;
+    @ExcelField(name = "减速度9")
     private BigDecimal deceleration9;
+    @ExcelField(name = "减速度9.5")
     private BigDecimal deceleration9_5;
+    @ExcelField(name = "减速度1")
     private BigDecimal deceleration10;
     private BigDecimal deceleration10_5;
     private BigDecimal deceleration11;

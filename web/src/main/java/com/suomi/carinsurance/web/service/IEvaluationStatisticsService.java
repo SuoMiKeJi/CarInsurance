@@ -13,6 +13,8 @@ package com.suomi.carinsurance.web.service;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 
+import java.util.List;
+
 /**
  * <h1>业务层[接口] - 评估统计</h1>
  *
@@ -22,7 +24,6 @@ import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 public interface IEvaluationStatisticsService {
 
@@ -31,9 +32,16 @@ public interface IEvaluationStatisticsService {
      * 查询数据。
      *
      * @param search 查询对象。
-     * @return 返回数据列表。
+     * @return 返回数据。
      */
     EvaluationStatistics find(SearchEvaluationStatistics search);
 
-    void exportExcel();
+
+    /**
+     * 查询数据。
+     *
+     * @param search 查询对象。
+     * @return 返回数据列表。
+     */
+    List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
 }
