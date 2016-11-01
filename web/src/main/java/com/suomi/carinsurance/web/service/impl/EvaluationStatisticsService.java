@@ -27,7 +27,6 @@ import java.util.List;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 public class EvaluationStatisticsService implements IEvaluationStatisticsService {
 
@@ -46,5 +45,13 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
             bean = list.get(0);
         }
         return bean;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void exportExcel() {
+
     }
 }
