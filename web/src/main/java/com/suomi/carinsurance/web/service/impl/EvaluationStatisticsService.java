@@ -13,9 +13,11 @@ package com.suomi.carinsurance.web.service.impl;
 import com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
+import com.suomi.carinsurance.web.Constant;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +75,14 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
         Map<String, Object> result = new HashMap<String, Object>();
         EvaluationStatistics bean = readMapper.find(search);
         result.put("detail", bean);
+//        result.put("speed-distribution", );
         return result;
+    }
+
+    // 计算速度分布
+    private void speedDistributionChartData(EvaluationStatistics bean) {
+        List<List<?>>data = new ArrayList<List<?>>();
+        bean.getClass().getDeclaredFields();
+//        Constant.System.Config.Chart.Id.SPEED_DISTRIBUTION;
     }
 }

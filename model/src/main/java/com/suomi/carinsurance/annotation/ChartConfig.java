@@ -27,7 +27,14 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ChartField {
+public @interface ChartConfig {
+
+    /**
+     * 图表的唯一标识。
+     *
+     * @return 图表的唯一标识。
+     */
+    String chartId();
 
     /**
      * 图表 Y 轴标签。
