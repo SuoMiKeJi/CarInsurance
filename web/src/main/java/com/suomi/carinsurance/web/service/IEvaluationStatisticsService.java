@@ -14,6 +14,7 @@ import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>业务层[接口] - 评估统计</h1>
@@ -44,4 +45,19 @@ public interface IEvaluationStatisticsService {
      * @return 返回数据列表。
      */
     List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
+
+    /**
+     * 获取下拉列表数据。
+     *
+     * @return 返回下拉列表数据。
+     */
+    Map<String, String> getComboBoxData();
+
+    /**
+     * 获取统计明细。
+     *
+     * @param search 查询对象。
+     * @return 返回统计明细。
+     */
+    Map<String, Object> getStatisticalDetail(SearchEvaluationStatistics search);
 }

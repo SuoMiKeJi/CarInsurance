@@ -2,8 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper">
 
-    <!-- 通过查询条件获取年度统计数据列表 -->
+    <!-- 获取下拉列表数据 -->
+    <select id="comboBoxAll" resultType="evaluationStatistics">
+        SELECT base.ID AS vehicleId FROM total AS base
+    </select>
+
+    <!-- 通过查询条件获取评估统计数据列表 -->
     <select id="findAll" resultType="evaluationStatistics" parameterType="searchEvaluationStatistics">
+        SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,
+        <include refid="decelerationLadder"/>
+        FROM total AS base
+        LEFT JOIN speed AS speed ON base.ID=speed.ID
+        LEFT JOIN acc AS acc ON base.ID=acc.ID
+        LEFT JOIN dcc AS decel ON base.ID=decel.ID
+        <if test="vehicleId!=null">WHERE base.ID=#{vehicleId}</if>
+    </select>
+
+    <!-- 通过查询条件获取评估统计数据 -->
+    <select id="find" resultType="evaluationStatistics" parameterType="searchEvaluationStatistics">
         SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,
         <include refid="decelerationLadder"/>
         FROM total AS base

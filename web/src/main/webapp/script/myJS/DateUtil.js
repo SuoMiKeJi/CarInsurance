@@ -4,23 +4,23 @@
  * Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 (new
  * Date()).Format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
  */
-Date.prototype.Format = function(fmt) { // author: meizz
-	var o = {
-		"M+" : this.getMonth() + 1, // 月份
-		"d+" : this.getDate(), // 日
-		"h+" : this.getHours(), // 小时
-		"m+" : this.getMinutes(), // 分
-		"s+" : this.getSeconds(), // 秒
-		"q+" : Math.floor((this.getMonth() + 3) / 3), // 季度
-		"S" : this.getMilliseconds()
-	// 毫秒
-	};
-	if (/(y+)/.test(fmt))
-		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-	for ( var k in o)
-		if (new RegExp("(" + k + ")").test(fmt))
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-	return fmt;
+Date.prototype.Format = function (fmt) { // author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, // 月份
+        "d+": this.getDate(), // 日
+        "h+": this.getHours(), // 小时
+        "m+": this.getMinutes(), // 分
+        "s+": this.getSeconds(), // 秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+        "S": this.getMilliseconds()
+        // 毫秒
+    };
+    if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
 }
 
 /**
@@ -32,39 +32,39 @@ Date.prototype.Format = function(fmt) { // author: meizz
  * Date()).pattern("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04 (new
  * Date()).pattern("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
  */
-Date.prototype.pattern = function(fmt) {
-	var o = {
-		"M+" : this.getMonth() + 1, // 月份
-		"d+" : this.getDate(), // 日
-		"h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
-		"H+" : this.getHours(), // 小时
-		"m+" : this.getMinutes(), // 分
-		"s+" : this.getSeconds(), // 秒
-		"q+" : Math.floor((this.getMonth() + 3) / 3), // 季度
-		"S" : this.getMilliseconds()
-	// 毫秒
-	};
-	var week = {
-		"0" : "\u65e5",
-		"1" : "\u4e00",
-		"2" : "\u4e8c",
-		"3" : "\u4e09",
-		"4" : "\u56db",
-		"5" : "\u4e94",
-		"6" : "\u516d"
-	};
-	if (/(y+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-	}
-	if (/(E+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
-	}
-	for ( var k in o) {
-		if (new RegExp("(" + k + ")").test(fmt)) {
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		}
-	}
-	return fmt;
+Date.prototype.pattern = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1, // 月份
+        "d+": this.getDate(), // 日
+        "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
+        "H+": this.getHours(), // 小时
+        "m+": this.getMinutes(), // 分
+        "s+": this.getSeconds(), // 秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), // 季度
+        "S": this.getMilliseconds()
+        // 毫秒
+    };
+    var week = {
+        "0": "\u65e5",
+        "1": "\u4e00",
+        "2": "\u4e8c",
+        "3": "\u4e09",
+        "4": "\u56db",
+        "5": "\u4e94",
+        "6": "\u516d"
+    };
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    if (/(E+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "\u661f\u671f" : "\u5468") : "") + week[this.getDay() + ""]);
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return fmt;
 }
 // Date.prototype.format = function(mask) {
 // var d = this;
@@ -118,25 +118,25 @@ Date.prototype.pattern = function(fmt) {
 // });
 // };
 
-Date.prototype.greetings = function() {
-	var resultString = null;
-	var hour = this.getHours();
-	if (hour < 6) {
-		resultString = "凌晨好";
-	} else if (hour < 9) {
-		resultString = "早上好";
-	} else if (hour < 12) {
-		resultString = "上午好";
-	} else if (hour < 14) {
-		resultString = "中午好";
-	} else if (hour < 17) {
-		resultString = "下午好";
-	} else if (hour < 19) {
-		resultString = "傍晚好";
-	} else if (hour < 22) {
-		resultString = "晚上好";
-	} else {
-		resultString = "夜里好";
-	}
-	return resultString;
+Date.prototype.greetings = function () {
+    var resultString = null;
+    var hour = this.getHours();
+    if (hour < 6) {
+        resultString = "凌晨好";
+    } else if (hour < 9) {
+        resultString = "早上好";
+    } else if (hour < 12) {
+        resultString = "上午好";
+    } else if (hour < 14) {
+        resultString = "中午好";
+    } else if (hour < 17) {
+        resultString = "下午好";
+    } else if (hour < 19) {
+        resultString = "傍晚好";
+    } else if (hour < 22) {
+        resultString = "晚上好";
+    } else {
+        resultString = "夜里好";
+    }
+    return resultString;
 }

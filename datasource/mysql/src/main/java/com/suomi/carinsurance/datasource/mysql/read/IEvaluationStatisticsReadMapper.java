@@ -24,9 +24,16 @@ import java.util.List;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 public interface IEvaluationStatisticsReadMapper {
+
+    /**
+     * 通过查询条件获取评估统计数据列。
+     *
+     * @param search 查询条件。
+     * @return 评估统计数据。
+     */
+    EvaluationStatistics find(SearchEvaluationStatistics search);
 
     /**
      * 通过查询条件获取评估统计数据列表。
@@ -35,4 +42,11 @@ public interface IEvaluationStatisticsReadMapper {
      * @return 评估统计数据列表。
      */
     List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
+
+    /**
+     * 获取下拉列表数据。
+     *
+     * @return 下拉列表数据。
+     */
+    List<EvaluationStatistics> comboBoxAll();
 }

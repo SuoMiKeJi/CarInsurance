@@ -27,7 +27,6 @@ import java.util.List;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
@@ -39,11 +38,25 @@ public class TestEvaluationStatisticsReadMapper {
     private IEvaluationStatisticsReadMapper readMapper;
 
     @Test
+    public void find() {
+        SearchEvaluationStatistics search = new SearchEvaluationStatistics();
+        search.setVehicleId("贵C-DL884");
+        EvaluationStatistics bean = readMapper.find(search);
+        System.out.println(bean);
+    }
+
+    @Test
     public void findAll() {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
         search.setVehicleId(null);
 //        search.setVehicleId("贵C-DL884");
         List<EvaluationStatistics> list = readMapper.findAll(search);
+        System.out.println(list);
+    }
+
+    @Test
+    public void comboBoxAll() {
+        List<EvaluationStatistics> list = readMapper.comboBoxAll();
         System.out.println(list);
     }
 }

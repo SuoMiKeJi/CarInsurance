@@ -23,6 +23,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,13 +49,17 @@ public class ExcelService {
      * @param outputStream 输出流。
      * @param config       配置对象。
      * @param data         数据。
+     * @param elementClass 元素类型。
      */
-    public <T> void export(OutputStream outputStream, ExcelWorkbook config, List<T> data) {
+    public <T> void export(OutputStream outputStream, ExcelWorkbook config, List<T> data, Class<T> elementClass) {
         if (outputStream == null) {
             throw new RuntimeException("Excel outputStream is null");
         }
         if (config == null) {
             throw new RuntimeException("Excel config is null");
+        }
+        if (data == null) {
+            return;
         }
         try {
             // 生成工作薄
@@ -77,28 +83,37 @@ public class ExcelService {
                         for (ExcelField fieldConfig : fieldConfigList) {
                             if (fieldConfig != null
                                     && fieldConfig.isExport()
-                                    && StringUtil.isNotBlank(fieldConfig.getExcelName())
+                                    //&& StringUtil.isNotBlank(fieldConfig.getExcelName())
                                     && StringUtil.isNotBlank(fieldConfig.getJavaName())) {
-                                titleRow.createCell(colIndex).setCellValue(fieldConfig.getExcelName());
+                                String excelName = fieldConfig.getExcelName();
+                                if (StringUtil.isBlank(excelName)) {
+                                    Field field = ReflectUtil.getField(elementClass, fieldConfig.getJavaName());
+                                    com.suomi.carinsurance.annotation.ExcelField excelField = field.getAnnotation(com.suomi.carinsurance.annotation.ExcelField.class);
+                                    excelName = excelField.name();
+                                }
+                                if (StringUtil.isBlank(excelName)) {
+                                    continue;
+                                }
+                                titleRow.createCell(colIndex).setCellValue(excelName);
                                 javaFieldList.add(fieldConfig.getJavaName());
                                 colIndex++;
                             }
                         }
 
                         // 生成数据
-                        if (data == null) {
-                            break;
-                        }
                         if (data.size() < 1) {
                             break;
                         }
                         for (T item : data) {
+                            if (item == null) {
+                                continue;
+                            }
                             rowIndex++;
                             colIndex = 0;
                             Row dataRow = sheet.createRow(rowIndex);
                             for (String javaField : javaFieldList) {
-                                Object fieldValue = ReflectUtil.getFieldValue(item, javaField);
                                 Cell dataCell = dataRow.createCell(colIndex);
+                                Object fieldValue = ReflectUtil.getFieldValue(item, javaField);
                                 if (fieldValue instanceof Boolean) {
                                     dataCell.setCellValue((boolean) fieldValue);
                                 } else if (fieldValue instanceof Number) {

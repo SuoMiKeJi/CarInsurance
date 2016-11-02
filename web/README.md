@@ -27,7 +27,8 @@
 ###### 导出 Excel 文件的配置JSON：
     [
         {
-            "name": "保险定价因子.xlsx",
+            "id": "InsurancePricingFactorController",
+            "name": "保险定价因子",
             "sheets": [
                 {
                     "name": "保险定价因子",

@@ -16,7 +16,9 @@ import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>业务层[实现] - 评估统计</h1>
@@ -39,12 +41,7 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
      */
     @Override
     public EvaluationStatistics find(SearchEvaluationStatistics search) {
-        EvaluationStatistics bean = null;
-        List<EvaluationStatistics> list = readMapper.findAll(search);
-        if (list != null && list.size() > 0) {
-            bean = list.get(0);
-        }
-        return bean;
+        return readMapper.find(search);
     }
 
     /**
@@ -53,5 +50,29 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
     @Override
     public List<EvaluationStatistics> findAll(SearchEvaluationStatistics search) {
         return readMapper.findAll(search);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> getComboBoxData() {
+        Map<String, String> result = new HashMap<String, String>();
+        List<EvaluationStatistics> list = readMapper.comboBoxAll();
+        for (EvaluationStatistics item : list) {
+            result.put(item.getVehicleId(), item.getVehicleId());
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, Object> getStatisticalDetail(SearchEvaluationStatistics search) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        EvaluationStatistics bean = readMapper.find(search);
+        result.put("detail", bean);
+        return result;
     }
 }
