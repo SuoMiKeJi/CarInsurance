@@ -10,13 +10,19 @@
  */
 package com.suomi.carinsurance.web.service.impl;
 
+import com.suomi.carinsurance.annotation.ChartConfig;
 import com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.Constant;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
+import net.lizhaoweb.common.util.base.ReflectUtil;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +39,8 @@ import java.util.Map;
  * Date of last commit:$Date$<br>
  */
 public class EvaluationStatisticsService implements IEvaluationStatisticsService {
+
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 读持久操作对象。
     @Autowired
@@ -58,11 +66,14 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
      * {@inheritDoc}
      */
     @Override
-    public Map<String, String> getComboBoxData() {
-        Map<String, String> result = new HashMap<String, String>();
-        List<EvaluationStatistics> list = readMapper.comboBoxAll();
-        for (EvaluationStatistics item : list) {
-            result.put(item.getVehicleId(), item.getVehicleId());
+    public DataDeliveryWrapper<List<EvaluationStatistics>> getComboBoxData() {
+        DataDeliveryWrapper<List<EvaluationStatistics>> result = null;
+        try {
+            List<EvaluationStatistics> list = readMapper.comboBoxAll();
+            result = new DataDeliveryWrapper<List<EvaluationStatistics>>(200, "成功", list);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            result = new DataDeliveryWrapper<List<EvaluationStatistics>>(500, "出错啦", null);
         }
         return result;
     }
@@ -71,18 +82,41 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
      * {@inheritDoc}
      */
     @Override
-    public Map<String, Object> getStatisticalDetail(SearchEvaluationStatistics search) {
-        Map<String, Object> result = new HashMap<String, Object>();
-        EvaluationStatistics bean = readMapper.find(search);
-        result.put("detail", bean);
-//        result.put("speed-distribution", );
+    public DataDeliveryWrapper<Map<String, Object>> getStatisticalDetail(SearchEvaluationStatistics search) {
+        DataDeliveryWrapper<Map<String, Object>> result = null;
+        try {
+            Map<String, Object> data = new HashMap<String, Object>();
+            EvaluationStatistics bean = readMapper.find(search);
+            Field[] allFields = ReflectUtil.getAllFields(bean.getClass());
+            data.put("detail", bean);
+
+            // 计算速度分布
+            List<Object[]> speedDistributionChartData = this.speedDistributionChartData(bean, allFields);
+            data.put(Constant.System.Config.Chart.Id.SPEED_DISTRIBUTION, speedDistributionChartData);
+
+            result = new DataDeliveryWrapper<Map<String, Object>>(200, "成功", data);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            result = new DataDeliveryWrapper<Map<String, Object>>(500, "出错啦", null);
+        }
         return result;
     }
 
     // 计算速度分布
-    private void speedDistributionChartData(EvaluationStatistics bean) {
-        List<List<?>>data = new ArrayList<List<?>>();
-        bean.getClass().getDeclaredFields();
-//        Constant.System.Config.Chart.Id.SPEED_DISTRIBUTION;
+    private List<Object[]> speedDistributionChartData(EvaluationStatistics bean, Field[] fields) {
+        List<Object[]> data = new ArrayList<Object[]>();
+        for (Field field : fields) {
+            ChartConfig chartConfig = field.getAnnotation(ChartConfig.class);
+            if (chartConfig != null) {
+                String chartId = chartConfig.chartId();
+                if (Constant.System.Config.Chart.Id.SPEED_DISTRIBUTION.equals(chartId)) {
+                    String label = chartConfig.yAxisLabel();
+                    Object value = ReflectUtil.getFieldValue(bean, field);
+                    Object[] array = {label, value};
+                    data.add(array);
+                }
+            }
+        }
+        return data;
     }
 }

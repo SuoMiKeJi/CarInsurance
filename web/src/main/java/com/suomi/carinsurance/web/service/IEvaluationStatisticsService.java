@@ -12,6 +12,7 @@ package com.suomi.carinsurance.web.service;
 
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public interface IEvaluationStatisticsService {
      *
      * @return 返回下拉列表数据。
      */
-    Map<String, String> getComboBoxData();
+    DataDeliveryWrapper<List<EvaluationStatistics>> getComboBoxData();
 
     /**
      * 获取统计明细。
@@ -59,5 +60,5 @@ public interface IEvaluationStatisticsService {
      * @param search 查询对象。
      * @return 返回统计明细。
      */
-    Map<String, Object> getStatisticalDetail(SearchEvaluationStatistics search);
+    DataDeliveryWrapper<Map<String, Object>> getStatisticalDetail(SearchEvaluationStatistics search);
 }

@@ -45,9 +45,10 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/web/matrix.tables.js'/>"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/localization/messages_zh.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/myForm.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/myUI.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jquery.validate.plugin.xinzhe.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jlForm.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jlUI.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jquery.validate.plugin.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jquery.validate.plugin.messages_zh.js' />"></script>
         </head>
         <body>
             <div id="header">

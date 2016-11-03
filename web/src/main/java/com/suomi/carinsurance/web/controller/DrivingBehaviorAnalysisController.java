@@ -10,14 +10,18 @@
  */
 package com.suomi.carinsurance.web.controller;
 
+import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
+import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import lombok.Setter;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,9 +59,9 @@ public class DrivingBehaviorAnalysisController extends AbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/comboBox.json", method = {RequestMethod.GET})
-    public Map<String, String> comboBoxDate() {
-        Map<String, String> comboBoxDataMap = service.getComboBoxData();
-        return comboBoxDataMap;
+    public DataDeliveryWrapper<List<EvaluationStatistics>> comboBoxDate() {
+        DataDeliveryWrapper<List<EvaluationStatistics>> result = service.getComboBoxData();
+        return result;
     }
 
     /**
@@ -68,8 +72,10 @@ public class DrivingBehaviorAnalysisController extends AbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/{vehicleId}.json", method = {RequestMethod.GET})
-    public Map<String, Object> getData(@PathVariable("vehicleId") String vehicleId) {
-        Map<String, Object> dataMap = service.getStatisticalDetail();
-        return dataMap;
+    public DataDeliveryWrapper<Map<String, Object>> getData(@PathVariable("vehicleId") String vehicleId) {
+        SearchEvaluationStatistics search = new SearchEvaluationStatistics();
+        search.setVehicleId(vehicleId);
+        DataDeliveryWrapper<Map<String, Object>> result = service.getStatisticalDetail(search);
+        return result;
     }
 }

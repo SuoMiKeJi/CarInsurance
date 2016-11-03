@@ -60,7 +60,7 @@ function mustURL(checkedURL) {
 /**
  * 7、函数功能：格式化网站路径
  *
- * JS库：string.js
+ * JS库：StringUtil.js
  */
 function formarWebPath(webPath) {
     if (typeof (webPath) != "string") {
@@ -154,7 +154,7 @@ function clearValue(obj, message, isForced) {
 /**
  * 10、函数功能：设置元素的value属性。
  *
- * JS库：string.js
+ * JS库：StringUtil.js
  *
  * @param obj
  *            可以是元素对象本身、元素对象的ID、元素对象的name或元素对象的tagname。
@@ -234,7 +234,7 @@ function clearInnerHtml(obj, message, isForced) {
 /**
  * 12、函数功能：设置元素的InnerHtml属性。
  *
- * JS库：string.js
+ * JS库：StringUtil.js
  *
  * @param obj
  *            可以是元素对象本身、元素对象的ID、元素对象的name或元素对象的tagname。
@@ -409,7 +409,7 @@ function reUpload(uploadFileId, showId, defaultPictureShow, isResetSave, saveId)
 /**
  * 19、函数功能：上传图片
  *
- * JS库：string.js、jquery.js和ajaxfileupload.js
+ * JS库：StringUtil.js、jquery.js和ajaxfileupload.js
  *
  * 服务端返回的数据类型：JSON
  *
@@ -962,6 +962,23 @@ function forwardByForm(action, method, parameters) {
         newForm.appendChild(input);
     }
     newForm.submit();
+}
+
+/**
+ * 32、获取项目根路径，如： http://localhost:8083/uimcardprj。
+ *@returns WEB项目根路径
+ */
+function getRootPath() {
+    // 获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var url = window.document.location.href;
+    // 获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var uri = window.document.location.pathname;
+    var pos = url.indexOf(uri);
+    // 获取主机地址，如： http://localhost:8083
+    var localhostPaht = url.substring(0, pos);
+    // 获取带"/"的项目名，如：/uimcardprj
+    var projectName = uri.substring(0, uri.substr(1).indexOf('/') + 1);
+    return (localhostPaht + projectName);
 }
 
 /**
