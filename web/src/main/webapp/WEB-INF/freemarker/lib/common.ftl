@@ -45,18 +45,18 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/web/matrix.tables.js'/>"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/localization/messages_zh.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jlForm.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jlUI.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jquery.validate.plugin.js' />"></script>
-            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/myJS/jquery.validate.plugin.messages_zh.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlForm.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlUI.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.messages_zh.js' />"></script>
         </head>
         <body>
-            <div id="header">
+            <div id="header" page-region="header">
                 <h1 style="width:320px;">
                     <a href="<@tags.spring.url value='/index' />" onclick="javascript:$('body').showLoading();" style="color:#FFFFFF;font-size: 30px;font-weight: bold;">索米车险大数据平台</a>
                 </h1>
             </div>
-            <div id="user-nav" class="navbar navbar-inverse">
+            <div id="user-nav" class="navbar navbar-inverse" page-region="header" >
                 <ul class="nav">
                     <li <#if selected == "HELP">class="open"</#if>>
                         <a href="#">
@@ -93,7 +93,7 @@
 <#-- 首页底部开始 -->
 <#macro indexFooter>
             <!--footer-->
-            <div id="footerWapper" class="row-fluid">
+            <div id="footerWapper" class="row-fluid" page-region="footer" >
                 <div id="footer" class="span12">索米科技</div>
             </div>
             <!--footer end-->

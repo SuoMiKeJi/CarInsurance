@@ -63,20 +63,6 @@ public class Constant implements net.lizhaoweb.spring.mvc.util.Constant {
          * 配置
          */
         public static final class Config {
-            /**
-             * 图表
-             */
-            public static final class Chart {
-                /**
-                 * 唯一标识
-                 */
-                public static final class Id {
-                    /**
-                     * 速度分布
-                     */
-                    public static final String SPEED_DISTRIBUTION = "speed-distribution";
-                }
-            }
         }
     }
 

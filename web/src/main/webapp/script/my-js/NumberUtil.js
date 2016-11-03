@@ -20,7 +20,7 @@ Number.prototype.add = function (arg) {
     // m = Math.pow(10, Math.max(r1, r2))
     // return (arg * m + this * m) / m;
     return (this * 10 + arg * 10) / 10;
-}
+};
 
 /**
  * 2.给Number类型增加一个sub方法，调用起来更加方便。
@@ -47,7 +47,7 @@ Number.prototype.sub = function (arg) {
     // n = (r1 >= r2) ? r1 : r2;
     // return ((this * m - arg * m) / m).toFixed(n);
     return (this * 10 - arg * 10) / 10;
-}
+};
 
 /**
  * 3.给Number类型增加一个mul方法，调用起来更加方便。
@@ -69,7 +69,7 @@ Number.prototype.mul = function (arg) {
     // return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) /
     // Math.pow(10, m);
     return ((this * 10) * (arg * 10)) / 100;
-}
+};
 
 /**
  * 4.给Number类型增加一个div方法，调用起来更加方便。
@@ -94,26 +94,31 @@ Number.prototype.div = function (arg) {
     // return (r1 / r2) * Math.pow(10, t2 - t1);
     // }
     return (this * 10) / (arg * 10);
-}
+};
 
 /**
  * 5.格式化数据。
  *
- * @param arg
- *            除数
- * @return
+ * @param intCount
+ *            整数部分位数
+ * @param floatCount
+ *            小数部分位数
+ * @param f
+ *            整数三位分割
+ * @return 格式化后的字符串。
  */
 Number.prototype.format = function (intCount, floatCount, f) {
     var returnString = null;
     var numberString = this.toString();
     var numberSplit = numberString.split("\.");
+    var intString = null;
     if (typeof (f) == "boolean" && f) {
         var rgx = /(\d+)(\d{3})/;
         while (rgx.test(numberSplit[0])) {
             numberSplit[0] = numberSplit[0].replace(rgx, '$1' + ',' + '$2');
         }
     }
-    if (typeof (intCount) == "number" && intCount % 1 == 0) {
+    if (typeof (intCount) == "number" && intCount % 1 == 0 && intCount > 0) {
         if (numberSplit[0].lenght == intCount) {
             returnString = numberSplit[0];
         } else if (numberSplit[0].lenght > intCount) {
@@ -125,7 +130,7 @@ Number.prototype.format = function (intCount, floatCount, f) {
     } else {
         returnString = numberSplit[0];
     }
-    if (typeof (floatCount) == "number" && floatCount % 1 == 0) {
+    if (typeof (floatCount) == "number" && floatCount % 1 == 0 && floatCount > 0) {
         returnString += ".";
         if (numberSplit[1].lenght == floatCount) {
             returnString += numberSplit[1];
@@ -142,7 +147,7 @@ Number.prototype.format = function (intCount, floatCount, f) {
         }
     }
     return returnString;
-}
+};
 
 /**
  * 3.函数功能：控制键盘输入，只允许数字键录入整数，支持IE和FF。

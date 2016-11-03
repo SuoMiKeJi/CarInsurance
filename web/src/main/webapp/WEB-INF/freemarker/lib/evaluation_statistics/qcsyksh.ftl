@@ -5,12 +5,6 @@
                 $("#cat_map_img").attr("src", "<@com.tags.spring.url value='/qcsyksh/' />" + this.value + ".jpg");
             });
         });
-        ui.window.layout.init({
-            parent : "#content",
-            offset : -73,
-            brothers : [ "#header", "#footerWapper", "#cat_gps_id" ],
-            main : ".tabbox"
-        });
     </script>
     <div id="content">
         <div class="container-fluid">
@@ -30,7 +24,7 @@
                                     <option value="YYZZ02013" >YYZZ02013</option>
                                 </select>
                             </div>
-                            <table class="table table-bordered with-check">
+                            <table class="table table-bordered with-check" page-region="body" >
                                 <tbody>
                                     <tr>
                                         <td style="padding:0;">

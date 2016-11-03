@@ -1,14 +1,8 @@
 <#macro content >
     <script type="text/javascript">
-        ui.window.layout.init({
-            parent : "#content",
-            offset : -403,
-            brothers : [ "#header", "#footerWapper" ],
-            main : ".tabbox"
-        });
     </script>
-    <div id="content">
-        <div class="container-fluid">
+    <div id="content" >
+        <div class="container-fluid" >
             <div class="row-fluid">
                 <div class="span12">
 
@@ -19,7 +13,7 @@
                                 <tbody>
                                     <tr>
                                         <td style="padding:0;">
-                                            <div class="tabbox">
+                                            <div class="tabbox" page-region="body" >
                                                 <table width="100%">
                                                     <thead >
                                                         <tr>
@@ -88,6 +82,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                     <!--table list end-->

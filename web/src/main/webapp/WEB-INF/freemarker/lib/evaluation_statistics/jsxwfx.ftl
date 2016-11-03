@@ -5,12 +5,6 @@
                 window.location="<@com.tags.spring.url value='/es/dba/' />" + this.value;
             });
         });
-        ui.window.layout.init({
-            parent : "#content",
-            offset : -875,
-            brothers : [ "#header", "#footerWapper", "#cat_gps_id" ],
-            main : ".tabbox"
-        });
     </script>
     <div id="content">
         <div class="container-fluid">

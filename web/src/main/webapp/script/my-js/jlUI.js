@@ -1,5 +1,29 @@
 ﻿/* ui util*/
 (function (win) {
+    $.fn.effectHeight = function () {
+        var marginTopString = $(this).css('marginTop');
+        var marginTop = parseInt(marginTopString);
+
+        var marginBottomString = $(this).css('marginBottom');
+        var marginBottom = parseInt(marginBottomString);
+
+        return $(this).outerHeight(true) + marginTop + marginBottom;
+    };
+    $.fn.offsetHeight = function () {
+        return $(this).effectHeight() - $(this).height();
+    };
+    $.fn.effectWidth = function () {
+        var marginLeftString = $(this).css('marginLeft');
+        var marginLeft = parseInt(marginLeftString);
+
+        var marginRightString = $(this).css('marginRight');
+        var marginRight = parseInt(marginRightString);
+
+        return $(this).outerHeight(true) + marginLeft + marginRight;
+    };
+    $.fn.offsetWidth = function () {
+        return $(this).effectWidth() - $(this).width();
+    };
     var jlUI = {
         regularExpression: {
             ajax_dataType: /^(json)|(html)|(xhtml)|(xml)|(script)|(text)$/ig,
@@ -127,6 +151,10 @@
             },
             layout: {
                 argument: [],
+                fullScreen: function () {
+                    jlUI.window.__win_fn.widthFullScreen()
+                    jlUI.window.__win_fn.heightFullScreen();
+                },
                 init: function (ops) {
                     if (typeof (ops) != "object") {
                         return;
@@ -356,6 +384,77 @@
                         }
                     }
                 }
+            },
+            __win_fn: {
+
+                /**
+                 * 宽度 - 全屏
+                 */
+                widthFullScreen: function () {
+                    var bodyObject = $('body');
+                    var allLefterObjects = bodyObject.find('[page-region="lefter"]');
+                    var allRighterObjects = bodyObject.find('[page-region="righter"]');
+                    var allCenterObjects = bodyObject.find('[page-region="center"]');
+                    var allLefterWidth = 0, allRighterWidth = 0, offset = 0, bodyCount = allCenterObjects.size();
+
+                    /**
+                     * index - 选择器的 index 位置
+                     * element - 当前的元素（也可使用 "this" 选择器）
+                     */
+                    allLefterObjects.each(function (index, element) {
+                        allLefterWidth += $(this).effectWidth();
+                    });
+
+                    allRighterObjects.each(function (index, element) {
+                        allRighterWidth += $(this).effectWidth();
+                    });
+
+                    allCenterObjects.each(function (index, element) {
+                        offset += $(this).offsetWidth();
+                    });
+
+                    // 计算每个体的高度
+                    var eachCenterWidth = ($(window).width() - allLefterWidth - allRighterWidth - offset) / bodyCount;
+
+                    allCenterObjects.each(function (index, element) {
+                        $(this).width(eachCenterWidth);
+                    });
+                },
+
+                /**
+                 * 高度 - 全屏
+                 */
+                heightFullScreen: function () {
+                    var bodyObject = $('body');
+                    var allHeaderObjects = bodyObject.find('[page-region="header"]');
+                    var allFooterObjects = bodyObject.find('[page-region="footer"]');
+                    var allBodyObjects = bodyObject.find('[page-region="body"]');
+                    var bodyMarginTop = parseInt(bodyObject.css('marginTop')), bodyMarginBottom = parseInt(bodyObject.css('marginBottom'));
+                    var allHeaderHeight = 0, allFooterHeight = 0, offsetHeight = 0, bodyCount = allBodyObjects.size(), offset = 3;
+
+                    /**
+                     * index - 选择器的 index 位置
+                     * element - 当前的元素（也可使用 "this" 选择器）
+                     */
+                    allHeaderObjects.each(function (index, element) {
+                        allHeaderHeight += $(this).effectHeight();
+                    });
+
+                    allFooterObjects.each(function (index, element) {
+                        allFooterHeight += $(this).effectHeight();
+                    });
+
+                    allBodyObjects.each(function (index, element) {
+                        offsetHeight += $(this).offsetHeight();
+                    });
+
+                    // 计算每个体的高度
+                    var eachBodyHeight = ($(window).height() - bodyObject.offsetHeight() - allHeaderHeight - allFooterHeight - offsetHeight) / bodyCount - bodyMarginTop - bodyMarginBottom - offset;
+
+                    allBodyObjects.each(function (index, element) {
+                        $(this).height(eachBodyHeight);
+                    });
+                }
             }
         }
     };
@@ -366,10 +465,8 @@
  * function(a, b) { return a > b ? a : b; } });
  */
 $(document).ready(function () {
-    jlUI.window.layout.resize.main.height.fill();
-    jlUI.window.layout.resize.main.position();
+    jlUI.window.layout.fullScreen();
     $(window).resize(function () {
-        jlUI.window.layout.resize.main.height.fill();
-        jlUI.window.layout.resize.main.position();
+        jlUI.window.layout.fullScreen();
     });
 });

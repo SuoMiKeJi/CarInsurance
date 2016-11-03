@@ -41,5 +41,5 @@ public @interface ChartConfig {
      *
      * @return 图表 Y 轴标签。
      */
-    String yAxisLabel();
+    String xAxisLabel();
 }
