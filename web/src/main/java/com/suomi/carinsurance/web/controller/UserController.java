@@ -36,8 +36,7 @@ public class UserController extends AbstractController{
         SearchUser searchUser = new SearchUser();
         searchUser.setUsername(form.getUsername());
         searchUser.setPassword(form.getPassword());
-        User userAll = service.find(searchUser);
-        return String.format("/%s/login",MODEL);
-//        return "aaa";
+        DataDeliveryWrapper<User> result = service.find(searchUser);
+        return result;
     }
 }
