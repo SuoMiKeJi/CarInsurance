@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @Controller
 public class IndexController extends AbstractController {
@@ -32,7 +31,7 @@ public class IndexController extends AbstractController {
     /**
      * 首页
      */
-    @RequestMapping(value = "/index", method = {RequestMethod.GET})
+    @RequestMapping(value = {"/index", "/"}, method = {RequestMethod.GET})
     public String webIndex() {
         return "/index";
     }

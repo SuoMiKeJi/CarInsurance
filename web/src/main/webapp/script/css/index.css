@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#content {
+    background-image: url("../../images/bg_01.jpg");
+}
+
+.welcome_title {
+    text-align: center;
+    margin: 0 auto;
+    height: 250px;
+    line-height: 250px;
+    overflow: hidden;
+}
+
+.welcome_title > span {
+    font-size: 70px;
+    font-family: "华文行楷", "隶书", "楷体", "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+.welcome_title > .common {
+    color: #6A6AFF;
+}
+
+.welcome_title > .major {
+    color: #e78f08;
+}
