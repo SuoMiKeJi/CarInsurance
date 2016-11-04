@@ -28,6 +28,16 @@ import java.io.Serializable;
 public abstract class AbstractSearchModel implements Serializable {
 
     /**
+     * 唯一标识
+     */
+    private long id;
+
+    /**
+     * 名称
+     */
+    private String name;
+
+    /**
      * GPS标识。
      */
     private String gpsId;

@@ -41,7 +41,9 @@ public class TestEvaluationStatisticsReadMapper {
     @Test
     public void find() {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-        search.setGpsId("YYZX03810");
+        search.setId(1);
+//        search.setName("D");
+//        search.setGpsId("YYZX03810");
 //        search.setVehicleId("贵C-DL884");
         EvaluationStatistics bean = readMapper.find(search);
         System.out.println(bean);
@@ -50,9 +52,10 @@ public class TestEvaluationStatisticsReadMapper {
     @Test
     public void findAll() {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-//        search.setVehicleId(null);
+//        search.setId("YYZX03810");
+        search.setName("D");
+//        search.setGpsId("YYZX03810");
 //        search.setVehicleId("贵C-DL884");
-        search.setGpsId("YYZX03810");
         List<EvaluationStatistics> list = readMapper.findAll(search);
         System.out.println(list);
     }

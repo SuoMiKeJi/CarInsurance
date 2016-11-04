@@ -141,12 +141,12 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
 
             // 建议保险折扣统计
             List<Map<String, Integer>> insuranceDiscountStatistics = readMapper.insuranceDiscountStatistics();
-            String insuranceDiscountStatisticsChartJson = this.vehiclePopulationStatistics(insuranceDiscountStatistics, 1, 0);
+            String insuranceDiscountStatisticsChartJson = this.vehiclePopulationStatistics(insuranceDiscountStatistics, 5, 1);
             request.setAttribute(Constant.Chart.Id.INSURANCE_DISCOUNT_STATISTICS, insuranceDiscountStatisticsChartJson);
 
             // 欺骗风险统计
             List<Map<String, Integer>> fraudRiskStatistics = readMapper.fraudRiskStatistics();
-            String fraudRiskStatisticsChartJson = this.vehiclePopulationStatistics(fraudRiskStatistics, 1, 0);
+            String fraudRiskStatisticsChartJson = this.vehiclePopulationStatistics(fraudRiskStatistics, 1, 1);
             request.setAttribute(Constant.Chart.Id.FRAUD_RISK_STATISTICS, fraudRiskStatisticsChartJson);
             return true;
         } catch (Exception e) {
@@ -209,9 +209,9 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
 
     // 车辆总体统计 JSON
     private String vehiclePopulationStatistics(List<Map<String, Integer>> list, int multiple, int offset) {
-        List<Integer[]> data = new ArrayList<Integer[]>();
+        List<Object[]> data = new ArrayList<Object[]>();
         for (int index = 0; index < 10; index++) {
-            int key = index * multiple + offset;
+            int key = (index + offset) * multiple;
             Integer count = null;
             for (Map<String, Integer> bean : list) {
                 if (key == bean.get("entry")) {
@@ -223,7 +223,7 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
             if (count == null) {
                 count = 0;
             }
-            Integer[] array = {key, count};
+            Object[] array = {key + "", count};
             data.add(array);
         }
         return JsonUtil.toJson(data);

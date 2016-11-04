@@ -31,7 +31,12 @@ public class AbstractModel implements Serializable {
     /**
      * 唯一标识
      */
-    private String id;
+    private long id;
+
+    /**
+     * 名称
+     */
+    private String name;
 
     /**
      * 车辆标识。

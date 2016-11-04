@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `acc` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '0',
   `Acc0.5` decimal(5,4) DEFAULT NULL,
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `acc` (
   `Acc29` decimal(5,4) DEFAULT NULL,
   `Acc29.5` decimal(5,4) DEFAULT NULL,
   `Acc30` decimal(5,4) DEFAULT NULL,
-  PRIMARY KEY (`GPS`)
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -110,6 +111,7 @@ INSERT INTO `acc` (`GPS`, `ID`, `Acc0.5`, `Acc1`, `Acc1.5`, `Acc2`, `Acc2.5`, `A
 --
 
 CREATE TABLE IF NOT EXISTS `dcc` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `Dcc0.5` decimal(5,4) DEFAULT NULL,
@@ -142,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `dcc` (
   `Dcc14` decimal(5,4) DEFAULT NULL,
   `Dcc14.5` decimal(5,4) DEFAULT NULL,
   `Dcc15` decimal(5,4) DEFAULT NULL,
-  PRIMARY KEY (`GPS`)
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -163,6 +165,7 @@ INSERT INTO `dcc` (`GPS`, `ID`, `Dcc0.5`, `Dcc1`, `Dcc1.5`, `Dcc2`, `Dcc2.5`, `D
 --
 
 CREATE TABLE IF NOT EXISTS `monthly` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(9) NOT NULL,
   `ID` varchar(8) DEFAULT NULL,
   `Period` int(6) DEFAULT NULL,
@@ -170,7 +173,8 @@ CREATE TABLE IF NOT EXISTS `monthly` (
   `Time` decimal(7,4) DEFAULT NULL,
   `AvgSpeed` decimal(6,4) DEFAULT NULL,
   `AvgAcc` decimal(5,4) DEFAULT NULL,
-  `AvgDcc` decimal(5,4) DEFAULT NULL
+  `AvgDcc` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -236,6 +240,7 @@ INSERT INTO `monthly` (`GPS`, `ID`, `Period`, `Mileage`, `Time`, `AvgSpeed`, `Av
 --
 
 CREATE TABLE IF NOT EXISTS `speed` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `Speed0` decimal(5,4) DEFAULT NULL,
@@ -299,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `speed` (
   `Speed290` decimal(5,4) DEFAULT NULL,
   `Speed295` decimal(5,4) DEFAULT NULL,
   `Speed300` decimal(5,4) DEFAULT NULL,
-  PRIMARY KEY (`GPS`)
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -320,6 +325,7 @@ INSERT INTO `speed` (`GPS`, `ID`, `Speed0`, `Speed5`, `Speed10`, `Speed15`, `Spe
 --
 
 CREATE TABLE IF NOT EXISTS `total` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `PROV` varchar(10) DEFAULT NULL,
@@ -372,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `total` (
   `MilesPerc` decimal(5,4) DEFAULT NULL,
   `Fatigue` decimal(5,4) DEFAULT NULL,
   `FatiguePerc` decimal(5,4) DEFAULT NULL,
-  PRIMARY KEY (`GPS`)
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -393,6 +399,7 @@ INSERT INTO `total` (`GPS`, `ID`, `PROV`, `CITY`, `GENDER`, `AGE`, `CAR`, `COLOR
 --
 
 CREATE TABLE IF NOT EXISTS `yacc` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `YEAR` int(11) NOT NULL,
@@ -455,7 +462,8 @@ CREATE TABLE IF NOT EXISTS `yacc` (
   `Acc28.5` decimal(5,4) DEFAULT NULL,
   `Acc29` decimal(5,4) DEFAULT NULL,
   `Acc29.5` decimal(5,4) DEFAULT NULL,
-  `Acc30` decimal(5,4) DEFAULT NULL
+  `Acc30` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -476,6 +484,7 @@ INSERT INTO `yacc` (`GPS`, `ID`, `YEAR`, `Acc0.5`, `Acc1`, `Acc1.5`, `Acc2`, `Ac
 --
 
 CREATE TABLE IF NOT EXISTS `ydcc` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `YEAR` int(11) NOT NULL,
@@ -508,7 +517,8 @@ CREATE TABLE IF NOT EXISTS `ydcc` (
   `Dcc13.5` decimal(5,4) DEFAULT NULL,
   `Dcc14` decimal(5,4) DEFAULT NULL,
   `Dcc14.5` decimal(5,4) DEFAULT NULL,
-  `Dcc15` decimal(5,4) DEFAULT NULL
+  `Dcc15` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -529,6 +539,7 @@ INSERT INTO `ydcc` (`GPS`, `ID`, `YEAR`, `Dcc0.5`, `Dcc1`, `Dcc1.5`, `Dcc2`, `Dc
 --
 
 CREATE TABLE IF NOT EXISTS `yspeed` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `YEAR` int(11) NOT NULL,
@@ -592,7 +603,8 @@ CREATE TABLE IF NOT EXISTS `yspeed` (
   `Speed285` decimal(5,4) DEFAULT NULL,
   `Speed290` decimal(5,4) DEFAULT NULL,
   `Speed295` decimal(5,4) DEFAULT NULL,
-  `Speed300` decimal(5,4) DEFAULT NULL
+  `Speed300` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -613,6 +625,7 @@ INSERT INTO `yspeed` (`GPS`, `ID`, `YEAR`, `Speed0`, `Speed5`, `Speed10`, `Speed
 --
 
 CREATE TABLE IF NOT EXISTS `ytotal` (
+  `auto_id` bigint(12) NOT NULL AUTO_INCREMENT,
   `GPS` varchar(10) NOT NULL,
   `ID` varchar(8) NOT NULL DEFAULT '',
   `YEAR` int(11) NOT NULL,
@@ -665,7 +678,8 @@ CREATE TABLE IF NOT EXISTS `ytotal` (
   `TimePerc` decimal(5,4) DEFAULT NULL,
   `MilesPerc` decimal(5,4) DEFAULT NULL,
   `Fatigue` decimal(5,4) DEFAULT NULL,
-  `FatiguePerc` decimal(5,4) DEFAULT NULL
+  `FatiguePerc` decimal(5,4) DEFAULT NULL,
+  PRIMARY KEY (`auto_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

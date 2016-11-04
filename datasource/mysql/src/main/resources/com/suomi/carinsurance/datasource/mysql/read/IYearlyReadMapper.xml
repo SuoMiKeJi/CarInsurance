@@ -7,14 +7,20 @@
         SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,
         <include refid="decelerationLadder"/>,base.YEAR as year
         FROM ytotal AS base
-        LEFT JOIN yspeed AS speed ON base.ID=speed.ID
-        LEFT JOIN yacc AS acc ON base.ID=acc.ID
-        LEFT JOIN ydcc AS decel ON base.ID=decel.ID
-        <if test="vehicleId!=null">WHERE base.ID=#{vehicleId}</if>
+        LEFT JOIN yspeed AS speed ON base.GPS=speed.GPS
+        LEFT JOIN yacc AS acc ON base.GPS=acc.GPS
+        LEFT JOIN ydcc AS decel ON base.GPS=decel.GPS WHERE 1=1
+        <if test="id!=null">AND base.auto_id=#{id}</if>
+        <if test="name!=null">AND base.ID LIKE CONCAT('%','${name}','%' )</if>
+        <if test="gpsId!=null">AND base.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND base.ID=#{vehicleId}</if>
     </select>
 
     <!-- 年度统计基本数据 -->
     <sql id="baseField">
+        base.auto_id         AS id,
+        base.ID              AS name,
+        base.GPS             AS gpsId,
         base.ID              AS voitureId,
         base.PROV            AS province,
         base.CITY            AS city,

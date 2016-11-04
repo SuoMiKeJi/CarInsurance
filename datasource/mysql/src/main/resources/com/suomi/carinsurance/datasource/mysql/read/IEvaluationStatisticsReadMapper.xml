@@ -35,8 +35,11 @@
         FROM total AS base
         LEFT JOIN speed AS speed ON base.GPS=speed.GPS
         LEFT JOIN acc AS acc ON base.GPS=acc.GPS
-        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS
-        <if test="gpsId!=null">WHERE base.GPS=#{gpsId}</if>
+        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS WHERE 1=1
+        <if test="id!=null">AND base.auto_id=#{id}</if>
+        <if test="name!=null">AND base.ID LIKE CONCAT('%','${name}','%' )</if>
+        <if test="gpsId!=null">AND base.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND base.ID=#{vehicleId}</if>
     </select>
 
     <!-- 通过查询条件获取评估统计数据 -->
@@ -46,12 +49,17 @@
         FROM total AS base
         LEFT JOIN speed AS speed ON base.GPS=speed.GPS
         LEFT JOIN acc AS acc ON base.GPS=acc.GPS
-        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS
-        <if test="gpsId!=null">WHERE base.GPS=#{gpsId}</if>
+        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS WHERE 1=1
+        <if test="id!=null">AND base.auto_id=#{id}</if>
+        <if test="name!=null">AND base.ID LIKE CONCAT('%','${name}','%' )</if>
+        <if test="gpsId!=null">AND base.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND base.ID=#{vehicleId}</if>
     </select>
 
     <!-- 评估统计基本数据 -->
     <sql id="baseField">
+        base.auto_id         AS id,
+        base.ID              AS name,
         base.GPS             AS gpsId,
         base.ID              AS vehicleId,
         base.PROV            AS province,

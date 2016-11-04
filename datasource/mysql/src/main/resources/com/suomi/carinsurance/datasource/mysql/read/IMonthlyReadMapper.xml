@@ -6,12 +6,18 @@
     <select id="findAll" resultType="monthly" parameterType="searchMonthly">
         SELECT
         <include refid="allField"/>
-        FROM monthly AS monthly
-        <if test="vehicleId!=null">WHERE monthly.ID=#{vehicleId}</if>
+        FROM monthly AS monthly WHERE 1=1
+        <if test="id!=null">AND monthly.auto_id=#{id}</if>
+        <if test="name!=null">AND monthly.ID LIKE CONCAT('%','${name}','%' )</if>
+        <if test="gpsId!=null">AND monthly.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND monthly.ID=#{vehicleId}</if>
     </select>
 
 
     <sql id="allField">
+        monthly.auto_id   AS id,
+        monthly.ID        AS name,
+        monthly.GPS       AS gpsId,
         monthly.ID        AS vehicleId,
         monthly.Period    AS period,
         monthly.Mileage   AS mileage,
