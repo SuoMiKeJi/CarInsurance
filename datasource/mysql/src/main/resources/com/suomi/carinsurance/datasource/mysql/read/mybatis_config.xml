@@ -8,7 +8,8 @@
     </settings>
 
     <typeAliases>
-
+        <!--用户相关-->
+        <typeAlias alias="user" type="com.suomi.carinsurance.model.statistics.User"/>
         <!-- 月度统计 -->
         <typeAlias alias="monthly" type="com.suomi.carinsurance.model.statistics.Monthly"/>
         <typeAlias alias="searchMonthly" type="com.suomi.carinsurance.search.statistics.SearchMonthly"/>

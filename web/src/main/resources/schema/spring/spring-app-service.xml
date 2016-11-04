@@ -5,7 +5,8 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.suomi.carinsurance.web.service.impl"/>
-
+    <!--用户相关操作-->
+    <bean id="userService" class="com.suomi.carinsurance.web.service.impl.UserService"/>
     <bean id="evaluationStatisticsService" class="com.suomi.carinsurance.web.service.impl.EvaluationStatisticsService"/>
 
     <bean id="excelService" class="com.suomi.carinsurance.export.excel.ExcelService"/>

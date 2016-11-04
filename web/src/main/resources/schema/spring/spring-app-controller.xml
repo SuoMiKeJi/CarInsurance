@@ -7,6 +7,10 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="com.suomi.carinsurance.web.controller"/>
+    <!--登陆-->
+    <bean class="com.suomi.carinsurance.web.controller.UserController">
+        <property name="service" ref="userService"/>
+    </bean>
 
     <!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
     <bean class="com.suomi.carinsurance.web.controller.EvaluationStatisticsController">
