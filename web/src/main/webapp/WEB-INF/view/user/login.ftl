@@ -32,9 +32,10 @@
                 errorElement : "font",
                 submitHandler : function(form) {
 
-                    myForm.submit(form, function(data, textStatus){
-                        alert(data);
-                        if(data.status == 200){
+                    myForm.submit(form, function(response, textStatus){
+                        alert(response);
+                        if(response.code == 200){
+                            var data = response.data;
                             if(typeof(data.data.forward) == "string"){
                                 window.location = data.data.forward;
                             }else{

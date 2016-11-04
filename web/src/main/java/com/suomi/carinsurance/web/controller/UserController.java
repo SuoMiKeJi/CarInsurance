@@ -4,6 +4,7 @@ import com.suomi.carinsurance.model.statistics.User;
 import com.suomi.carinsurance.search.statistics.SearchUser;
 import com.suomi.carinsurance.web.service.impl.UserService;
 import lombok.Setter;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,8 @@ public class UserController extends AbstractController{
      *
      * @return
      */
-    @RequestMapping(value = "/login.action")
-    public String login(
-            ModelMap model,
-            @ModelAttribute("form") User form
-    ){
+    @RequestMapping(value = "/login.json")
+    public DataDeliveryWrapper<User> login(@ModelAttribute("form") User form){
         SearchUser searchUser = new SearchUser();
         searchUser.setUsername(form.getUsername());
         searchUser.setPassword(form.getPassword());
