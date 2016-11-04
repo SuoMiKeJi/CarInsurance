@@ -10,9 +10,14 @@
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/bootstrap.min.css' />"/>
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/bootstrap-responsive.min.css'/>"/>
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/matrix-login.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/jquery/plug-in/showloading/showLoading.min.css' />"/>
+    <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value="/script/jquery/plug-in/artDialog/skins/aero.css" />"/>
 
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/core/1.11.1/jquery-1.11.1.min.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/plugins/bootstrap/bootstrap.min.js' />"></script>
+    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value="/script/jquery/plug-in/artDialog/artDialog.min.js" />"></script>
+    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/plug-in/jquery-migrate-1.1.1.js' />"></script>
+    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/plug-in/showloading/jquery.showLoading.min.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/my-js/jlForm.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
@@ -37,13 +42,14 @@
                         alert(response);
                         if(response.code == 200){
                             var data = response.data;
-                            alert(data);
+                            alert(data+"200");
                             if(typeof(data.data.forward) == "string"){
                                 window.location = data.data.forward;
                             }else{
                                 window.location = "www.baidu.com";
                             }
                         }else{
+                            alert(data+"不是200");
                             art.dialog({
                                 title : "提示",
                                 content : data.message,
