@@ -39,4 +39,10 @@ public class AbstractModel implements Serializable {
      */
     @ExcelField(name = "ID")
     private String vehicleId;
+
+    /**
+     * GPS 标识
+     */
+    @ExcelField(name = "GPS")
+    private String gpsId;
 }

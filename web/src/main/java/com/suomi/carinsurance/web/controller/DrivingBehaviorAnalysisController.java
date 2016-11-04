@@ -67,14 +67,14 @@ public class DrivingBehaviorAnalysisController extends AbstractController {
     /**
      * 获取数据。
      *
-     * @param vehicleId 车辆标识。
+     * @param gpsId GPS 标识。
      * @return 统计明细。
      */
     @ResponseBody
-    @RequestMapping(value = "/{vehicleId}.json", method = {RequestMethod.GET})
-    public DataDeliveryWrapper<Map<String, Object>> getData(@PathVariable("vehicleId") String vehicleId) {
+    @RequestMapping(value = "/{gpsId}.json", method = {RequestMethod.GET})
+    public DataDeliveryWrapper<Map<String, Object>> getData(@PathVariable("gpsId") String gpsId) {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-        search.setVehicleId(vehicleId);
+        search.setGpsId(gpsId);
         DataDeliveryWrapper<Map<String, Object>> result = service.getStatisticalDetail(search);
         return result;
     }

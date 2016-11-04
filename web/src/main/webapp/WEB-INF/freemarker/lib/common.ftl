@@ -107,8 +107,8 @@
     <!--left nav star-->
     <div class="st_tree" style="overflow-y:auto;">
         <ul class="site-stats">
-            <li <#if selected == "QCFXPJ">class="active"</#if>>
-                <a href="<@tags.spring.url value='/es/qcfxpj' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
+            <li <#if selected == "VRRC">class="active"</#if>>
+                <a href="<@tags.spring.url value='/vrrc/index' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
             </li>
             <li <#if selected == "DBAC">class="active"</#if>>
                 <a href="<@tags.spring.url value='/dbac/index' />" onclick="javascript:$('body').showLoading();">驾驶行为分析</a>

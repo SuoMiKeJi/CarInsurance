@@ -4,7 +4,7 @@
 
     <!-- 获取下拉列表数据 -->
     <select id="comboBoxAll" resultType="evaluationStatistics">
-        SELECT base.ID AS vehicleId FROM total AS base
+        SELECT base.GPS AS gpsId, base.ID AS vehicleId FROM total AS base
     </select>
 
     <!-- 通过查询条件获取评估统计数据列表 -->
@@ -12,10 +12,10 @@
         SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,
         <include refid="decelerationLadder"/>
         FROM total AS base
-        LEFT JOIN speed AS speed ON base.ID=speed.ID
-        LEFT JOIN acc AS acc ON base.ID=acc.ID
-        LEFT JOIN dcc AS decel ON base.ID=decel.ID
-        <if test="vehicleId!=null">WHERE base.ID=#{vehicleId}</if>
+        LEFT JOIN speed AS speed ON base.GPS=speed.GPS
+        LEFT JOIN acc AS acc ON base.GPS=acc.GPS
+        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS
+        <if test="gpsId!=null">WHERE base.GPS=#{gpsId}</if>
     </select>
 
     <!-- 通过查询条件获取评估统计数据 -->
@@ -23,14 +23,15 @@
         SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,
         <include refid="decelerationLadder"/>
         FROM total AS base
-        LEFT JOIN speed AS speed ON base.ID=speed.ID
-        LEFT JOIN acc AS acc ON base.ID=acc.ID
-        LEFT JOIN dcc AS decel ON base.ID=decel.ID
-        <if test="vehicleId!=null">WHERE base.ID=#{vehicleId}</if>
+        LEFT JOIN speed AS speed ON base.GPS=speed.GPS
+        LEFT JOIN acc AS acc ON base.GPS=acc.GPS
+        LEFT JOIN dcc AS decel ON base.GPS=decel.GPS
+        <if test="gpsId!=null">WHERE base.GPS=#{gpsId}</if>
     </select>
 
     <!-- 评估统计基本数据 -->
     <sql id="baseField">
+        base.GPS             AS gpsId,
         base.ID              AS vehicleId,
         base.PROV            AS province,
         base.CITY            AS city,

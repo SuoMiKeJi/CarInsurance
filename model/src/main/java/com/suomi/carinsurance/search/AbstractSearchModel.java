@@ -23,10 +23,14 @@ import java.io.Serializable;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @Data
 public abstract class AbstractSearchModel implements Serializable {
+
+    /**
+     * GPS标识。
+     */
+    private String gpsId;
 
     /**
      * 车辆标识。

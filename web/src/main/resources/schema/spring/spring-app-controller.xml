@@ -13,6 +13,11 @@
         <property name="service" ref="evaluationStatisticsService"/>
     </bean>
 
+    <!-- 车辆风险评级 -->
+    <bean class="com.suomi.carinsurance.web.controller.VehicleRiskRatingController">
+        <property name="service" ref="evaluationStatisticsService"/>
+    </bean>
+
     <!-- 驾驶行为分析 -->
     <bean class="com.suomi.carinsurance.web.controller.DrivingBehaviorAnalysisController">
         <property name="service" ref="evaluationStatisticsService"/>

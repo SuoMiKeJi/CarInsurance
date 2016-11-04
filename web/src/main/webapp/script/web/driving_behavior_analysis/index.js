@@ -246,7 +246,7 @@ function loadDataToSelect(config) {
                     // var vehicleIdSelected = $("#vehicleIdSelectedValue").val();
 
                     $(data).each(function (index, element) {
-                        var id = $(this).attr("vehicleId");
+                        var id = $(this).attr("gpsId");
                         var name = $(this).attr("vehicleId");
                         // var selected = (vehicleIdSelected == id) ? "selected" : "";
                         // selectOptionHtml += '<option value="' + id + '" ' + selected + '>' + name + '</option>';
