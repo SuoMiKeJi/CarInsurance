@@ -30,7 +30,7 @@ public abstract class AbstractSearchModel implements Serializable {
     /**
      * 唯一标识
      */
-    private long id;
+    private Long id;
 
     /**
      * 名称

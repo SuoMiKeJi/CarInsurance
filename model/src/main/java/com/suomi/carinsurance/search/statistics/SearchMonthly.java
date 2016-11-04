@@ -11,6 +11,7 @@
 package com.suomi.carinsurance.search.statistics;
 
 import com.suomi.carinsurance.search.AbstractSearchModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -24,11 +25,20 @@ import lombok.NoArgsConstructor;
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
- *
  */
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SearchMonthly extends AbstractSearchModel {
+
+    /**
+     * 开始月份
+     */
+    private Integer startMonth;
+
+    /**
+     * 结束月份
+     */
+    private Integer endMonth;
 }

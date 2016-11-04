@@ -1,13 +1,52 @@
 /* charts util */
 (function (win) {
     var jlCharts = {
-        column: function (setting, container) {
-            jlCharts._fn.chart.column.draw(setting, container);
+        line: function (setting, container) {
+            jlCharts._fn.chart.line.draw(setting, container);
         },
         stacked: function (setting, container) {
             jlCharts._fn.chart.stacked.draw(setting, container);
         },
+        column: function (setting, container) {
+            jlCharts._fn.chart.column.draw(setting, container);
+        },
         _setting: {
+            line: {
+                title: {
+                    text: '',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '',
+                    x: -20
+                },
+                xAxis: {
+                    categories: null
+                },
+                yAxis: {
+                    title: {
+                        text: ''
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: null,
+                clone: function () {
+                    return jlCharts._fn.clone(this);
+                }
+            },
             stacked: {
                 chart: {
                     type: 'column'
@@ -97,6 +136,37 @@
         },
         _fn: {
             chart: {
+                line: {
+                    draw: function (setting, container) {
+                        var defaultSetting = jlCharts._setting.line.clone();
+                        if (typeof (setting.title) == "string") {
+                            defaultSetting.title.text = setting.title;
+                        }
+                        if (typeof (setting.subtitle) == "string") {
+                            defaultSetting.title.text = setting.subtitle;
+                        }
+                        if (typeof (setting.xAxis) == "object") {
+                            if (typeof (setting.xAxis.categories) == "object" && setting.xAxis.categories instanceof Array) {
+                                defaultSetting.xAxis.categories = setting.xAxis.categories;
+                            }
+                        }
+                        if (typeof (setting.yAxis) == "object" && typeof (setting.yAxis.title) == "string") {
+                            defaultSetting.yAxis.title.text = setting.yAxis.title;
+                        }
+                        if (typeof (setting.tooltip) == "object") {
+                            if (typeof (setting.tooltip.headerFormat) == "string") {
+                                defaultSetting.tooltip.headerFormat = setting.tooltip.headerFormat;
+                            }
+                            if (typeof (setting.tooltip.pointFormat) == "string") {
+                                defaultSetting.tooltip.pointFormat = setting.tooltip.pointFormat;
+                            }
+                        }
+                        if (typeof (setting.data) == "object") {
+                            defaultSetting.series = setting.data;
+                        }
+                        $(container).highcharts(defaultSetting);
+                    }
+                },
                 stacked: {
                     draw: function (setting, container) {
                         var defaultSetting = jlCharts._setting.stacked.clone();

@@ -11,8 +11,9 @@
         <if test="name!=null">AND monthly.ID LIKE CONCAT('%','${name}','%' )</if>
         <if test="gpsId!=null">AND monthly.GPS=#{gpsId}</if>
         <if test="vehicleId!=null">AND monthly.ID=#{vehicleId}</if>
+        <if test="startMonth!=null">AND monthly.Period&gt;=#{startMonth}</if>
+        <if test="endMonth!=null">AND monthly.Period&lt;=#{endMonth}</if>
     </select>
-
 
     <sql id="allField">
         monthly.auto_id   AS id,

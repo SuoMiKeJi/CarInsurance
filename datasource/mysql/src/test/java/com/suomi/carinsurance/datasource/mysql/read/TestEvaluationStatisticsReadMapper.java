@@ -41,7 +41,7 @@ public class TestEvaluationStatisticsReadMapper {
     @Test
     public void find() {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-        search.setId(1);
+        search.setId(1l);
 //        search.setName("D");
 //        search.setGpsId("YYZX03810");
 //        search.setVehicleId("贵C-DL884");
