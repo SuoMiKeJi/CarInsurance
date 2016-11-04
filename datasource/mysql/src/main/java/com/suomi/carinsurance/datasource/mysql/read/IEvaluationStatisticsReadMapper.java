@@ -14,6 +14,7 @@ import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>持久层[接口·读] - 评估统计</h1>
@@ -49,4 +50,25 @@ public interface IEvaluationStatisticsReadMapper {
      * @return 下拉列表数据。
      */
     List<EvaluationStatistics> comboBoxAll();
+
+    /**
+     * 车辆风险统计
+     *
+     * @return 统计结果
+     */
+    List<Map<String, Integer>> vehicleRiskStatistics();
+
+    /**
+     * 建议保险折扣统计
+     *
+     * @return 统计结果
+     */
+    List<Map<String, Integer>> insuranceDiscountStatistics();
+
+    /**
+     * 欺骗风险统计
+     *
+     * @return 统计结果
+     */
+    List<Map<String, Integer>> fraudRiskStatistics();
 }

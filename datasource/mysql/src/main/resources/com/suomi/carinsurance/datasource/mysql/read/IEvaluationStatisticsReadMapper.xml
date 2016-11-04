@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper">
 
+    <!-- 条目统计 -->
+    <resultMap id="entryCount" type="java.util.HashMap">
+        <result property="entry" column="entry" javaType="java.lang.Integer"/>
+        <result property="count" column="count" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <!-- 车辆风险统计 -->
+    <select id="vehicleRiskStatistics" resultMap="entryCount">
+        SELECT COUNT(riskRating) AS count,riskRating AS entry FROM (SELECT ROUND(Rating,0) AS riskRating FROM total) AS tRating GROUP BY riskRating ORDER BY riskRating
+    </select>
+
+    <!-- 建议保险折扣统计 -->
+    <select id="insuranceDiscountStatistics" resultMap="entryCount">
+        SELECT COUNT(suggestedDiscount) AS count,suggestedDiscount AS entry FROM (SELECT ROUND((InsureDiscount/5)*100,0)*5 AS suggestedDiscount FROM total) AS tInsureDiscount GROUP BY suggestedDiscount ORDER BY suggestedDiscount
+    </select>
+
+    <!-- 欺骗风险统计 -->
+    <select id="fraudRiskStatistics" resultMap="entryCount">
+        SELECT COUNT(fraudRisk) AS count,fraudRisk AS entry FROM (SELECT ROUND(Fraud*100,0) AS fraudRisk FROM total) AS tFraud GROUP BY fraudRisk ORDER BY fraudRisk
+    </select>
+
     <!-- 获取下拉列表数据 -->
     <select id="comboBoxAll" resultType="evaluationStatistics">
         SELECT base.GPS AS gpsId, base.ID AS vehicleId FROM total AS base

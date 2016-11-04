@@ -87,7 +87,7 @@
                                                             <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
                                                         </td>
                                                         <td rowspan="9">
-                                                            <div class="chart_container" />
+                                                            <div class="chart_container" ></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -134,7 +134,7 @@
                                                             <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
                                                         </td>
                                                         <td rowspan="9">
-                                                            <div class="chart_container" />
+                                                            <div class="chart_container" ></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -181,7 +181,7 @@
                                                             <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
                                                         </td>
                                                         <td rowspan="9">
-                                                            <div class="chart_container" />
+                                                            <div class="chart_container" ></div>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -229,7 +229,7 @@
                                                         </td>
                                                         <td width="100">平均水平</td>
                                                         <td rowspan="9">
-                                                            <div class="chart_container" />
+                                                            <div class="chart_container" ></div>
                                                         </td>
                                                     </tr>
                                                     <tr>

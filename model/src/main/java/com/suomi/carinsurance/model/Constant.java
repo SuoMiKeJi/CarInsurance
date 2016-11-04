@@ -45,6 +45,18 @@ public class Constant {
              * 驾驶时间分布
              */
             public static final String DRIVING_TIME_DISTRIBUTION = "chart-driving-time-distribution";
+            /**
+             * 车辆风险统计
+             */
+            public static final String VEHICLE_RISK_STATISTICS = "chart-vehicle-risk-statistics";
+            /**
+             * 建议保险折扣统计
+             */
+            public static final String INSURANCE_DISCOUNT_STATISTICS = "chart-insurance-discount-statistics";
+            /**
+             * 欺骗风险统计
+             */
+            public static final String FRAUD_RISK_STATISTICS = "chart-fraud-risk-statistics";
         }
     }
 }

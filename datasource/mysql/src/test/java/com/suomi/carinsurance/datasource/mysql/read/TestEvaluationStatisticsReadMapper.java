@@ -19,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="http://www.lizhaoweb.cn">李召(John.Lee)</a>
@@ -59,6 +60,24 @@ public class TestEvaluationStatisticsReadMapper {
     @Test
     public void comboBoxAll() {
         List<EvaluationStatistics> list = readMapper.comboBoxAll();
+        System.out.println(list);
+    }
+
+    @Test
+    public void vehicleRiskStatistics() {
+        List<Map<String, Integer>> list = readMapper.vehicleRiskStatistics();
+        System.out.println(list);
+    }
+
+    @Test
+    public void insuranceDiscountStatistics() {
+        List<Map<String, Integer>> list = readMapper.insuranceDiscountStatistics();
+        System.out.println(list);
+    }
+
+    @Test
+    public void fraudRiskStatistics() {
+        List<Map<String, Integer>> list = readMapper.fraudRiskStatistics();
         System.out.println(list);
     }
 }

@@ -16,6 +16,8 @@ import com.suomi.carinsurance.model.Constant;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
+import net.lizhaoweb.common.util.base.HttpUtil;
+import net.lizhaoweb.common.util.base.JsonUtil;
 import net.lizhaoweb.common.util.base.ReflectUtil;
 import net.lizhaoweb.common.util.base.StringUtil;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
@@ -23,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -116,6 +120,42 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean vehicleRiskRating(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            SearchEvaluationStatistics search
+    ) {
+        try {
+            // 统计列表
+            List<EvaluationStatistics> list = readMapper.findAll(search);
+            request.setAttribute("list", list);
+
+            // 车辆风险统计
+            List<Map<String, Integer>> vehicleRiskStatistics = readMapper.vehicleRiskStatistics();
+            String vehicleRiskStatisticsChartJson = this.vehiclePopulationStatistics(vehicleRiskStatistics, 1, 0);
+            request.setAttribute(Constant.Chart.Id.VEHICLE_RISK_STATISTICS, vehicleRiskStatisticsChartJson);
+
+            // 建议保险折扣统计
+            List<Map<String, Integer>> insuranceDiscountStatistics = readMapper.insuranceDiscountStatistics();
+            String insuranceDiscountStatisticsChartJson = this.vehiclePopulationStatistics(insuranceDiscountStatistics, 1, 0);
+            request.setAttribute(Constant.Chart.Id.INSURANCE_DISCOUNT_STATISTICS, insuranceDiscountStatisticsChartJson);
+
+            // 欺骗风险统计
+            List<Map<String, Integer>> fraudRiskStatistics = readMapper.fraudRiskStatistics();
+            String fraudRiskStatisticsChartJson = this.vehiclePopulationStatistics(fraudRiskStatistics, 1, 0);
+            request.setAttribute(Constant.Chart.Id.FRAUD_RISK_STATISTICS, fraudRiskStatisticsChartJson);
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            HttpUtil.print(response, "系统出错啦，请稍后再试……");
+        }
+        return false;
+    }
+
     // 计算平铺柱形
     private List<Object[]> columnChartData(EvaluationStatistics bean, Field[] fields, String namedChartId) {
         if (StringUtil.isBlank(namedChartId)) {
@@ -165,5 +205,27 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
             }
         }
         return data;
+    }
+
+    // 车辆总体统计 JSON
+    private String vehiclePopulationStatistics(List<Map<String, Integer>> list, int multiple, int offset) {
+        List<Integer[]> data = new ArrayList<Integer[]>();
+        for (int index = 0; index < 10; index++) {
+            int key = index * multiple + offset;
+            Integer count = null;
+            for (Map<String, Integer> bean : list) {
+                if (key == bean.get("entry")) {
+                    count = bean.get("count");
+                    list.remove(bean);
+                    break;
+                }
+            }
+            if (count == null) {
+                count = 0;
+            }
+            Integer[] array = {key, count};
+            data.add(array);
+        }
+        return JsonUtil.toJson(data);
     }
 }

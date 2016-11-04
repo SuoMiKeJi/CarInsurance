@@ -1,13 +1,9 @@
 @charset "UTF-8";
 
 .chart_container {
-    min-width: 620px;
-    height: 251px;
+    display: inline-block;
+    width: 33%;
+    height: 300px;
     margin: 0 auto;
-}
-
-.data_table {
-    width: 100%;
-    padding-top: 10px;
 }
 

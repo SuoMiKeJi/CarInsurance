@@ -10,16 +10,15 @@
  */
 package com.suomi.carinsurance.web.controller;
 
-import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import lombok.Setter;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <h1>控制层 - 车辆风险评级</h1>
@@ -45,10 +44,13 @@ public class VehicleRiskRatingController extends AbstractController {
      * @return 跳转地址
      */
     @RequestMapping(value = "/index", method = {RequestMethod.GET})
-    public String index(ModelMap model) {
+    public String index(HttpServletRequest request, HttpServletResponse response) {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-        List<EvaluationStatistics> list = service.findAll(search);
-        model.addAttribute("list", list);
-        return String.format("/%s/index", MODEL);
+        boolean jump = service.vehicleRiskRating(request, response, search);
+        String pagePath = null;
+        if (jump) {
+            pagePath = String.format("/%s/index", MODEL);
+        }
+        return pagePath;
     }
 }
