@@ -7,6 +7,7 @@ import com.suomi.carinsurance.web.service.IUserService;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <h1>业务层[实现] - 用户相关</h1>
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 public class UserService implements IUserService{
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
     // 读持久操作对象。
+    @Autowired
     private IUserReadMapper readMapper;
 
     @Override

@@ -14,14 +14,14 @@
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/core/1.11.1/jquery-1.11.1.min.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/plugins/bootstrap/bootstrap.min.js' />"></script>
     <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
-    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/myJS/myForm.js' />"></script>
-    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/myJS/jquery.validate.plugin.dstore.js' />"></script>
+    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/my-js/jlForm.js' />"></script>
+    <script type="text/javascript" charset="UTF-8" src="<@com.tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
 
     <script language="javascript" >
         $().ready(function() {
-            myForm.field.setDefault($("[name='username']"), "用户名");
-            myForm.field.setDefault($("[name='password']"), "密码", "text", "password");
-            myForm.field.setDefault($("[name='validateCode']"), "输入验证码");
+            jlForm.field.setDefault($("[name='username']"), "用户名");
+            jlForm.field.setDefault($("[name='password']"), "密码", "text", "password");
+            jlForm.field.setDefault($("[name='validateCode']"), "输入验证码");
 
             $("#loginForm").validate({
                 focusCleanup : true,
@@ -32,10 +32,12 @@
                 errorElement : "font",
                 submitHandler : function(form) {
 
-                    myForm.submit(form, function(response, textStatus){
+                    jlForm.submit(form,{
+                            success:function(response, textStatus){
                         alert(response);
                         if(response.code == 200){
                             var data = response.data;
+                            alert(data);
                             if(typeof(data.data.forward) == "string"){
                                 window.location = data.data.forward;
                             }else{
@@ -52,6 +54,8 @@
                                 }
                             }).lock();
                         }
+                        }
+
                     });
                 },
                 init:{},
@@ -94,12 +98,15 @@
             $("#refreshValidateCode").click(function(e){
                 myForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());
             });
+            $("#to-recover").click(function () {
+                $("#loginForm").submit();
+            });
         });
     </script>
 </head>
 <body>
 <div id="loginbox">
-    <form id="loginForm" action="<@com.tags.spring.url value='/user/login.action' />" method="GET" class="form-vertical">
+    <form id="loginForm" action="<@com.tags.spring.url value='/user/login.json' />" method="GET" class="form-vertical">
         <div class="control-group normal_text">
            <!-- <h3><img src="images/login_logo.png" alt="Logo" /></h3>-->
             <h2>欢迎使用索米车险大数据平台</h2>
@@ -132,7 +139,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <span class="pull-left"><input type="submit" id="to-recover" value="登 录" class="flip-link btn btn-info" /></span>
+            <span class="pull-left"><button id="to-recover" class="flip-link btn btn-info" >登 录</button></span>
         </div>
     </form>
 </div>
