@@ -10,7 +10,7 @@
  */
 package com.suomi.carinsurance.web.controller;
 
-import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
+import com.suomi.carinsurance.web.service.IMonthlyService;
 import lombok.Setter;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
 import org.springframework.ui.ModelMap;
@@ -36,7 +36,7 @@ public class TravelTrendAnalysisController extends AbstractController {
     private final static String MODEL = "travel_trend_analysis";
 
     @Setter
-    private IEvaluationStatisticsService service;
+    private IMonthlyService service;
 
     /**
      * 首页

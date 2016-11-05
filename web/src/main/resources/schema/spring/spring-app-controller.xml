@@ -24,7 +24,7 @@
 
     <!-- 行驶趋势分析 -->
     <bean class="com.suomi.carinsurance.web.controller.TravelTrendAnalysisController">
-        <property name="service" ref="evaluationStatisticsService"/>
+        <property name="service" ref="monthlyService"/>
     </bean>
 
     <!-- 驾驶行为分析 -->
