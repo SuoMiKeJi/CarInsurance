@@ -36,32 +36,27 @@
                 validClass : "checked",
                 errorElement : "font",
                 submitHandler : function(form) {
-
                     jlForm.submit(form,{
                         success:function(response, textStatus){
-
-                        var data = response.data;
-                        if(response.code == 200){
-
-                            if(typeof(data.data.forward) == "string"){
-                                window.location = data.data.forward;
-                            }else{
-                                window.location = "www.baidu.com";
-                            }
-                        }else{
-
-                            art.dialog({
-                                title : "提示",
-                                content : data.msg,
-                                fixed: true,
-                                okValue : '确定',
-                                ok : function() {
-                                    return true;
+                            var data = response.data;
+                            if(response.code == 200){
+                                if(typeof(data.data.forward) == "string"){
+                                    window.location = data.data.forward;
+                                }else{
+                                    window.location = "www.baidu.com";
                                 }
-                            }).lock();
+                            }else{
+                                art.dialog({
+                                    title : "提示",
+                                    content : response.msg,
+                                    fixed: true,
+                                    okValue : '确定',
+                                    ok : function() {
+                                        return true;
+                                    }
+                                }).lock();
+                            }
                         }
-                        }
-
                     });
                 },
                 init:{},
@@ -102,11 +97,11 @@
                 }
             });
             $("#refreshValidateCode").click(function(e){
-                jlForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());
+                <#--jlForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());-->
             });
-            $("#to-recover").click(function () {
-                $("#loginForm").submit();
-            });
+//            $("#to-recover").click(function () {
+//                $("#loginForm").submit();
+//            });
         });
     </script>
 </head>
@@ -139,13 +134,16 @@
                     <span class="add-on">验证码</span>
                     <input name="validateCode" style="width:30%;"/>
                     <span class="imag"><a id="refreshValidateCode" href="javascript:;">
-                    <img src="<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10' />" />
+                    <#--<img src="<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10' />" />-->
                     <i>换一张</i></a></span>
                 </div>
             </div>
         </div>
         <div class="form-actions">
-            <span class="pull-left"><button id="to-recover" class="flip-link btn btn-info" >登 录</button></span>
+            <span class="pull-left">
+                <#--<button id="to-recover" class="flip-link btn btn-info" >登 录</button>-->
+                <input type="submit" value="登录" class="flip-link btn btn-info" />
+            </span>
         </div>
     </form>
 </div>
