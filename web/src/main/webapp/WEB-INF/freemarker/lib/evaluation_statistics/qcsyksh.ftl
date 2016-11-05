@@ -15,7 +15,7 @@
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             <div id="cat_gps_id" >
-                                <span>ID</span>
+                                <span>车牌号</span>
                                 <select id="gpsIdSelect" page-region="header">
                                     <option value="YYZX03810" selected >YYZX03810</option>
                                     <option value="YYZX05028" >YYZX05028</option>

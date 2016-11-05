@@ -143,7 +143,7 @@
                             defaultSetting.title.text = setting.title;
                         }
                         if (typeof (setting.subtitle) == "string") {
-                            defaultSetting.title.text = setting.subtitle;
+                            defaultSetting.subtitle.text = setting.subtitle;
                         }
                         if (typeof (setting.xAxis) == "object") {
                             if (typeof (setting.xAxis.categories) == "object" && setting.xAxis.categories instanceof Array) {

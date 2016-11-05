@@ -31,7 +31,7 @@
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             <div id="cat_gps_id" page-region="header">
-                                <span>ID</span>
+                                <span class="label" >车牌号</span>
                                 <select id="select-vehicle-id"></select>
                             </div>
                             <table class="table table-bordered with-check">

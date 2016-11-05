@@ -8,5 +8,40 @@
 
 .data_table {
     width: 100%;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+select, input {
+    width: 180px;
+}
+
+.time_input {
+    margin: 0px 0px 10px 0px;
+    padding: 3px 4px;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    font-weight: normal;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.label {
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 18px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #1f7ed0;
+}
+
+.label_spacing {
+    margin-left: 8px;
+    margin-right: 0px;
 }

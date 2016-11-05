@@ -2,13 +2,21 @@
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/css/highcharts.css' />"/>
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/travel_trend_analysis/index.css' />"/>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/highcharts.js' />"></script>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/datepicker/WdatePicker.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/travel_trend_analysis/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            // 加载下拉框数据
+            loadDataToSelect({
+                url : "<@com.tags.spring.url value='/dbac/comboBox.json' />",
+                select : "#select-vehicle-id"
+            });
+
+            // 图表
             jlCharts.line({
-                title: "",
+                title: "趋势分析",
                 subtitle: "",
                 xAxis: {
                     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -42,23 +50,35 @@
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             <div id="cat_gps_id" page-region="header">
-                                <span>ID</span>
-                                <select id="select-vehicle-id">
-                                    <#if selectMap?? && (selectMap?size > 0) >
-                                        <#list selectMap?keys as key>
-                                            <#if key?? && "" != key?trim>
-                                                <option value="${key!}">${selectMap[key]!}</option>
-                                            </#if>
-                                        </#list>
-                                    </#if>)
-                                </select>
+                                <span>
+                                    <span class="label">车牌号</span>
+                                    <select id="select-vehicle-id" ></select>
+                                </span>
+                                <span class="label_spacing">
+                                    <span class="label ">维度</span>
+                                    <select id="select-dimension-id" >
+                                        <#if selectMap?? && (selectMap?size > 0) >
+                                            <#list selectMap?keys as key>
+                                                <#if key?? && "" != key?trim>
+                                                    <option value="${key!}">${selectMap[key]!}</option>
+                                                </#if>
+                                            </#list>
+                                        </#if>
+                                    </select>
+                                </span>
+                                <span class="label_spacing">
+                                    <span class="label">起止年月</span>
+                                    <input name="startMonth" class="Wdate time_input" onClick="WdatePicker()" />
+                                    <span>-</span>
+                                    <input name="endMonth" class="Wdate time_input" onClick="WdatePicker()" />
+                                </span>
                             </div>
                             <table class="table table-bordered with-check">
                                 <tbody>
                                     <tr>
                                         <td style="padding:0;">
                                             <div class="tabbox" page-region="body" >
-                                                <table width="100%">
+                                                <table class="data_table">
                                                     <thead >
                                                         <tr>
                                                             <th width="10">&nbsp;</th>
