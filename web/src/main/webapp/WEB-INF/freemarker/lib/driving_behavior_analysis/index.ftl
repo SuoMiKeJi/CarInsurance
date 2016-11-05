@@ -4,13 +4,20 @@
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/highcharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/driving_behavior_analysis/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // 加载下拉框数据
             loadDataToSelect({
                 url : "<@com.tags.spring.url value='/dbac/comboBox.json' />",
-                select : "#select-vehicle-id"
+                async : false,
+                select : "#select-vehicle-id",
+                each : function (index, element) {
+                    var id = $(element).attr("gpsId");
+                    var name = $(element).attr("vehicleId");
+                    return '<option value="' + id + '" > ' + name + '</option>';
+                }
             });
 
             // 加载数据

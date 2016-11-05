@@ -91,6 +91,7 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
     public DataDeliveryWrapper<Map<String, Object>> getStatisticalDetail(SearchEvaluationStatistics search) {
         DataDeliveryWrapper<Map<String, Object>> result = null;
         try {
+            // 获取展示统计数据
             Map<String, Object> data = new HashMap<String, Object>();
             EvaluationStatistics bean = readMapper.find(search);
             Field[] allFields = ReflectUtil.getAllFields(bean.getClass());

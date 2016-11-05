@@ -10,12 +10,13 @@
  */
 package com.suomi.carinsurance.web.controller;
 
+import com.suomi.carinsurance.search.statistics.SearchMonthly;
 import com.suomi.carinsurance.web.service.IMonthlyService;
 import lombok.Setter;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,5 +54,23 @@ public class TravelTrendAnalysisController extends AbstractController {
         selectMap.put("avgDeceleration", "平均减速度");
         model.addAttribute("selectMap", selectMap);
         return String.format("/%s/index", MODEL);
+    }
+
+    /**
+     * 获取数据。
+     *
+     * @param gpsId GPS 标识。
+     * @return 统计明细。
+     */
+    @ResponseBody
+    @RequestMapping(value = "/{gpsId}-{dimension}.json", method = {RequestMethod.GET})
+    public DataDeliveryWrapper<Map<String, Object>> getData(
+            @PathVariable("gpsId") String gpsId,
+            @PathVariable("dimension") String dimension,
+            @ModelAttribute("search") SearchMonthly search
+    ) {
+        search.setGpsId(gpsId);
+        DataDeliveryWrapper<Map<String, Object>> result = service.getStatisticalDetail(search, dimension);
+        return result;
     }
 }

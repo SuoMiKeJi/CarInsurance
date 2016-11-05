@@ -15,7 +15,7 @@
                 yAxis: {title: "车辆数"},
                 tooltip: {
                     headerFormat: '风险等级：<b>{point.key}</b><br/>',
-                    pointFormat: '车 辆 数：<b>{point.y}</b>'
+                    pointFormat: '车 辆 数：<b>{point.y}</b> 台'
                 },
                 data: ${Request["chart-vehicle-risk-statistics"]!"null"}
             }, $("#chart-vehicle-risk-statistics"));
@@ -28,7 +28,7 @@
                 yAxis: {title: "车辆数"},
                 tooltip: {
                     headerFormat: '保费折扣：<b>{point.key} %</b><br/>',
-                    pointFormat: '车 辆 数：<b>{point.y}</b>'
+                    pointFormat: '车 辆 数：<b>{point.y}</b> 台'
                 },
                 data: ${Request["chart-insurance-discount-statistics"]!"null"}
             }, $("#chart-insurance-discount-statistics"));
@@ -41,7 +41,7 @@
                 yAxis: {title: "车辆数"},
                 tooltip: {
                     headerFormat: '欺骗风险概率：<b>{point.key} %</b><br/>',
-                    pointFormat: '车 辆 数：<b>{point.y}</b>'
+                    pointFormat: '车 辆 数：<b>{point.y}</b> 台'
                 },
                 data: ${Request["chart-fraud-risk-statistics"]!"null"}
             }, $("#chart-fraud-risk-statistics"));

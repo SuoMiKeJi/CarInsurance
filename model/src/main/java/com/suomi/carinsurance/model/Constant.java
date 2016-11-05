@@ -57,6 +57,10 @@ public class Constant {
              * 欺骗风险统计
              */
             public static final String FRAUD_RISK_STATISTICS = "chart-fraud-risk-statistics";
+            /**
+             * 行驶趋势分布
+             */
+            public static final String TRAVEL_TREND_ANALYSIS = "chart-travel-trend-analysis";
         }
     }
 }

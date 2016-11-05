@@ -1,5 +1,7 @@
 /**
  * 1、函数功能：去除字符串两端的空格。
+ *
+ * @returns {String}
  */
 String.prototype.trim = function () {
     return this.replace(/(^\s*)|(\s*$)/g, "");
@@ -7,6 +9,8 @@ String.prototype.trim = function () {
 
 /**
  * 2、函数功能：判断字符串是否为空。
+ *
+ * @returns {Boolean}
  */
 String.prototype.isNull = function () {
     return this == null || this.trim() == "";
@@ -15,7 +19,7 @@ String.prototype.isNull = function () {
 /**
  * 3、函数功能：判断字符串是以什么样的字符串结束的。
  *
- * @param str
+ * @param str 结束标志。
  * @returns {Boolean}
  */
 String.prototype.endWith = function (str) {
@@ -33,7 +37,7 @@ String.prototype.endWith = function (str) {
 /**
  * 4、函数功能：判断字符串是以什么样的字符串开头的。
  *
- * @param str
+ * @param str 开始标志。
  * @returns {Boolean}
  */
 String.prototype.startWith = function (str) {
@@ -51,16 +55,18 @@ String.prototype.startWith = function (str) {
 /**
  * 5、函数功能：替换字符串中全部匹配的字符串
  *
- * @param str1
- * @param str2
- * @returns
+ * @param reg       正则表达式。
+ * @param newString 新的子字符串。
+ * @returns {String}
  */
-String.prototype.replaceAll = function (str1, str2) {
-    return this.replace(new RegExp(str1, "gm"), str2);
+String.prototype.replaceAll = function (reg, newString) {
+    return this.replace(new RegExp(reg, "gm"), newString);
 };
 
 /**
  * 6、函数功能：将URL字符串转换这对象。
+ *
+ * @returns {URL}
  */
 String.prototype.toURL = function () {
     var URL = {
@@ -101,6 +107,8 @@ String.prototype.toURL = function () {
 
 /**
  * 7.函数功能：判断字符串是否为整型数字。
+ *
+ * @returns {Boolean}
  */
 String.prototype.isInt = function () {
     var number = this.replace(/(^\s*)|(\s*$)/g, "");
@@ -110,6 +118,8 @@ String.prototype.isInt = function () {
 
 /**
  * 8.函数功能：判断字符串是否为浮点型数字。
+ *
+ * @returns {Boolean}
  */
 String.prototype.isFloat = function () {
     var number = this.replace(/(^\s*)|(\s*$)/g, "");
@@ -119,6 +129,8 @@ String.prototype.isFloat = function () {
 
 /**
  * 9、函数功能：for循环检测字符串的字节长度。
+ *
+ * @returns {int}
  */
 String.prototype.getBytesLengthByFor = function () {
     var byteLen = 0, len = this.length;
@@ -138,6 +150,8 @@ String.prototype.getBytesLengthByFor = function () {
 
 /**
  * 10、函数功能：正则表达式检测字符串的字节长度。
+ *
+ * @returns {int}
  */
 String.prototype.getBytesLengthByReg = function () {
     return this.replace(/[^\x00-\xFF]/g, '**').length;
@@ -146,10 +160,7 @@ String.prototype.getBytesLengthByReg = function () {
 /**
  * 11、函数功能：验证字符串的长度(FOR循环)。
  *
- * @param str
- *            被验证的字符串。
- * @param maxByteslength
- *            字符串的最大字节数。
+ * @param maxByteslength 字符串的最大字节数。
  * @returns {Boolean}
  */
 String.prototype.checkStringLengthByFor = function (maxByteslength) {
@@ -167,10 +178,7 @@ String.prototype.checkStringLengthByFor = function (maxByteslength) {
 /**
  * 12、函数功能：验证字符串的长度(正则表达式)。
  *
- * @param str
- *            被验证的字符串。
- * @param maxByteslength
- *            字符串的最大字节数。
+ * @param maxByteslength 字符串的最大字节数。
  * @returns {Boolean}
  */
 String.prototype.checkStringLengthByReg = function (maxByteslength) {
@@ -184,3 +192,27 @@ String.prototype.checkStringLengthByReg = function (maxByteslength) {
         return true;
     }
 };
+
+/**
+ * 13、函数功能：将字符串转成 Int
+ *
+ * @returns {int}
+ */
+String.prototype.toInt = function () {
+    return parseInt(this);
+};
+
+/**
+ * 14、函数功能：将字符串转成 Float
+ *
+ * @returns {float}
+ */
+String.prototype.toFloat = function () {
+    return parseFloat(this);
+};
+
+// String.prototype.format = function (regExp, format) {
+//     var regExpOjbect = new RegExp(regExp);
+//     RegExp.
+// };
+    

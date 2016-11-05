@@ -10,6 +10,13 @@
  */
 package com.suomi.carinsurance.web.service;
 
+import com.suomi.carinsurance.model.statistics.Monthly;
+import com.suomi.carinsurance.search.statistics.SearchMonthly;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * <h1>业务层[接口] - 月度统计</h1>
  *
@@ -21,4 +28,21 @@ package com.suomi.carinsurance.web.service;
  * Date of last commit:$Date$<br>
  */
 public interface IMonthlyService {
+
+    /**
+     * 查询数据。
+     *
+     * @param search 查询对象。
+     * @return 返回数据列表。
+     */
+    List<Monthly> findAll(SearchMonthly search);
+
+    /**
+     * 获取统计明细。
+     *
+     * @param search    查询对象。
+     * @param dimension 维度。
+     * @return 返回统计明细。
+     */
+    DataDeliveryWrapper<Map<String, Object>> getStatisticalDetail(SearchMonthly search, String dimension);
 }

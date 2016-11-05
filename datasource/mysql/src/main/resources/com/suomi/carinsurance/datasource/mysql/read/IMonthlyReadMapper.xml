@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.suomi.carinsurance.datasource.mysql.read.IMonthlyReadMapper">
 
+    <!-- 最大最小年月 -->
+    <resultMap id="minAndMaxPeriod" type="HashMap">
+        <result column="min_period" property="minPeriod" javaType="java.lang.Integer"/>
+        <result column="max_period" property="maxPeriod" javaType="java.lang.Integer"/>
+    </resultMap>
+
     <!-- 通过查询条件获取月度统计数据列表 -->
     <select id="findAll" resultType="monthly" parameterType="searchMonthly">
         SELECT
@@ -13,6 +19,14 @@
         <if test="vehicleId!=null">AND monthly.ID=#{vehicleId}</if>
         <if test="startMonth!=null">AND monthly.Period&gt;=#{startMonth}</if>
         <if test="endMonth!=null">AND monthly.Period&lt;=#{endMonth}</if>
+        ORDER BY monthly.Period ASC
+    </select>
+
+    <!-- 通过查询条件获取月度统计的最小年月和最大年月 -->
+    <select id="getMinAndMaxPeriod" resultMap="minAndMaxPeriod">
+        SELECT MIN(Period) AS min_period,MAX(Period) AS max_period FROM monthly WHERE 1=1
+        <if test="gpsId!=null">AND monthly.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND monthly.ID=#{vehicleId}</if>
     </select>
 
     <sql id="allField">
