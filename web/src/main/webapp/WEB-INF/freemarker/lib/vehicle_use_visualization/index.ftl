@@ -26,15 +26,15 @@
                             </div>
                             <table class="table table-bordered with-check" >
                                 <tbody>
-                                    <tr>
-                                        <td style="padding:0;">
-                                            <div class="tabbox">
-                                                <div style="padding-top: 10px;padding-left: 15px;">
-                                                    <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/qcsyksh/YYZX03810.jpg' />">
-                                                </div>
+                                <tr>
+                                    <td style="padding:0;">
+                                        <div class="tabbox">
+                                            <div style="padding-top: 10px;padding-left: 15px;">
+                                                <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/qcsyksh/YYZX03810.jpg' />">
                                             </div>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
