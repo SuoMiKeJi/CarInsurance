@@ -38,21 +38,21 @@
                 submitHandler : function(form) {
 
                     jlForm.submit(form,{
-                            success:function(response, textStatus){
-                        alert(response);
+                        success:function(response, textStatus){
+
+                        var data = response.data;
                         if(response.code == 200){
-                            var data = response.data;
-                            alert(data+"200");
+
                             if(typeof(data.data.forward) == "string"){
                                 window.location = data.data.forward;
                             }else{
                                 window.location = "www.baidu.com";
                             }
                         }else{
-                            alert(data+"不是200");
+
                             art.dialog({
                                 title : "提示",
-                                content : data.message,
+                                content : data.msg,
                                 fixed: true,
                                 okValue : '确定',
                                 ok : function() {
@@ -102,7 +102,7 @@
                 }
             });
             $("#refreshValidateCode").click(function(e){
-                myForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());
+                jlForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());
             });
             $("#to-recover").click(function () {
                 $("#loginForm").submit();
