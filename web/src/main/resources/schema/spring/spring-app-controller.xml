@@ -38,4 +38,7 @@
         <property name="service" ref="evaluationStatisticsService"/>
     </bean>
 
+    <!-- 车辆使用可视化 -->
+    <bean class="com.suomi.carinsurance.web.controller.VehicleUseVisualizationController"/>
+
 </beans>

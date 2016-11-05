@@ -81,7 +81,7 @@
                                                 <table class="data_table">
                                                     <thead >
                                                         <tr>
-                                                            <th width="10">&nbsp;</th>
+                                                            <th width="10" >&nbsp;</th>
                                                             <th width="80" >GPS</th>
                                                             <th width="80" >车牌号</th>
                                                             <th width="60" >年月</th>

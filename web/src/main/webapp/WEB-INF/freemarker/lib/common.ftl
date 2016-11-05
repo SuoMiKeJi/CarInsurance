@@ -119,8 +119,8 @@
             <li <#if selected == "BXDJYZ">class="active"</#if>>
                 <a href="<@tags.spring.url value='/ipfc/export.excel' />">保险定价因子</a>
             </li>
-            <li <#if selected == "QCSYKSH">class="active"</#if>>
-                <a href="<@tags.spring.url value='/es/qcsyksh' />" onclick="javascript:$('body').showLoading();">汽车使用可视化</a>
+            <li <#if selected == "VUVC">class="active"</#if>>
+                <a href="<@tags.spring.url value='/vuvc/index' />" onclick="javascript:$('body').showLoading();">汽车使用可视化</a>
             </li>
         </ul>
     </div>
