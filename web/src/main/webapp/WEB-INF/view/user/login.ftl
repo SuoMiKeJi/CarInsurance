@@ -38,13 +38,14 @@
                 submitHandler : function(form) {
                     jlForm.submit(form,{
                         success:function(response, textStatus){
-                            var data = response.data;
                             if(response.code == 200){
-                                if(typeof(data.data.forward) == "string"){
-                                    window.location = data.data.forward;
-                                }else{
-                                    window.location = "www.baidu.com";
-                                }
+                                var data = response.result;
+                                alert("登陆成功，用户ID="+data.uid);
+//                                if(typeof(data.data.forward) == "string"){
+//                                    window.location = data.data.forward;
+//                                }else{
+//                                    window.location = "www.baidu.com";
+//                                }
                             }else{
                                 art.dialog({
                                     title : "提示",
