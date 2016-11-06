@@ -30,6 +30,13 @@ import java.lang.annotation.Target;
 public @interface ChartConfig {
 
     /**
+     * 图表对应其他数据的键。
+     *
+     * @return 图表对应其他数据的键。
+     */
+    String key() default "";
+
+    /**
      * 图表的唯一标识。
      *
      * @return 图表的唯一标识。

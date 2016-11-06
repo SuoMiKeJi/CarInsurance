@@ -216,9 +216,13 @@ function ___loadDrivingTimeDistribution(bean, chart) {
     drivingTimeDistributionPanel.find('[data-name="evenignPeakProportion"]').text(evenignPeakProportion + "%");
     drivingTimeDistributionPanel.find('[data-name="nightProportion"]').text(nightProportion + "%");
 
+    $(chart).each(function (i, e) {
+        drivingTimeDistributionPanel.find('[data-key="' + this["data-key"] + '"]').text(this["data"][1] + "%");
+    });
+
     jlCharts.stacked({
         title: "",
-        xAxis: {categories: [$("#select-vehicle-id").val()]},
+        xAxis: {categories: [$("#select-vehicle-id").val(), "平均水平"]},
         yAxis: {title: ""},
         tooltip: {
             pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>'

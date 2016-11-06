@@ -14,6 +14,9 @@
     <!-- 月度统计 -->
     <bean id="monthlyService" class="com.suomi.carinsurance.web.service.impl.MonthlyService"/>
 
+    <!-- 各时间段出行平均 -->
+    <bean id="allAvgService" class="com.suomi.carinsurance.web.service.impl.AllAvgService"/>
+
     <!-- Excel -->
     <bean id="excelService" class="com.suomi.carinsurance.export.excel.ExcelService"/>
 

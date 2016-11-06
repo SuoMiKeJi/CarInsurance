@@ -25,6 +25,33 @@ public class Constant {
      * 图表
      */
     public static final class Chart {
+
+        /**
+         * 其他数据的键
+         */
+        public static final class Key {
+            /**
+             * 清晨比例
+             */
+            public static final String EARLY_MORNING = "chart-key-early-morning";
+            /**
+             * 早高峰比例
+             */
+            public static final String MORNING_PEAK = "chart-key-morning-peak";
+            /**
+             * 白天比例
+             */
+            public static final String DAY = "chart-key-day";
+            /**
+             * 晚高峰比例
+             */
+            public static final String EVENIGN_PEAK = "chart-key-evenign-peak";
+            /**
+             * 夜间比例
+             */
+            public static final String NIGHT = "chart-key-night";
+        }
+
         /**
          * 唯一标识
          */

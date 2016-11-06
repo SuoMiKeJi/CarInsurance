@@ -11,9 +11,12 @@
 package com.suomi.carinsurance.web.service.impl;
 
 import com.suomi.carinsurance.annotation.ChartConfig;
+import com.suomi.carinsurance.datasource.mysql.read.IAllAvgReadMapper;
 import com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper;
 import com.suomi.carinsurance.model.Constant;
+import com.suomi.carinsurance.model.statistics.AllAvg;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
+import com.suomi.carinsurance.search.statistics.SearchAllAvg;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import net.lizhaoweb.common.util.base.HttpUtil;
@@ -51,6 +54,10 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
     // 读持久操作对象。
     @Autowired
     private IEvaluationStatisticsReadMapper readMapper;
+
+    // 读持久操作对象。
+    @Autowired
+    private IAllAvgReadMapper allAvgReadMapper;
 
     /**
      * {@inheritDoc}
@@ -97,6 +104,27 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
             Field[] allFields = ReflectUtil.getAllFields(bean.getClass());
             data.put("detail", bean);
 
+            // 获取所有车辆的平均值
+            List<AllAvg> allAvgList = allAvgReadMapper.findAll(new SearchAllAvg());
+            Map<String, BigDecimal> allAvgMap = new HashMap<String, BigDecimal>();
+            for (AllAvg allAvg : allAvgList) {
+                if ("Dawn".equalsIgnoreCase(allAvg.getName())) {
+                    allAvgMap.put(Constant.Chart.Key.EARLY_MORNING, allAvg.getValue());
+                }
+                if ("AMRush".equalsIgnoreCase(allAvg.getName())) {
+                    allAvgMap.put(Constant.Chart.Key.MORNING_PEAK, allAvg.getValue());
+                }
+                if ("Day".equalsIgnoreCase(allAvg.getName())) {
+                    allAvgMap.put(Constant.Chart.Key.DAY, allAvg.getValue());
+                }
+                if ("PMRush".equalsIgnoreCase(allAvg.getName())) {
+                    allAvgMap.put(Constant.Chart.Key.EVENIGN_PEAK, allAvg.getValue());
+                }
+                if ("Night".equalsIgnoreCase(allAvg.getName())) {
+                    allAvgMap.put(Constant.Chart.Key.NIGHT, allAvg.getValue());
+                }
+            }
+
             // 计算速度分布
             List<Object[]> speedDistributionChartData = this.columnChartData(bean, allFields, Constant.Chart.Id.SPEED_DISTRIBUTION);
             data.put(Constant.Chart.Id.SPEED_DISTRIBUTION, speedDistributionChartData);
@@ -110,7 +138,7 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
             data.put(Constant.Chart.Id.DECELERATION_DISTRIBUTION, decelerationDistributionChartData);
 
             // 计算驾驶时间分布
-            List<Map<String, Object>> drivingTimeDistributionChartData = this.stackedChartData(bean, allFields, Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION);
+            List<Map<String, Object>> drivingTimeDistributionChartData = this.stackedChartData(bean, allFields, allAvgMap, Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION);
             data.put(Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, drivingTimeDistributionChartData);
 
             result = new DataDeliveryWrapper<Map<String, Object>>(200, "成功", data);
@@ -159,6 +187,15 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
 
     // 计算平铺柱形
     private List<Object[]> columnChartData(EvaluationStatistics bean, Field[] fields, String namedChartId) {
+        if (bean == null) {
+            throw new IllegalArgumentException("The bean is null");
+        }
+        if (fields == null) {
+            throw new IllegalArgumentException("The fields is null");
+        }
+        if (fields.length < 1) {
+            throw new IllegalArgumentException("The size of the fields is 0");
+        }
         if (StringUtil.isBlank(namedChartId)) {
             throw new IllegalArgumentException("The namedChartId is wrong");
         }
@@ -182,25 +219,43 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
     }
 
     // 计算堆叠柱形
-    private List<Map<String, Object>> stackedChartData(EvaluationStatistics bean, Field[] fields, String namedChartId) {
+    private List<Map<String, Object>> stackedChartData(EvaluationStatistics bean, Field[] fields, Map<String, BigDecimal> allAvgMap, String namedChartId) {
+        if (bean == null) {
+            throw new IllegalArgumentException("The bean is null");
+        }
+        if (fields == null) {
+            throw new IllegalArgumentException("The fields is null");
+        }
+        if (fields.length < 1) {
+            throw new IllegalArgumentException("The size of the fields is 0");
+        }
         if (StringUtil.isBlank(namedChartId)) {
             throw new IllegalArgumentException("The namedChartId is wrong");
         }
+
         List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        Map<String, Object> avgItemMap = new HashMap<String, Object>();
         for (Field field : fields) {
             ChartConfig chartConfig = field.getAnnotation(ChartConfig.class);
             if (chartConfig != null) {
                 String chartId = chartConfig.chartId();
                 if (namedChartId.equals(chartId)) {
                     String label = chartConfig.xAxisLabel();
+                    String dataKey = chartConfig.key();
                     Object value = ReflectUtil.getFieldValue(bean, field);
                     if (value instanceof Number) {
                         value = new BigDecimal(value.toString()).multiply(new BigDecimal(100));
                     }
+                    BigDecimal allAvgValue = allAvgMap.get(dataKey);
+                    double avgValue = 0;
+                    if (allAvgValue != null) {
+                        avgValue = allAvgValue.multiply(new BigDecimal(100)).doubleValue();
+                    }
                     Map<String, Object> itemMap = new HashMap<String, Object>();
                     itemMap.put("name", label);
-                    Object[] array = {value};
+                    Object[] array = {value, avgValue};
                     itemMap.put("data", array);
+                    itemMap.put("data-key", dataKey);
                     data.add(itemMap);
                 }
             }

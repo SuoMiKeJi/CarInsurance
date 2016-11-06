@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
     <!--用户操作相关-->
     <bean id="login" class="com.suomi.carinsurance.model.statistics.User"/>
     <bean id="searchLogin" class="com.suomi.carinsurance.search.statistics.SearchUser"/>
+
     <!-- 每月统计数据 -->
     <bean id="monthly" class="com.suomi.carinsurance.model.statistics.Monthly"/>
     <bean id="searchMonthly" class="com.suomi.carinsurance.search.statistics.SearchMonthly"/>
@@ -15,5 +17,9 @@
     <!-- 评估统计数据 -->
     <bean id="evaluationStatistics" class="com.suomi.carinsurance.model.statistics.EvaluationStatistics"/>
     <bean id="searchEvaluationStatistics" class="com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics"/>
+
+    <!-- 各时间段出行平均 -->
+    <bean id="allAvg" class="com.suomi.carinsurance.model.statistics.AllAvg"/>
+    <bean id="searchAllAvg" class="com.suomi.carinsurance.search.statistics.SearchAllAvg"/>
 
 </beans>

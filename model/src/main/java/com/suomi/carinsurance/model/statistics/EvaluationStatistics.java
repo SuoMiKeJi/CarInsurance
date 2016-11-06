@@ -144,35 +144,35 @@ public class EvaluationStatistics extends AbstractModel {
     /**
      * 清晨（5-6）比例
      */
-    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "清晨")
+    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "清晨", key = Constant.Chart.Key.EARLY_MORNING)
     @ExcelField(name = "清晨比例")
     private BigDecimal earlyMorningProportion;
 
     /**
      * 早高峰（7-10）比例
      */
-    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "早高峰")
+    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "早高峰", key = Constant.Chart.Key.MORNING_PEAK)
     @ExcelField(name = "早高峰比例")
     private BigDecimal morningPeakProportion;
 
     /**
      * 白天（11-16）比例
      */
-    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "白天")
+    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "白天", key = Constant.Chart.Key.DAY)
     @ExcelField(name = "白天比例")
     private BigDecimal dayProportion;
 
     /**
      * 晚高峰（17-20）比例
      */
-    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "晚高峰")
+    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "晚高峰", key = Constant.Chart.Key.EVENIGN_PEAK)
     @ExcelField(name = "晚高峰比例")
     private BigDecimal evenignPeakProportion;
 
     /**
      * 夜间（21-4）比例
      */
-    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "夜间")
+    @ChartConfig(chartId = Constant.Chart.Id.DRIVING_TIME_DISTRIBUTION, xAxisLabel = "夜间", key = Constant.Chart.Key.NIGHT)
     @ExcelField(name = "夜间比例")
     private BigDecimal nightProportion;
 

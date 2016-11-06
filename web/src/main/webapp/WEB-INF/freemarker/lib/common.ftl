@@ -110,11 +110,11 @@
             <li <#if selected == "VRRC">class="active"</#if>>
                 <a href="<@tags.spring.url value='/vrrc/index' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
             </li>
-            <li <#if selected == "TTAC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/ttac/index' />" onclick="javascript:$('body').showLoading();">行驶趋势分析</a>
-            </li>
             <li <#if selected == "DBAC">class="active"</#if>>
                 <a href="<@tags.spring.url value='/dbac/index' />" onclick="javascript:$('body').showLoading();">驾驶行为分析</a>
+            </li>
+            <li <#if selected == "TTAC">class="active"</#if>>
+                <a href="<@tags.spring.url value='/ttac/index' />" onclick="javascript:$('body').showLoading();">行驶趋势分析</a>
             </li>
             <li <#if selected == "BXDJYZ">class="active"</#if>>
                 <a href="<@tags.spring.url value='/ipfc/export.excel' />">保险定价因子</a>
