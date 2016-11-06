@@ -63,6 +63,10 @@ public class Constant implements net.lizhaoweb.spring.mvc.util.Constant {
          * 配置
          */
         public static final class Config {
+            /**
+             * 用户 SessionKey
+             */
+            public static final String USER_SESSION_KEY = Config.class.getName() + ".USER_SESSION_KEY";
         }
     }
 
