@@ -10,6 +10,7 @@
     <typeAliases>
         <!--用户相关-->
         <typeAlias alias="user" type="com.suomi.carinsurance.model.statistics.User"/>
+
         <!-- 月度统计 -->
         <typeAlias alias="monthly" type="com.suomi.carinsurance.model.statistics.Monthly"/>
         <typeAlias alias="searchMonthly" type="com.suomi.carinsurance.search.statistics.SearchMonthly"/>
@@ -22,6 +23,11 @@
         <typeAlias alias="evaluationStatistics" type="com.suomi.carinsurance.model.statistics.EvaluationStatistics"/>
         <typeAlias alias="searchEvaluationStatistics"
                    type="com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics"/>
+
+        <!-- 各时间段出行平均 -->
+        <typeAlias alias="allAvg" type="com.suomi.carinsurance.model.statistics.AllAvg"/>
+        <typeAlias alias="searchAllAvg" type="com.suomi.carinsurance.search.statistics.SearchAllAvg"/>
+
     </typeAliases>
 
 </configuration>

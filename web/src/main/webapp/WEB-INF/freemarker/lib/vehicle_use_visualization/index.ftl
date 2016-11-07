@@ -1,8 +1,32 @@
 <#macro content >
+    <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/vehicle_use_visualization/index.css' />"/>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#gpsIdSelect").change(function (e) {
-                $("#cat_map_img").attr("src", "<@com.tags.spring.url value='/qcsyksh/' />" + this.value + ".jpg");
+            // 加载下拉框数据
+            loadDataToSelect({
+                url : "<@com.tags.spring.url value='/dbac/comboBox.json' />",
+                async : false,
+                select : "#select-vehicle-id",
+                header : {
+                    text : "--- 请选择 ---",
+                    value : ""
+                },
+                each : function (index, element) {
+                    var id = $(element).attr("gpsId");
+                    var name = $(element).attr("vehicleId");
+                    return '<option value="' + id + '" > ' + name + '</option>';
+                }
+            });
+
+            // 下拉框点击操作
+            $("#select-vehicle-id").change(function (e) {
+                if (typeof (this.value) == "string" && this.value != ""){
+                    $("#cat_map_img").attr("src", "<@com.tags.spring.url value='/vehicle_use_visualization/' />" + this.value + ".jpg");
+                }else {
+                    $("#cat_map_img").attr("src", "<@com.tags.spring.url value='/images/world-map.jpg' />");
+                }
             });
         });
     </script>
@@ -15,14 +39,8 @@
                     <div class="widget-box">
                         <div class="widget-content nopadding">
                             <div id="cat_gps_id" >
-                                <span>车牌号</span>
-                                <select id="gpsIdSelect" page-region="header">
-                                    <option value="YYZX03810" selected >YYZX03810</option>
-                                    <option value="YYZX05028" >YYZX05028</option>
-                                    <option value="YYZX04777" >YYZX04777</option>
-                                    <option value="YYZX05248" >YYZX05248</option>
-                                    <option value="YYZZ02013" >YYZZ02013</option>
-                                </select>
+                                <span class="label">车牌号</span>
+                                <select id="select-vehicle-id" page-region="header"></select>
                             </div>
                             <table class="table table-bordered with-check" >
                                 <tbody>
@@ -30,7 +48,7 @@
                                     <td style="padding:0;">
                                         <div class="tabbox">
                                             <div style="padding-top: 10px;padding-left: 15px;">
-                                                <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/qcsyksh/YYZX03810.jpg' />">
+                                                <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/images/world-map.jpg' />">
                                             </div>
                                         </div>
                                     </td>

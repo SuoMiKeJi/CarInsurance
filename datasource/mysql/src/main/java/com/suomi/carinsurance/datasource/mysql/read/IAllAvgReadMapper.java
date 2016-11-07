@@ -6,41 +6,40 @@
  * @Package : com.suomi.carinsurance.datasource.mysql.read
  * @author <a href="http://www.lizhaoweb.net">李召(John.Lee)</a>
  * @EMAIL 404644381@qq.com
- * @Time : 10:10
+ * @Time : 1:08
  */
 package com.suomi.carinsurance.datasource.mysql.read;
 
-import com.suomi.carinsurance.model.statistics.Monthly;
-import com.suomi.carinsurance.search.statistics.SearchMonthly;
+import com.suomi.carinsurance.model.statistics.AllAvg;
+import com.suomi.carinsurance.search.statistics.SearchAllAvg;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * <h1>持久层[接口·读] - 月度统计</h1>
+ * <h1>持久层[接口·读] - 各时间段出行平均</h1>
  *
  * @author <a href="http://www.lizhaoweb.cn">李召(John.Lee)</a>
  * @version 1.0.0.0.1
- * @notes Created on 2016年10月31日<br>
+ * @notes Created on 2016年11月07日<br>
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-public interface IMonthlyReadMapper {
+public interface IAllAvgReadMapper {
 
     /**
-     * 通过查询条件获取月度统计数据列表。
+     * 通过查询条件获取各时间段出行平均数据。
      *
      * @param search 查询条件。
-     * @return 月度统计数据列表。
+     * @return 评估统计数据。
      */
-    List<Monthly> findAll(SearchMonthly search);
+    AllAvg find(SearchAllAvg search);
 
     /**
-     * 通过查询条件获取月度统计的最小年月和最大年月。
+     * 通过查询条件获取各时间段出行平均数据列表。
      *
      * @param search 查询条件。
-     * @return 月度统计的最小年月和最大年月。
+     * @return 评估统计数据列表。
      */
-    Map<String, Integer> getMinAndMaxPeriod(SearchMonthly search);
+    List<AllAvg> findAll(SearchAllAvg search);
 }

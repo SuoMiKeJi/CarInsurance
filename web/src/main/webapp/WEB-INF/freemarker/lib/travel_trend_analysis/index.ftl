@@ -5,40 +5,39 @@
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/datepicker/WdatePicker.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/travel_trend_analysis/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             // 加载下拉框数据
             loadDataToSelect({
                 url : "<@com.tags.spring.url value='/dbac/comboBox.json' />",
-                select : "#select-vehicle-id"
+                async : false,
+                select : "#select-vehicle-id",
+                each : function (index, element) {
+                    var id = $(element).attr("gpsId");
+                    var name = $(element).attr("vehicleId");
+                    return '<option value="' + id + '" > ' + name + '</option>';
+                }
             });
 
-            // 图表
-            jlCharts.line({
-                title: "趋势分析",
-                subtitle: "",
-                xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                yAxis: {title: ""},
-                tooltip: {
-                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>'
-                },
-                data: [{
-                    name: 'Tokyo',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'New York',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                }, {
-                    name: 'Berlin',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'London',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }]
-            }, '#chart-driving-behavior-analysis');
+            // 加载页面数据
+            loadDataToViewPanel({
+                url : "<@com.tags.spring.url value='/ttac/' />" + $("#select-vehicle-id").val() + "-" + $("#select-dimension-id").val() + ".json",
+                chart : '#chart-driving-behavior-analysis'
+            });
+
+            // 查询
+            $("[name='search']").click(function () {
+                loadDataToViewPanel({
+                    url : "<@com.tags.spring.url value='/ttac/' />" + $("#select-vehicle-id").val() + "-" + $("#select-dimension-id").val() + ".json",
+                    submitData:{
+                        startMonth : $('[name="startMonth"]').val(),
+                        endMonth : $('[name="endMonth"]').val()
+                    },
+                    chart : '#chart-driving-behavior-analysis'
+                });
+            });
         });
     </script>
     <div id="content" >
@@ -68,9 +67,12 @@
                                 </span>
                                 <span class="label_spacing">
                                     <span class="label">起止年月</span>
-                                    <input name="startMonth" class="Wdate time_input" onClick="WdatePicker()" />
-                                    <span>-</span>
-                                    <input name="endMonth" class="Wdate time_input" onClick="WdatePicker()" />
+                                    <input name="startMonth" class="Wdate time_input tb_align" readonly="readonly" />
+                                    <span class="tb_align">-</span>
+                                    <input name="endMonth" class="Wdate time_input tb_align" readonly="readonly" />
+                                </span>
+                                <span class="label_spacing">
+                                    <button name="search" class="blue button">查询</button>
                                 </span>
                             </div>
                             <table class="table table-bordered with-check">
@@ -78,52 +80,10 @@
                                     <tr>
                                         <td style="padding:0;">
                                             <div class="tabbox" page-region="body" >
-                                                <table class="data_table">
-                                                    <thead >
-                                                        <tr>
-                                                            <th width="10" >&nbsp;</th>
-                                                            <th width="80" >GPS</th>
-                                                            <th width="80" >车牌号</th>
-                                                            <th width="60" >年月</th>
-                                                            <th width="120" >里程</th>
-                                                            <th width="100" >时长</th>
-                                                            <th width="60" >平均速度</th>
-                                                            <th width="60" >平均加速度</th>
-                                                            <th width="60" >平均减速度</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td >&nbsp;</td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                            <td >
-                                                                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <#-- 数据展示面板 -->
+                                                <@dataShowPaenl />
                                                 <div style="padding-top: 10px;width: 99%;">
-                                                    <div id="chart-driving-behavior-analysis" class="chart_container"></div>
+                                                    <div id="chart-travel-trend-analysis" class="chart_container"></div>
                                                 </div>
                                             </div>
                                         </td>
@@ -138,4 +98,52 @@
             </div>
         </div>
     </div>
+</#macro>
+
+<#-- 数据展示面板 -->
+<#macro dataShowPaenl>
+    <table class="data_table">
+        <thead >
+        <tr>
+            <th width="10" >&nbsp;</th>
+            <th width="80" >GPS</th>
+            <th width="80" >车牌号</th>
+            <th width="60" >年月</th>
+            <th width="120" >里程(公里)</th>
+            <th width="100" >时长(小时)</th>
+            <th width="150" >平均速度(公里/小时)</th>
+            <th width="120" >平均加速度(米/秒<sup>2</sup>)</th>
+            <th width="120" >平均减速度(米/秒<sup>2</sup>)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td >&nbsp;</td>
+            <td data-name="gpsId">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="vehicleId">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="month">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="mileage">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="duration">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="avgSpeed">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="avgAcceleration">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+            <td data-name="avgDeceleration">
+                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </#macro>

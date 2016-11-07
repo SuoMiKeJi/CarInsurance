@@ -983,7 +983,7 @@ function getRootPath() {
 
 /**
  *
- * 这个可以验证15位和18位的身份证，并且包含生日和校验位的验证。 如果有兴趣，还可以加上身份证所在地的验证，就是前6位有些数字合法有些数字不合法。
+ * 33、这个可以验证15位和18位的身份证，并且包含生日和校验位的验证。 如果有兴趣，还可以加上身份证所在地的验证，就是前6位有些数字合法有些数字不合法。
  *
  * @param IdCardNo
  *            身份证号
@@ -1196,3 +1196,44 @@ var IDCard = (function () {
         }
     };
 })();
+
+
+/**
+ * 34、函数功能：控制键盘输入，只允许数字键录入整数，支持IE和FF。
+ *
+ * @param keyEvent
+ *            事件对象
+ * @return
+ */
+function intOnly(keyEvent) {
+    var iKeyCode = window.event ? keyEvent.keyCode : keyEvent.which;
+    if (!(iKeyCode >= 48 && iKeyCode <= 57)) {
+        if (navigator.userAgent.indexOf("MSIE") > 0 && parseInt(navigator.appVersion) >= 4) {
+            keyEvent.returnValue = false;
+        } else {
+            if (navigator.userAgent.indexOf("Firefox") > 0) {
+                keyEvent.preventDefault();
+            }
+        }
+    }
+}
+
+/**
+ * 35、函数功能：控制键盘输入，只允许数字键录入小数，支持IE和FF。
+ *
+ * @param keyEvent
+ *            事件对象
+ * @return
+ */
+function floatOnly(keyEvent) {
+    var iKeyCode = window.event ? keyEvent.keyCode : keyEvent.which;
+    if (!(((iKeyCode >= 48) && (iKeyCode <= 57)) || (iKeyCode == 13) || (iKeyCode == 46))) {
+        if (navigator.userAgent.indexOf("MSIE") > 0 && parseInt(navigator.appVersion) >= 4) {
+            keyEvent.returnValue = false;
+        } else {
+            if (navigator.userAgent.indexOf("Firefox") > 0) {
+                keyEvent.preventDefault();
+            }
+        }
+    }
+}

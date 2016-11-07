@@ -29,7 +29,7 @@ import java.util.Map;
 public interface IEvaluationStatisticsReadMapper {
 
     /**
-     * 通过查询条件获取评估统计数据列。
+     * 通过查询条件获取评估统计数据。
      *
      * @param search 查询条件。
      * @return 评估统计数据。

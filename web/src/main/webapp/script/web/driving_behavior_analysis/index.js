@@ -17,11 +17,11 @@ function loadDataToPage(url) {
                 var accelerationDistribution = data["chart-acceleration-distribution"];
                 var decelerationDistribution = data["chart-deceleration-distribution"];
                 var drivingTimeDistribution = data["chart-driving-time-distribution"];
-                loadGeneralSituation(bean);
-                loadSpeedDistribution(bean, speedDistribution);
-                loadAccelerationDistribution(bean, accelerationDistribution);
-                loadDecelerationDistribution(bean, decelerationDistribution);
-                loadDrivingTimeDistribution(bean, drivingTimeDistribution);
+                ___loadGeneralSituation(bean);
+                ___loadSpeedDistribution(bean, speedDistribution);
+                ___loadAccelerationDistribution(bean, accelerationDistribution);
+                ___loadDecelerationDistribution(bean, decelerationDistribution);
+                ___loadDrivingTimeDistribution(bean, drivingTimeDistribution);
             } else {
                 art.dialog({
                     title: "提示",
@@ -51,7 +51,7 @@ function loadDataToPage(url) {
 /**
  * 概况
  */
-function loadGeneralSituation(bean) {
+function ___loadGeneralSituation(bean) {
     var generalSituationPanel = $("#panel-general-situation");
     var monthAvgTime = 0.0, monthAvgTimeProportion = 0.0, monthAvgMileage = 0.0,
         monthAvgMileageProportion = 0.0, fatigueDrivingProbability = 0.0, fatigueDrivingProbabilityProportion = 0.0;
@@ -86,7 +86,7 @@ function loadGeneralSituation(bean) {
 /**
  * 速度分布
  */
-function loadSpeedDistribution(bean, chart) {
+function ___loadSpeedDistribution(bean, chart) {
     var speedDistributionPanel = $("#panel-speed-distribution");
     var maxSpeed = 0.0, avgSpeed = 0.0, avgSpeedProportion = 0.0;
     if (typeof (bean) == "object") {
@@ -120,7 +120,7 @@ function loadSpeedDistribution(bean, chart) {
 /**
  * 加速度分布
  */
-function loadAccelerationDistribution(bean, chart) {
+function ___loadAccelerationDistribution(bean, chart) {
     var accelerationDistributionPanel = $("#panel-acceleration-distribution");
     var maxAcceleration = 0.0, avgAcceleration = 0.0, avgAccelerationProportion = 0.0;
     if (typeof (bean) == "object") {
@@ -154,7 +154,7 @@ function loadAccelerationDistribution(bean, chart) {
 /**
  * 减速度分布
  */
-function loadDecelerationDistribution(bean, chart) {
+function ___loadDecelerationDistribution(bean, chart) {
     var decelerationDistributionPanel = $("#panel-deceleration-distribution");
     var maxDeceleration = 0.0, avgDeceleration = 0.0, avgDecelerationProportion = 0.0;
     if (typeof (bean) == "object") {
@@ -188,7 +188,7 @@ function loadDecelerationDistribution(bean, chart) {
 /**
  * 驾驶时间分布
  */
-function loadDrivingTimeDistribution(bean, chart) {
+function ___loadDrivingTimeDistribution(bean, chart) {
     var drivingTimeDistributionPanel = $("#panel-driving-time-distribution");
     var earlyMorningProportion = 0.0, morningPeakProportion = 0.0, dayProportion = 0.0,
         evenignPeakProportion = 0.0, nightProportion = 0.0;
@@ -216,77 +216,17 @@ function loadDrivingTimeDistribution(bean, chart) {
     drivingTimeDistributionPanel.find('[data-name="evenignPeakProportion"]').text(evenignPeakProportion + "%");
     drivingTimeDistributionPanel.find('[data-name="nightProportion"]').text(nightProportion + "%");
 
+    $(chart).each(function (i, e) {
+        drivingTimeDistributionPanel.find('[data-key="' + this["data-key"] + '"]').text(this["data"][1] + "%");
+    });
+
     jlCharts.stacked({
         title: "",
-        xAxis: {categories: [$("#select-vehicle-id").val()]},
+        xAxis: {categories: [$("#select-vehicle-id").val(), "平均水平"]},
         yAxis: {title: ""},
         tooltip: {
             pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>'
         },
         data: chart
     }, drivingTimeDistributionPanel.find('[class="chart_container"]'));
-}
-
-/**
- * 加载下拉框数据
- */
-function loadDataToSelect(config) {
-    if (typeof (config) != "object") {
-        throw new TypeError(config + " is not a object");
-    }
-    jlData.request(config.url, {
-        async: false,
-        type: "GET",
-        success: function (response, textStatus) {
-            $("body").hideLoading();
-            if (response.code == 200) {
-                var data = response.result;
-                if (typeof (data) == "object" && data instanceof Array) {
-                    var selectOptionHtml = "";
-                    // var vehicleIdSelected = $("#vehicleIdSelectedValue").val();
-
-                    $(data).each(function (index, element) {
-                        var id = $(this).attr("gpsId");
-                        var name = $(this).attr("vehicleId");
-                        // var selected = (vehicleIdSelected == id) ? "selected" : "";
-                        // selectOptionHtml += '<option value="' + id + '" ' + selected + '>' + name + '</option>';
-                        selectOptionHtml += '<option value="' + id + '" > ' + name + '</option>';
-                    });
-                    $(config.select).html(selectOptionHtml);
-                } else {
-                    art.dialog({
-                        title: "提示",
-                        content: "数据格式错误",
-                        okValue: '确定',
-                        ok: function () {
-                            $("body").showLoading();
-                            window.location.reload();
-                            return true;
-                        }
-                    }).lock();
-                }
-            } else {
-                art.dialog({
-                    title: "提示",
-                    content: response.msg,
-                    fixed: true,
-                    okValue: '确定',
-                    ok: function () {
-                        return true;
-                    }
-                }).lock();
-            }
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            $("body").hideLoading();
-            art.dialog({
-                title: "提示",
-                content: "系统异常，请稍后重试！",
-                okValue: '确定',
-                ok: function () {
-                    return true;
-                }
-            }).lock();
-        }
-    });
 }

@@ -1,103 +1,49 @@
 /**
- * 1.给Number类型增加一个add方法，调用起来更加方便。
+ * 1、函数功能：给Number类型增加一个add方法，调用起来更加方便。
  *
  * @param arg
  *            加数
- * @return
+ * @return {Number}
  */
 Number.prototype.add = function (arg) {
-    // var r1, r2, m;
-    // try {
-    // r1 = arg.toString().split(".")[1].length
-    // } catch (e) {
-    // r1 = 0
-    // }
-    // try {
-    // r2 = this.toString().split(".")[1].length
-    // } catch (e) {
-    // r2 = 0
-    // }
-    // m = Math.pow(10, Math.max(r1, r2))
-    // return (arg * m + this * m) / m;
     return (this * 10 + arg * 10) / 10;
 };
 
 /**
- * 2.给Number类型增加一个sub方法，调用起来更加方便。
+ * 2、函数功能：给Number类型增加一个sub方法，调用起来更加方便。
  *
  * @param arg
  *            减数
- * @return
+ * @return {Number}
  */
 Number.prototype.sub = function (arg) {
-    // var r1, r2, m, n;
-    // try {
-    // r1 = arg.toString().split(".")[1].length
-    // } catch (e) {
-    // r1 = 0
-    // }
-    // try {
-    // r2 = this.toString().split(".")[1].length
-    // } catch (e) {
-    // r2 = 0
-    // }
-    // m = Math.pow(10, Math.max(r1, r2));
-    // // last modify by deeka
-    // // 动态控制精度长度
-    // n = (r1 >= r2) ? r1 : r2;
-    // return ((this * m - arg * m) / m).toFixed(n);
     return (this * 10 - arg * 10) / 10;
 };
 
 /**
- * 3.给Number类型增加一个mul方法，调用起来更加方便。
+ * 3、函数功能：给Number类型增加一个mul方法，调用起来更加方便。
  *
  * @param arg
  *            乘数
- * @return
+ * @return {Number}
  */
 Number.prototype.mul = function (arg) {
-    // var m = 0, s1 = arg.toString(), s2 = this.toString();
-    // try {
-    // m += s1.split(".")[1].length
-    // } catch (e) {
-    // }
-    // try {
-    // m += s2.split(".")[1].length
-    // } catch (e) {
-    // }
-    // return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) /
-    // Math.pow(10, m);
     return ((this * 10) * (arg * 10)) / 100;
 };
 
 /**
- * 4.给Number类型增加一个div方法，调用起来更加方便。
+ * 4、函数功能：给Number类型增加一个div方法，调用起来更加方便。
  *
  * @param arg
  *            除数
- * @return
+ * @return {Number}
  */
 Number.prototype.div = function (arg) {
-    // var t1 = 0, t2 = 0, r1, r2;
-    // try {
-    // t1 = arg.toString().split(".")[1].length
-    // } catch (e) {
-    // }
-    // try {
-    // t2 = this.toString().split(".")[1].length
-    // } catch (e) {
-    // }
-    // with (Math) {
-    // r1 = Number(arg.toString().replace(".", ""))
-    // r2 = Number(this.toString().replace(".", ""))
-    // return (r1 / r2) * Math.pow(10, t2 - t1);
-    // }
     return (this * 10) / (arg * 10);
 };
 
 /**
- * 5.格式化数据。
+ * 5、函数功能：格式化数据。
  *
  * @param intCount
  *            整数部分位数
@@ -105,7 +51,7 @@ Number.prototype.div = function (arg) {
  *            小数部分位数
  * @param f
  *            整数三位分割
- * @return 格式化后的字符串。
+ * @return {String}
  */
 Number.prototype.format = function (intCount, floatCount, f) {
     var returnString = null;
@@ -149,42 +95,3 @@ Number.prototype.format = function (intCount, floatCount, f) {
     return returnString;
 };
 
-/**
- * 3.函数功能：控制键盘输入，只允许数字键录入整数，支持IE和FF。
- *
- * @param keyEvent
- *            事件对象
- * @return
- */
-function intOnly(keyEvent) {
-    var iKeyCode = window.event ? keyEvent.keyCode : keyEvent.which;
-    if (!(iKeyCode >= 48 && iKeyCode <= 57)) {
-        if (navigator.userAgent.indexOf("MSIE") > 0 && parseInt(navigator.appVersion) >= 4) {
-            keyEvent.returnValue = false;
-        } else {
-            if (navigator.userAgent.indexOf("Firefox") > 0) {
-                keyEvent.preventDefault();
-            }
-        }
-    }
-}
-
-/**
- * 4.函数功能：控制键盘输入，只允许数字键录入小数，支持IE和FF。
- *
- * @param keyEvent
- *            事件对象
- * @return
- */
-function floatOnly(keyEvent) {
-    var iKeyCode = window.event ? keyEvent.keyCode : keyEvent.which;
-    if (!(((iKeyCode >= 48) && (iKeyCode <= 57)) || (iKeyCode == 13) || (iKeyCode == 46))) {
-        if (navigator.userAgent.indexOf("MSIE") > 0 && parseInt(navigator.appVersion) >= 4) {
-            keyEvent.returnValue = false;
-        } else {
-            if (navigator.userAgent.indexOf("Firefox") > 0) {
-                keyEvent.preventDefault();
-            }
-        }
-    }
-}

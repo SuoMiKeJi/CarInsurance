@@ -7,8 +7,17 @@
     <context:component-scan base-package="com.suomi.carinsurance.web.service.impl"/>
     <!--用户相关操作-->
     <bean id="userService" class="com.suomi.carinsurance.web.service.impl.UserService"/>
+
+    <!-- 评估统计 -->
     <bean id="evaluationStatisticsService" class="com.suomi.carinsurance.web.service.impl.EvaluationStatisticsService"/>
 
+    <!-- 月度统计 -->
+    <bean id="monthlyService" class="com.suomi.carinsurance.web.service.impl.MonthlyService"/>
+
+    <!-- 各时间段出行平均 -->
+    <bean id="allAvgService" class="com.suomi.carinsurance.web.service.impl.AllAvgService"/>
+
+    <!-- Excel -->
     <bean id="excelService" class="com.suomi.carinsurance.export.excel.ExcelService"/>
 
 </beans>

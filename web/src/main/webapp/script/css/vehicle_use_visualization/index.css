@@ -1,16 +1,5 @@
 @charset "UTF-8";
 
-.chart_container {
-    min-width: 620px;
-    height: 251px;
-    margin: 0 auto;
-}
-
-.data_table {
-    width: 100%;
-    padding-top: 10px;
-}
-
 .label {
     display: inline-block;
     padding: 2px 4px;
@@ -28,4 +17,3 @@
     margin-left: 8px;
     margin-right: 0px;
 }
-
