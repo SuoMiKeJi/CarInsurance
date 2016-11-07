@@ -46,7 +46,8 @@ public class VehicleRiskRatingController extends AbstractController {
     @RequestMapping(value = "/index", method = {RequestMethod.GET})
     public String index(HttpServletRequest request, HttpServletResponse response) {
         SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-        boolean jump = service.vehicleRiskRating(request, response, search);
+        boolean jump = service.vehicleRiskRating(search);
+//        boolean jump = service.vehicleRiskRating(request, response, search);
         String pagePath = null;
         if (jump) {
             pagePath = String.format("/%s/index", MODEL);

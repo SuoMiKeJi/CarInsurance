@@ -14,8 +14,7 @@ import com.suomi.carinsurance.datasource.mysql.read.IAllAvgReadMapper;
 import com.suomi.carinsurance.model.statistics.AllAvg;
 import com.suomi.carinsurance.search.statistics.SearchAllAvg;
 import com.suomi.carinsurance.web.service.IAllAvgService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.lizhaoweb.spring.mvc.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -30,9 +29,7 @@ import java.util.List;
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-public class AllAvgService implements IAllAvgService {
-
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+public class AllAvgService extends AbstractService implements IAllAvgService {
 
     // 读持久操作对象。
     @Autowired
@@ -43,6 +40,7 @@ public class AllAvgService implements IAllAvgService {
      */
     @Override
     public AllAvg find(SearchAllAvg search) {
+        this.getSession().setAttribute("aa", null);
         return readMapper.find(search);
     }
 

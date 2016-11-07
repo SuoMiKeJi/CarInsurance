@@ -24,12 +24,9 @@ import net.lizhaoweb.common.util.base.JsonUtil;
 import net.lizhaoweb.common.util.base.ReflectUtil;
 import net.lizhaoweb.common.util.base.StringUtil;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.lizhaoweb.spring.mvc.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -47,9 +44,7 @@ import java.util.Map;
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-public class EvaluationStatisticsService implements IEvaluationStatisticsService {
-
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+public class EvaluationStatisticsService extends AbstractService implements IEvaluationStatisticsService {
 
     // 读持久操作对象。
     @Autowired
@@ -154,33 +149,33 @@ public class EvaluationStatisticsService implements IEvaluationStatisticsService
      */
     @Override
     public boolean vehicleRiskRating(
-            HttpServletRequest request,
-            HttpServletResponse response,
+//            HttpServletRequest request,
+//            HttpServletResponse response,
             SearchEvaluationStatistics search
     ) {
         try {
             // 统计列表
             List<EvaluationStatistics> list = readMapper.findAll(search);
-            request.setAttribute("list", list);
+            this.getRequest().setAttribute("list", list);
 
             // 车辆风险统计
             List<Map<String, Integer>> vehicleRiskStatistics = readMapper.vehicleRiskStatistics();
             String vehicleRiskStatisticsChartJson = this.vehiclePopulationStatistics(vehicleRiskStatistics, 1, 0);
-            request.setAttribute(Constant.Chart.Id.VEHICLE_RISK_STATISTICS, vehicleRiskStatisticsChartJson);
+            this.getRequest().setAttribute(Constant.Chart.Id.VEHICLE_RISK_STATISTICS, vehicleRiskStatisticsChartJson);
 
             // 建议保险折扣统计
             List<Map<String, Integer>> insuranceDiscountStatistics = readMapper.insuranceDiscountStatistics();
             String insuranceDiscountStatisticsChartJson = this.vehiclePopulationStatistics(insuranceDiscountStatistics, 5, 1);
-            request.setAttribute(Constant.Chart.Id.INSURANCE_DISCOUNT_STATISTICS, insuranceDiscountStatisticsChartJson);
+            this.getRequest().setAttribute(Constant.Chart.Id.INSURANCE_DISCOUNT_STATISTICS, insuranceDiscountStatisticsChartJson);
 
             // 欺骗风险统计
             List<Map<String, Integer>> fraudRiskStatistics = readMapper.fraudRiskStatistics();
             String fraudRiskStatisticsChartJson = this.vehiclePopulationStatistics(fraudRiskStatistics, 1, 1);
-            request.setAttribute(Constant.Chart.Id.FRAUD_RISK_STATISTICS, fraudRiskStatisticsChartJson);
+            this.getRequest().setAttribute(Constant.Chart.Id.FRAUD_RISK_STATISTICS, fraudRiskStatisticsChartJson);
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            HttpUtil.print(response, "系统出错啦，请稍后再试……");
+            HttpUtil.print(this.getResponse(), "系统出错啦，请稍后再试……");
         }
         return false;
     }
