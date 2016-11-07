@@ -17,8 +17,7 @@ import com.suomi.carinsurance.search.statistics.SearchMonthly;
 import com.suomi.carinsurance.web.service.IMonthlyService;
 import net.lizhaoweb.common.util.base.ReflectUtil;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.lizhaoweb.spring.mvc.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -36,9 +35,7 @@ import java.util.Map;
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-public class MonthlyService implements IMonthlyService {
-
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+public class MonthlyService extends AbstractService implements IMonthlyService {
 
     // 读持久操作对象。
     @Autowired

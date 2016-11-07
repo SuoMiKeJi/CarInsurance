@@ -38,7 +38,7 @@ public class LoginInterceptor extends AbstractInterceptor {
      * @throws Exception
      */
     @Override
-    public boolean preMethdExecute(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    protected boolean preMethdExecute(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(Constant.System.Config.USER_SESSION_KEY);
         if (user == null) {
