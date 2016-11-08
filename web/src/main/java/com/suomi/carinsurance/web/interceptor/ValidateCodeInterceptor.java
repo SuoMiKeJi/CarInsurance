@@ -10,9 +10,6 @@
  */
 package com.suomi.carinsurance.web.interceptor;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.suomi.carinsurance.model.statistics.User;
-import com.suomi.carinsurance.web.Constant;
 import net.lizhaoweb.common.util.base.HttpUtil;
 import net.lizhaoweb.common.util.base.StringUtil;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
@@ -22,8 +19,6 @@ import net.lizhaoweb.spring.mvc.core.servlet.ValidateCodeServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <h1>拦截器 - 验证码</h1>
@@ -39,15 +34,6 @@ import java.util.Map;
  */
 public class ValidateCodeInterceptor extends AbstractInterceptor {
 
-    private String validateCodeURL;
-
-    public ValidateCodeInterceptor(String validateCodeURL) {
-        if (StringUtil.isBlank(validateCodeURL)) {
-            throw new IllegalArgumentException("loginURL is null or empty string");
-        }
-        this.validateCodeURL = validateCodeURL;
-    }
-
     /**
      * 拦截
      *
@@ -61,13 +47,18 @@ public class ValidateCodeInterceptor extends AbstractInterceptor {
     protected boolean preMethdExecute(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
         String serverValidateCode = (String) session.getAttribute(ValidateCodeServlet.VALIDATE_CODE_KEY);
-        String[] localValidateCode = request.getParameterValues("validateCode");
+        String localValidateCode = request.getParameter("validateCode");
 
-        if (!serverValidateCode.equals(localValidateCode[0])) {
-            Map<String,Object> map = new HashMap<String,Object>();
-            map.put("code",203);
-            map.put("msg","验证码输入错误");
-            HttpUtil.printJson(response,map);
+        if (StringUtil.isBlank(serverValidateCode)) {
+            HttpUtil.printJson(response, new DataDeliveryWrapper<Object>(500, "验证码无效，请刷新验证码", null));
+            return false;
+        }
+        if (!serverValidateCode.equals(localValidateCode)) {
+//            Map<String, Object> map = new HashMap<String, Object>();
+//            map.put("code", 203);
+//            map.put("msg", "");
+//            HttpUtil.printJson(response, map);
+            HttpUtil.printJson(response, new DataDeliveryWrapper<Object>(203, "验证码输入错误", null));
             return false;
         }
         return true;
