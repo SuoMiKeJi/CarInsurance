@@ -10,6 +10,13 @@
 
     <!-- 拦截器组 -->
     <mvc:interceptors>
+        <!-- 验证用户登录时验证码拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/user/login.json"/>
+            <bean class="com.suomi.carinsurance.web.interceptor.ValidateCodeInterceptor">
+                <constructor-arg name="validateCodeURL" value="/"/>
+            </bean>
+        </mvc:interceptor>
         <!-- 验证用户登录拦截器 -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

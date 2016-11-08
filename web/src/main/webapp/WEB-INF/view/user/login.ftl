@@ -47,6 +47,9 @@
 //                                    window.location = "www.baidu.com";
 //                                }
                             }else{
+                                if(response.code == 203){
+                                    jlForm.field.setDefault($("[name='validateCode']"), "输入验证码");
+                                }
                                 art.dialog({
                                     title : "提示",
                                     content : response.msg,
