@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 /**
  * 登陆
@@ -36,6 +37,7 @@ public class UserController extends AbstractController {
     }
 
     /**
+     * 登陆操作
      * @return
      */
     @ResponseBody
@@ -47,5 +49,22 @@ public class UserController extends AbstractController {
         DataDeliveryWrapper<User> result = service.find(searchUser);
 
         return result;
+    }
+
+    /**
+     * 登出操作
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/logout")
+    public String logout(HttpServletRequest request) {
+        // 清除session
+        Enumeration<String> em = request.getSession().getAttributeNames();
+        while (em.hasMoreElements()) {
+            request.getSession().removeAttribute(em.nextElement().toString());
+        }
+        request.getSession().removeAttribute(Constant.System.Config.USER_SESSION_KEY);
+        request.getSession().invalidate();
+        return "success";
     }
 }

@@ -49,6 +49,19 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlUI.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.messages_zh.js' />"></script>
+            <script language="javascript" >
+                $(document).ready(function(){
+                    $("#logout").click(function () {
+
+                        $.post("<@com.tags.spring.url value='/user/logout'/>", function(data){
+                            if("success"==data){
+                                window.location.reload();
+                            }
+                        });
+                    });
+                });
+
+            </script>
         </head>
         <body>
             <div id="header" page-region="header">
@@ -81,7 +94,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#">退出</a>
+                                <a id="logout" href="javascript:void(0);">退出</a>
                             </li>
                         </ul>
                     </li>
