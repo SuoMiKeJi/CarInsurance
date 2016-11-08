@@ -6,13 +6,12 @@
  * @Package : com.suomi.carinsurance.web.interceptor
  * @author <a href="http://www.lizhaoweb.net">李召(John.Lee)</a>
  * @EMAIL 404644381@qq.com
- * @Time : 4:05
+ * @Time : 12:27
  */
 package com.suomi.carinsurance.web.interceptor;
 
 import com.suomi.carinsurance.model.statistics.User;
 import com.suomi.carinsurance.web.Constant;
-import net.lizhaoweb.common.util.base.StringUtil;
 import net.lizhaoweb.spring.mvc.core.interceptor.AbstractInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,26 +19,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * <h1>拦截器 - 登录</h1>
+ * <h1>拦截器 - 登录跳转</h1>
  * <p>
- * 检查用户是否登录，如果没有例如就跳转到登录页面。
+ * 用户登录成功后，跳转
  *
  * @author <a href="http://www.lizhaoweb.cn">李召(John.Lee)</a>
  * @version 1.0.0.0.1
- * @notes Created on 2016年11月07日<br>
+ * @notes Created on 2016年11月08日<br>
  * Revision of last commit:$Revision$<br>
  * Author of last commit:$Author$<br>
  * Date of last commit:$Date$<br>
  */
-public class LoginInterceptor extends AbstractInterceptor {
+public class LoginToJumpInterceptor extends AbstractInterceptor {
 
-    private String loginURL;
+    /**
+     * 跳转到
+     */
+    private String jumpTo;
 
-    public LoginInterceptor(String loginURL) {
-        if (StringUtil.isBlank(loginURL)) {
-            throw new IllegalArgumentException("loginURL is null or empty string");
-        }
-        this.loginURL = loginURL;
+    public LoginToJumpInterceptor(String jumpTo) {
+        this.jumpTo = jumpTo;
     }
 
     /**
@@ -55,13 +54,10 @@ public class LoginInterceptor extends AbstractInterceptor {
     protected boolean preMethdExecute(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(Constant.System.Config.USER_SESSION_KEY);
-        String thisURLString = String.format("%s/%s", request.getContextPath(), request.getRequestURL());
-        if (user == null) {
-            request.setAttribute("jumpURL", thisURLString);
-            request.getRequestDispatcher(loginURL).forward(request, response);
+        if (user != null) {
+            response.sendRedirect(request.getContextPath() + jumpTo);
             return false;
         }
-        session.setAttribute(Constant.System.Config.USER_SESSION_FOR_ACCESS_KEY, user);
         return true;
     }
 }

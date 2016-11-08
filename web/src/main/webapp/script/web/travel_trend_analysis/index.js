@@ -237,3 +237,10 @@ function ___stringDate2intDate(dateString, format) {
 // var bbb=aaa.test("aaaaaafwefwsdfsafewfwef123456sfeafsdfe4567823548754456sssss");
 // alert(typeof (RegExp));
 // // alert(RegExp.index);
+
+
+// var linkStr = "/black-mountain/35-cotton-creek-cir-black-mountain-nc-421_537763.html";
+// // 括号表示组。访问可以用group[index]来访问每组的信息
+// var linkRegx = /\/([^\/]+)\/.+-(\d+)_(\d+).html/;
+// var group = linkStr.match(linkRegx);
+// console.log(group);

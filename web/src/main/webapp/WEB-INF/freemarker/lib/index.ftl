@@ -9,7 +9,7 @@
                     <div class="widget-box">
                         <div class="widget-content nopadding" page-region="body">
                             <div class="welcome_title">
-                                <span class="common">欢乐使用</span>
+                                <span class="common">欢迎使用</span>
                                 <span class="major">索米</span>
                                 <span class="common">大数据平台</span>
                             </div>

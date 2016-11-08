@@ -80,7 +80,7 @@
                         <a href="javascript:;" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle">
                             <i class="icon-user"></i>
                             <span class="text">
-                                <#if DAASBANK_DSTORE_USER??>${DAASBANK_DSTORE_USER.name!}<#else><span style="color : #BFBFBF; font-weight: 900; font-size: 14px;">未登录</span></#if>
+                                <#if SESSION_USER??>${SESSION_USER.username!}<#else><span style="color : #BFBFBF; font-weight: 900; font-size: 14px;">未登录</span></#if>
                             </span>
                             <b class="caret"></b>
                         </a>

@@ -8,13 +8,22 @@
         <param-value>CarInsurance-SMKJ-String-MVC</param-value>
     </context-param>
 
+    <!-- 日志设置 -->
     <context-param>
         <param-name>logbackConfigLocation</param-name>
         <param-value>classpath:logback.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>60000</param-value>
+    </context-param>
     <listener>
         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
     </listener>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
 
     <servlet-mapping>
         <servlet-name>resin-file</servlet-name>
@@ -53,7 +62,7 @@
         <url-pattern>*.swf</url-pattern>
     </servlet-mapping>
 
-    <!-- 配置Spring核心控制器 -->
+    <!-- 配置 Spring 核心控制器 -->
     <servlet>
         <servlet-name>spring-mvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -72,6 +81,41 @@
     <servlet-mapping>
         <servlet-name>spring-mvc</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 验证码控制器 -->
+    <servlet>
+        <servlet-name>validate-code-servlet</servlet-name>
+        <servlet-class>net.lizhaoweb.spring.mvc.core.servlet.ValidateCodeServlet</servlet-class>
+        <init-param>
+            <param-name>isRequestReset</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>isRequestResize</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>lineCount</param-name>
+            <param-value>20</param-value>
+        </init-param>
+        <init-param>
+            <param-name>width</param-name>
+            <param-value>95</param-value>
+        </init-param>
+        <init-param>
+                <param-name>height</param-name>
+            <param-value>38</param-value>
+        </init-param>
+        <init-param>
+            <param-name>codeCount</param-name>
+            <param-value>6</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>validate-code-servlet</servlet-name>
+        <url-pattern>/validate-code.jpg</url-pattern>
     </servlet-mapping>
 
     <!-- 项目编码过滤器 -->
