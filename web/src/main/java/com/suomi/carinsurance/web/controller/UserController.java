@@ -57,14 +57,17 @@ public class UserController extends AbstractController {
      */
     @ResponseBody
     @RequestMapping(value = "/logout")
-    public String logout(HttpServletRequest request) {
+    public DataDeliveryWrapper<User> logout(HttpServletRequest request) {
+        DataDeliveryWrapper<User> result= null;
+        User user= (User)request.getSession().getAttribute(Constant.System.Config.USER_SESSION_KEY);
+        result = new DataDeliveryWrapper<User>(200, "用户"+user.getUsername()+"登出", user);
         // 清除session
-        Enumeration<String> em = request.getSession().getAttributeNames();
-        while (em.hasMoreElements()) {
-            request.getSession().removeAttribute(em.nextElement().toString());
-        }
+//        Enumeration<String> em = request.getSession().getAttributeNames();
+//        while (em.hasMoreElements()) {
+//            request.getSession().removeAttribute(em.nextElement().toString());
+//        }
         request.getSession().removeAttribute(Constant.System.Config.USER_SESSION_KEY);
         request.getSession().invalidate();
-        return "success";
+        return result;
     }
 }

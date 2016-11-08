@@ -40,7 +40,6 @@
                         success:function(response, textStatus){
                             if(response.code == 200){
                                 var data = response.result;
-//                                window.location.href='http://127.0.0.1:8080/web-1.0.0.0.0-SNAPSHOT';
                                 window.location.reload();
 //                                if(typeof(data.data.forward) == "string"){
 //                                    window.location = data.data.forward;
@@ -99,11 +98,9 @@
                 }
             });
             $("#refreshValidateCode").click(function(e){
-                <#--jlForm.refreshValidateCode("validateCodeImg", "<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10&time=' />" + new Date());-->
+                jlForm.refreshValidateCode("#validateCodeImg","<@com.tags.spring.url value='/validate-code.jpg'/>");
             });
-//            $("#to-recover").click(function () {
-//                $("#loginForm").submit();
-//            });
+
         });
     </script>
 </head>
@@ -135,9 +132,12 @@
                 <div class="main_input_box">
                     <span class="add-on">验证码</span>
                     <input name="validateCode" style="width:30%;"/>
-                    <span class="imag"><a id="refreshValidateCode" href="javascript:;">
-                    <#--<img src="<@com.tags.spring.url value='/validateCode?width=84&height=22&codeCount=4&lineCount=10' />" />-->
-                    <i>换一张</i></a></span>
+                    <span class="imag">
+                        <a id="refreshValidateCode" href="javascript:;">
+                            <img id="validateCodeImg" src="<@com.tags.spring.url value='/validate-code.jpg'/>" />
+                            <i>换一张</i>
+                        </a>
+                    </span>
                 </div>
             </div>
         </div>

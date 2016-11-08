@@ -55,8 +55,17 @@
                     $("#logout").click(function () {
 
                         $.post("<@com.tags.spring.url value='/user/logout'/>", function(data){
-                            if("success"==data){
-                                window.location.reload();
+                            if(200 == data.code){
+                                art.dialog({
+                                    title : "提示",
+                                    content : data.msg,
+                                    fixed: true,
+                                    okValue : '确定',
+                                    ok : function() {
+                                        window.location.reload();
+                                        return true;
+                                    }
+                                }).lock();
                             }
                         });
                     });
