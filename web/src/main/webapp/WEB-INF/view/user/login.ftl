@@ -131,7 +131,7 @@
             <div class="controls">
                 <div class="main_input_box">
                     <span class="add-on">验证码</span>
-                    <input name="validateCode" style="width:30%;"/>
+                    <input value="验证码" name="validateCode" style="width:30%;"/>
                     <span class="imag">
                         <a id="refreshValidateCode" href="javascript:;">
                             <img id="validateCodeImg" src="<@com.tags.spring.url value='/validate-code.jpg?width=90&height=22'/>" />

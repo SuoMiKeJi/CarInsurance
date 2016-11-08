@@ -60,7 +60,6 @@ public class UserController extends AbstractController {
     public DataDeliveryWrapper<User> logout(HttpServletRequest request) {
         DataDeliveryWrapper<User> result= null;
         User user= (User)request.getSession().getAttribute(Constant.System.Config.USER_SESSION_KEY);
-        result = new DataDeliveryWrapper<User>(200, "用户"+user.getUsername()+"登出", user);
         // 清除session
 //        Enumeration<String> em = request.getSession().getAttributeNames();
 //        while (em.hasMoreElements()) {
@@ -68,6 +67,7 @@ public class UserController extends AbstractController {
 //        }
         request.getSession().removeAttribute(Constant.System.Config.USER_SESSION_KEY);
         request.getSession().invalidate();
+        result = new DataDeliveryWrapper<User>(200, "用户"+user.getUsername()+"登出", user);
         return result;
     }
 }
