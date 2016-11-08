@@ -40,8 +40,8 @@
                         success:function(response, textStatus){
                             if(response.code == 200){
                                 var data = response.result;
-                                alert("登陆成功，用户="+ window.document.location.pathname);
-                                window.location.href='http://127.0.0.1:8080/web-1.0.0.0.0-SNAPSHOT';
+//                                window.location.href='http://127.0.0.1:8080/web-1.0.0.0.0-SNAPSHOT';
+                                window.location.reload();
 //                                if(typeof(data.data.forward) == "string"){
 //                                    window.location = data.data.forward;
 //                                }else{
