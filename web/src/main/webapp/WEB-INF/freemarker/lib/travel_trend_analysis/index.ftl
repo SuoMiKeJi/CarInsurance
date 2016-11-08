@@ -3,6 +3,7 @@
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/travel_trend_analysis/index.css' />"/>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/highcharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/datepicker/WdatePicker.js' />"></script>
+    <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/StringUtil.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>

@@ -211,8 +211,21 @@ String.prototype.toFloat = function () {
     return parseFloat(this);
 };
 
-// String.prototype.format = function (regExp, format) {
-//     var regExpOjbect = new RegExp(regExp);
-//     RegExp.
-// };
+/**
+ * 15、函数功能：格式化字符串。
+ *
+ * "20152130".format("(\\d{4})(\\d{2})(\\d{2})", "{1}-{2}-{3}") 返回 2015-21-30
+ * "20152130".format("(\\d{4})(\\d{2})(\\d{2})", "{2}-{3}-{1}") 返回 21-30-2015
+ *
+ * @param regExp 正则表达式
+ * @param format 返回的格式，{正则索引}
+ * @returns {String}
+ */
+String.prototype.format = function (regExp, format) {
+    var groups = this.match(regExp);
+    for (var index = 1; index < groups.length; index++) {
+        format = format.replace("{" + index + "}", groups[index]);
+    }
+    return format;
+};
     

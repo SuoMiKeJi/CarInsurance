@@ -11,8 +11,8 @@ function loadDataToViewPanel(config) {
     if (typeof (config.submitData) == "object") {
         selectedStartMonth = config.submitData.startMonth;
         selectedEndMonth = config.submitData.endMonth;
-        var startMonth = ___stringDate2intDate(selectedStartMonth, "yyyy-MM");
-        var endMonth = ___stringDate2intDate(selectedEndMonth, "yyyy-MM");
+        var startMonth = selectedStartMonth.format("(\\d{4})-(\\d{2})", "{1}{2}");
+        var endMonth = selectedEndMonth.format("(\\d{4})-(\\d{2})", "{1}{2}");
         if (startMonth > endMonth) {
             art.dialog({
                 title: "提示",
@@ -39,8 +39,8 @@ function loadDataToViewPanel(config) {
                 var data = response.result;
                 var list = data["list"];
                 var chartId = "chart-travel-trend-analysis";
-                var minMonth = ___intDate2StringDate(data["min-month"], "yyyy-MM");
-                var maxMonth = ___intDate2StringDate(data["max-month"], "yyyy-MM");
+                var minMonth = (data["min-month"] + "").format("(\\d{4})(\\d{2})", "{1}-{2}");
+                var maxMonth = (data["max-month"] + "").format("(\\d{4})(\\d{2})", "{1}-{2}");
 
                 var startMonthInput = $('[name="startMonth"].Wdate').val(minMonth).attr("min-date", minMonth).attr("max-date", maxMonth).click(___datePickerClick);
                 if (selectedStartMonth !== null) {
@@ -93,7 +93,7 @@ function ___loadTable(list) {
         var row = trElement.clone(true);
         row.find('[data-name="gpsId"]').text(this["gpsId"]);
         row.find('[data-name="vehicleId"]').text(this["vehicleId"]);
-        row.find('[data-name="month"]').text(___intDate2StringDate(this["period"], "yyyy年MM月"));
+        row.find('[data-name="month"]').text((this["period"] + "").format("(\\d{4})(\\d{2})", "{1}年{2}月"));
         row.find('[data-name="mileage"]').text(this["mileage"]);
         row.find('[data-name="duration"]').text(this["duration"]);
         row.find('[data-name="avgSpeed"]').text(this["avgSpeed"]);
@@ -177,70 +177,3 @@ function ___datePickerClick(event) {
     // $(WdatePickerDocument).find(".MTitle:first").css("display", "none");
 }
 
-/**
- * 数字年月转成指定格式的字符串年月
- *
- * @param integer 数字年月
- * @param format  格式
- * @returns {String}
- * @private
- */
-function ___intDate2StringDate(integer, format) {
-    var dateString = integer.toString();
-    // var year = parseInt(integer / 100);
-    // var month = integer % 100;
-    format = format.replace("yyyy", dateString.substr(0, 4));
-    format = format.replace("MM", dateString.substr(4, 2));
-    return format;
-}
-
-/**
- * 指定格式的字符串年月转成数字年月
- *
- * @param dateString 数字年月
- * @param format     格式
- * @returns {int}
- * @private
- */
-function ___stringDate2intDate(dateString, format) {
-    var yearIndex = format.indexOf("yyyy");
-    var monthIndex = format.indexOf("MM");
-    var tempDate = dateString.substr(yearIndex, 4) + dateString.substr(monthIndex, 2);
-    var intDate = parseInt(tempDate);
-    return intDate;
-}
-
-// /**
-//  * 加载时间控件
-//  */
-// $(document).ready(function () {
-//     $("input.Wdate").each(function () {
-//         $(this).click(function (e) {
-//             WdatePicker({
-//                 skin: 'ext',
-//                 dateFmt: 'yyyy-MM',
-//                 isShowWeek: false,
-//                 isShowClear: false,
-//                 isShowToday: false,
-//                 isShowOthers: false,
-//                 isShowOK: false,
-//                 readOnly: true
-//             });
-//             var WdatePickerDocument = $("#_my97DP").find("iframe").contents().get(0);
-//             $(WdatePickerDocument).find(".MTitle:first").css("display", "none");
-//         });
-//     });
-// });
-
-
-// var aaa = new RegExp("(\\d+)(\\w{2}).*(\\d{3})");
-// var bbb=aaa.test("aaaaaafwefwsdfsafewfwef123456sfeafsdfe4567823548754456sssss");
-// alert(typeof (RegExp));
-// // alert(RegExp.index);
-
-
-// var linkStr = "/black-mountain/35-cotton-creek-cir-black-mountain-nc-421_537763.html";
-// // 括号表示组。访问可以用group[index]来访问每组的信息
-// var linkRegx = /\/([^\/]+)\/.+-(\d+)_(\d+).html/;
-// var group = linkStr.match(linkRegx);
-// console.log(group);
