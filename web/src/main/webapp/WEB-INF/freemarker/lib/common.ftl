@@ -22,6 +22,7 @@
             <#else>
                 <meta http-equiv="description" content="${title}"/>
             </#if>
+            <link rel="shortcut icon" href="<@tags.spring.url value='/favicon.ico' />" />
             <link rel="stylesheet" type="text/css" href="<@tags.spring.url value='/script/css/bootstrap.min.css' />"/>
             <link rel="stylesheet" type="text/css" href="<@tags.spring.url value='/script/css/bootstrap-responsive.min.css'/>"/>
             <link rel="stylesheet" type="text/css" href="<@tags.spring.url value='/script/css/uniform.css' />"/>
@@ -65,8 +66,11 @@
         </head>
         <body>
             <div id="header" page-region="header">
-                <h1 style="width:320px;">
-                    <a href="<@tags.spring.url value='/index' />" onclick="javascript:$('body').showLoading();" style="color:#FFFFFF;font-size: 30px;font-weight: bold;">索米车险大数据平台</a>
+                <h1 style="width:410px;">
+                    <a href="<@tags.spring.url value='/index' />" onclick="javascript:$('body').showLoading();" style="color:#FFFFFF;font-size: 30px;font-weight: bold;">
+                        <img src="<@tags.spring.url value='/images/logo.png' />"/>
+                        <span>车险大数据平台</span>
+                    </a>
                 </h1>
             </div>
             <div id="user-nav" class="navbar navbar-inverse" page-region="header" >

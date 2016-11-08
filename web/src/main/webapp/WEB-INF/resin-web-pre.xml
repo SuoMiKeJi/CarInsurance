@@ -96,20 +96,20 @@
             <param-value>true</param-value>
         </init-param>
         <init-param>
-            <param-name>lineCount</param-name>
-            <param-value>20</param-value>
-        </init-param>
-        <init-param>
             <param-name>width</param-name>
             <param-value>95</param-value>
         </init-param>
         <init-param>
-                <param-name>height</param-name>
+            <param-name>height</param-name>
             <param-value>38</param-value>
         </init-param>
         <init-param>
             <param-name>codeCount</param-name>
             <param-value>6</param-value>
+        </init-param>
+        <init-param>
+            <param-name>lineCount</param-name>
+            <param-value>13</param-value>
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>

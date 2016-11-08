@@ -208,13 +208,13 @@
             }
             return resultData;
         },
-        refreshValidateCode: function (codeId, url) {
+        refreshValidateCode: function (codeImg, url) {
             /*
              * if (url.indexOf(":") < 0) { var winUrl = window.location + ""; var
              * doubleIndex = winUrl.indexOf("://"); var index = winUrl.indexOf("/",
              * doubleIndex + 3); url = winUrl.substring(0, index) + url; }
              */
-            $("#" + codeId).attr('src', url).fadeIn('slow');
+            $(codeImg).attr('src', url).fadeIn('slow');
         },
         deleteRecode: function (url, id, ops) {
             if (typeof (ops) != "object") {
