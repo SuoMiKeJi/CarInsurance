@@ -98,7 +98,7 @@
                 }
             });
             $("#refreshValidateCode").click(function(e){
-                jlForm.refreshValidateCode("#validateCodeImg","<@com.tags.spring.url value='/validate-code.jpg'/>");
+                jlForm.refreshValidateCode("#validateCodeImg", "<@com.tags.spring.url value='/validate-code.jpg?width=90&height=22&time='/>" + new Date().getTime());
             });
 
         });
@@ -108,7 +108,7 @@
 <div id="loginbox">
     <form id="loginForm" action="<@com.tags.spring.url value='/user/login.json' />" method="GET" class="form-vertical">
         <div class="control-group normal_text">
-           <!-- <h3><img src="images/login_logo.png" alt="Logo" /></h3>-->
+            <h3><img src="<@com.tags.spring.url value='/images/login_logo.png'/>" alt="Logo" /></h3>
             <h2>欢迎使用索米车险大数据平台</h2>
         </div>
         <div class="control-group">
@@ -134,7 +134,7 @@
                     <input name="validateCode" style="width:30%;"/>
                     <span class="imag">
                         <a id="refreshValidateCode" href="javascript:;">
-                            <img id="validateCodeImg" src="<@com.tags.spring.url value='/validate-code.jpg'/>" />
+                            <img id="validateCodeImg" src="<@com.tags.spring.url value='/validate-code.jpg?width=90&height=22'/>" />
                             <i>换一张</i>
                         </a>
                     </span>
