@@ -46,6 +46,7 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/web/matrix.tables.js'/>"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/localization/messages_zh.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/StringUtil.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlForm.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlUI.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
@@ -131,8 +132,8 @@
 <#-- 左部开始 -->
 <#macro left selected>
     <!--left nav star-->
-    <div class="st_tree" style="overflow-y:auto;">
-        <ul class="site-stats">
+    <div class="st_tree" page-region="left" style="overflow-y:auto;">
+        <ul class="site-stats" >
             <li <#if selected == "VRRC">class="active"</#if>>
                 <a href="<@tags.spring.url value='/vrrc/index' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
             </li>

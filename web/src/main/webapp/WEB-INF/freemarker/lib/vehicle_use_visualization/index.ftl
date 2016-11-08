@@ -38,21 +38,21 @@
                     <!--table list-->
                     <div class="widget-box">
                         <div class="widget-content nopadding">
-                            <div id="cat_gps_id" >
+                            <div id="cat_gps_id" page-region="body" region-height="50px" >
                                 <span class="label">车牌号</span>
-                                <select id="select-vehicle-id" page-region="header"></select>
+                                <select id="select-vehicle-id" ></select>
                             </div>
                             <table class="table table-bordered with-check" >
                                 <tbody>
-                                <tr>
-                                    <td style="padding:0;">
-                                        <div class="tabbox">
-                                            <div style="padding-top: 10px;padding-left: 15px;">
-                                                <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/images/world-map.jpg' />">
+                                    <tr>
+                                        <td style="padding:0;">
+                                            <div class="tabbox">
+                                                <div style="padding-left: 15px;">
+                                                    <img id="cat_map_img" page-region="body" src="<@com.tags.spring.url value='/images/world-map.jpg' />">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

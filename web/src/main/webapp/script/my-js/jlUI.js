@@ -429,8 +429,14 @@
                     var allHeaderObjects = bodyObject.find('[page-region="header"]');
                     var allFooterObjects = bodyObject.find('[page-region="footer"]');
                     var allBodyObjects = bodyObject.find('[page-region="body"]');
+                    var allLeftObjects = bodyObject.find('[page-region="left"]');
+                    var allRightObjects = bodyObject.find('[page-region="right"]');
                     var bodyMarginTop = parseInt(bodyObject.css('marginTop')), bodyMarginBottom = parseInt(bodyObject.css('marginBottom'));
-                    var allHeaderHeight = 0, allFooterHeight = 0, offsetHeight = 0, bodyCount = allBodyObjects.size(), offset = 3;
+
+                    var allHeaderHeight = 0, allFooterHeight = 0, offset = 3;
+                    var bodyCount = allBodyObjects.size(), bodyOffset = 0;
+                    var leftCount = allLeftObjects.size(), leftOffset = 0;
+                    var rightCount = allRightObjects.size(), rightOffset = 0;
 
                     /**
                      * index - 选择器的 index 位置
@@ -439,21 +445,97 @@
                     allHeaderObjects.each(function (index, element) {
                         allHeaderHeight += $(this).effectHeight();
                     });
-
                     allFooterObjects.each(function (index, element) {
                         allFooterHeight += $(this).effectHeight();
                     });
-
                     allBodyObjects.each(function (index, element) {
-                        offsetHeight += $(this).offsetHeight();
+                        bodyOffset += $(this).offsetHeight();
                     });
+                    allLeftObjects.each(function (index, element) {
+                        leftOffset += $(this).offsetHeight();
+                    });
+                    allRightObjects.each(function (index, element) {
+                        rightOffset += $(this).offsetHeight();
+                    });
+
+                    // var middleHeight = $(window).height() - bodyObject.offsetHeight() - allHeaderHeight - allFooterHeight;
+                    var middleHeight = $(window).height() - bodyObject.offsetHeight() - allHeaderHeight - allFooterHeight - bodyMarginTop - bodyMarginBottom - offset;
 
                     // 计算每个体的高度
-                    var eachBodyHeight = ($(window).height() - bodyObject.offsetHeight() - allHeaderHeight - allFooterHeight - offsetHeight) / bodyCount - bodyMarginTop - bodyMarginBottom - offset;
+                    if (bodyCount > 0) {
+                        var bodyHeight = middleHeight - bodyOffset;
+                        var bodyArray = new Array();
+                        allBodyObjects.each(function (index, element) {
+                            var regionHeight = $(this).attr("region-height") + "";
+                            if (!regionHeight.match("\\d+")) {
+                                bodyArray.push(this);
+                                return;
+                            }
+                            var thisHeight = 0;
+                            if (regionHeight.endWith("%")) {
+                                thisHeight = middleHeight * regionHeight.toFloat() / 100;
+                            } else {
+                                thisHeight = parseInt(regionHeight);
+                            }
+                            $(this).height(thisHeight);
+                            bodyCount--;
+                            bodyHeight -= thisHeight;
+                        });
+                        var eachBodyHeight = (bodyHeight) / bodyCount;
+                        $(bodyArray).each(function (index, element) {
+                            $(this).height(eachBodyHeight);
+                        });
+                    }
 
-                    allBodyObjects.each(function (index, element) {
-                        $(this).height(eachBodyHeight);
-                    });
+                    if (leftCount > 0) {
+                        var leftHeight = middleHeight - leftOffset;
+                        var leftArray = new Array();
+                        allLeftObjects.each(function (index, element) {
+                            var regionHeight = $(this).attr("region-height") + "";
+                            if (!regionHeight.match("\\d+")) {
+                                leftArray.push(this);
+                                return;
+                            }
+                            var thisHeight = 0;
+                            if (regionHeight.endWith("%")) {
+                                thisHeight = middleHeight * regionHeight.toFloat() / 100;
+                            } else {
+                                thisHeight = parseInt(regionHeight);
+                            }
+                            $(this).height(thisHeight);
+                            leftCount--;
+                            leftHeight -= thisHeight;
+                        });
+                        var eachLeftHeight = (leftHeight) / leftCount;
+                        $(leftArray).each(function (index, element) {
+                            $(this).height(eachLeftHeight);
+                        });
+                    }
+
+                    if (rightCount > 0) {
+                        var rightHeight = middleHeight - rightOffset;
+                        var rightArray = new Array();
+                        allRightObjects.each(function (index, element) {
+                            var regionHeight = $(this).attr("region-height") + "";
+                            if (!regionHeight.match("\\d+")) {
+                                rightArray.push(this);
+                                return;
+                            }
+                            var thisHeight = 0;
+                            if (regionHeight.endWith("%")) {
+                                thisHeight = middleHeight * regionHeight.toFloat() / 100;
+                            } else {
+                                thisHeight = parseInt(regionHeight);
+                            }
+                            $(this).height(thisHeight);
+                            rightCount--;
+                            rightHeight -= thisHeight;
+                        });
+                        var eachRightHeight = (rightHeight) / rightCount;
+                        $(rightArray).each(function (index, element) {
+                            $(this).height(eachRightHeight);
+                        });
+                    }
                 }
             }
         }
