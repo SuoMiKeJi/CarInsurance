@@ -64,7 +64,6 @@ public class ValidateCodeInterceptor extends AbstractInterceptor {
         String[] localValidateCode = request.getParameterValues("validateCode");
 
         if (!serverValidateCode.equals(localValidateCode[0])) {
-            DataDeliveryWrapper<String> result = new DataDeliveryWrapper<String>(203, "验证码输入错误", null);
             Map<String,Object> map = new HashMap<String,Object>();
             map.put("code",203);
             map.put("msg","验证码输入错误");
