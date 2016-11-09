@@ -19,7 +19,7 @@ function userLogout(config) {
                     fixed: true,
                     okValue: '确定',
                     beforeunload: function () {
-                        window.location.reload();
+                        window.location = config.jumpTo;
                         return true;
                     },
                     ok: function () {

@@ -56,7 +56,8 @@
                 $(document).ready(function(){
                     $("#logout").click(function () {
                         userLogout({
-                            url:"<@com.tags.spring.url value='/user/logout'/>"
+                            url:"<@com.tags.spring.url value='/user/logout'/>",
+                            jumpTo:"<@com.tags.spring.url value='/'/>"
                         });
                     });
                 });
