@@ -51,27 +51,15 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlUI.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.messages_zh.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/web/common.js' />"></script>
             <script language="javascript" >
                 $(document).ready(function(){
                     $("#logout").click(function () {
-
-                        $.post("<@com.tags.spring.url value='/user/logout'/>", function(data){
-                            if(200 == data.code){
-                                art.dialog({
-                                    title : "提示",
-                                    content : data.msg,
-                                    fixed: true,
-                                    okValue : '确定',
-                                    ok : function() {
-                                        window.location.reload();
-                                        return true;
-                                    }
-                                }).lock();
-                            }
+                        userLogout({
+                            url:"<@com.tags.spring.url value='/user/logout'/>"
                         });
                     });
                 });
-
             </script>
         </head>
         <body>

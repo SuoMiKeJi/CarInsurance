@@ -1,6 +1,58 @@
 /* 公用的 */
 
 /**
+ * 用户登出
+ */
+function userLogout(config) {
+    $("body").showLoading();
+    jlData.request(config.url, {
+        async: true,
+        type: "GET",
+        data: config.data,
+        success: function (response, textStatus) {
+            $("body").hideLoading();
+            var data = response.result;
+            if (200 == response.code) {
+                art.dialog({
+                    title: "提示",
+                    content: "用户‘" + data.username + "’登出成功",
+                    fixed: true,
+                    okValue: '确定',
+                    beforeunload: function () {
+                        window.location.reload();
+                        return true;
+                    },
+                    ok: function () {
+                        return true;
+                    }
+                }).lock();
+            } else {
+                art.dialog({
+                    title: "提示",
+                    content: response.msg,
+                    fixed: true,
+                    okValue: '确定',
+                    ok: function () {
+                        return true;
+                    }
+                }).lock();
+            }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $("body").hideLoading();
+            art.dialog({
+                title: "提示",
+                content: "系统异常，请稍后重试！",
+                okValue: '确定',
+                ok: function () {
+                    return true;
+                }
+            }).lock();
+        }
+    });
+}
+
+/**
  * 加载下拉框数据
  */
 function loadDataToSelect(config) {

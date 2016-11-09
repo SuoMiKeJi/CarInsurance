@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
 
 /**
  * 登陆
@@ -38,12 +36,13 @@ public class UserController extends AbstractController {
 
     /**
      * 登陆操作
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/login.json")
     public DataDeliveryWrapper<User> login(HttpServletRequest request, @ModelAttribute("form") User form) {
-            SearchUser searchUser = new SearchUser();
+        SearchUser searchUser = new SearchUser();
         searchUser.setUsername(form.getUsername());
         searchUser.setPassword(form.getPassword());
         DataDeliveryWrapper<User> result = service.find(searchUser);
@@ -53,21 +52,26 @@ public class UserController extends AbstractController {
 
     /**
      * 登出操作
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/logout")
     public DataDeliveryWrapper<User> logout(HttpServletRequest request) {
-        DataDeliveryWrapper<User> result= null;
-        User user= (User)request.getSession().getAttribute(Constant.System.Config.USER_SESSION_KEY);
-        // 清除session
+        DataDeliveryWrapper<User> result = null;
+        try {
+            User user = (User) request.getSession().getAttribute(Constant.System.Config.USER_SESSION_KEY);
+            // 清除session
 //        Enumeration<String> em = request.getSession().getAttributeNames();
 //        while (em.hasMoreElements()) {
 //            request.getSession().removeAttribute(em.nextElement().toString());
 //        }
-        request.getSession().removeAttribute(Constant.System.Config.USER_SESSION_KEY);
-        request.getSession().invalidate();
-        result = new DataDeliveryWrapper<User>(200, "用户"+user.getUsername()+"登出", user);
+            request.getSession().removeAttribute(Constant.System.Config.USER_SESSION_KEY);
+            request.getSession().invalidate();
+            result = new DataDeliveryWrapper<User>(200, "登出成功", user);
+        } catch (Exception e) {
+            result = new DataDeliveryWrapper<User>(500, "出错啦", null);
+        }
         return result;
     }
 }
