@@ -53,7 +53,7 @@ public class ValidateCodeInterceptor extends AbstractInterceptor {
             HttpUtil.printJson(response, new DataDeliveryWrapper<Object>(500, "验证码无效，请刷新验证码", null));
             return false;
         }
-        if (!serverValidateCode.equals(localValidateCode)) {
+        if (!serverValidateCode.equalsIgnoreCase(localValidateCode)) {
 //            Map<String, Object> map = new HashMap<String, Object>();
 //            map.put("code", 203);
 //            map.put("msg", "");
