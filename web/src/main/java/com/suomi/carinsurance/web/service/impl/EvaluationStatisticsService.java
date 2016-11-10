@@ -13,6 +13,8 @@ package com.suomi.carinsurance.web.service.impl;
 import com.suomi.carinsurance.annotation.ChartConfig;
 import com.suomi.carinsurance.datasource.mysql.read.IAllAvgReadMapper;
 import com.suomi.carinsurance.datasource.mysql.read.IEvaluationStatisticsReadMapper;
+import com.suomi.carinsurance.export.ExcelWorkbook;
+import com.suomi.carinsurance.export.excel.ExcelService;
 import com.suomi.carinsurance.model.Constant;
 import com.suomi.carinsurance.model.statistics.AllAvg;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
@@ -27,8 +29,10 @@ import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import net.lizhaoweb.spring.mvc.core.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.ServletOutputStream;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,12 +66,20 @@ public class EvaluationStatisticsService extends AbstractService implements IEva
         return readMapper.find(search);
     }
 
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    public List<EvaluationStatistics> findAll(SearchEvaluationStatistics search) {
+//        return readMapper.findAll(search);
+//    }
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<EvaluationStatistics> findAll(SearchEvaluationStatistics search) {
-        return readMapper.findAll(search);
+    public List<EvaluationStatistics> findAllBase(SearchEvaluationStatistics search) {
+        return readMapper.findAllBase(search);
     }
 
     /**
@@ -148,11 +160,7 @@ public class EvaluationStatisticsService extends AbstractService implements IEva
      * {@inheritDoc}
      */
     @Override
-    public boolean vehicleRiskRating(
-//            HttpServletRequest request,
-//            HttpServletResponse response,
-            SearchEvaluationStatistics search
-    ) {
+    public boolean vehicleRiskRating(SearchEvaluationStatistics search) {
         try {
             // 统计列表
             List<EvaluationStatistics> list = readMapper.findAll(search);
@@ -178,6 +186,41 @@ public class EvaluationStatisticsService extends AbstractService implements IEva
             HttpUtil.print(this.getResponse(), "系统出错啦，请稍后再试……");
         }
         return false;
+    }
+
+    @Override
+    public void exportExcel(String configKey, ExcelService excelService) {
+        ServletOutputStream servletOutputStream = null;
+        try {
+            servletOutputStream = this.getResponse().getOutputStream();
+//            HttpSession session = request.getSession();
+//            ServletContext application = session.getServletContext();
+
+            // 获取配置信息
+            Map<String, ExcelWorkbook> workbookMap = (Map<String, ExcelWorkbook>) this.getApplication().getAttribute(com.suomi.carinsurance.web.Constant.Application.ServletContext.Key.EXPORT_EXCEL_WORKBOOK);
+            ExcelWorkbook workbookConfig = workbookMap.get(configKey);
+
+            // 设置响应对象
+            this.getResponse().setCharacterEncoding(net.lizhaoweb.common.util.base.Constant.Charset.UTF8);
+            String contentType = String.format(
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=%s",
+                    net.lizhaoweb.common.util.base.Constant.Charset.UTF8
+            );
+            this.getResponse().setContentType(contentType);
+            String encodeFileName = URLEncoder.encode(
+                    workbookConfig.getName(),
+                    net.lizhaoweb.common.util.base.Constant.Charset.UTF8
+            );
+            this.getResponse().setHeader("Content-Disposition", String.format("attachment;filename=%s.xls", encodeFileName));
+
+
+            // 生成 Excel
+            SearchEvaluationStatistics search = new SearchEvaluationStatistics();
+            List<EvaluationStatistics> data = readMapper.findAllBase(search);
+            excelService.export(servletOutputStream, workbookConfig, data, EvaluationStatistics.class);
+        } catch (Exception e) {
+            HttpUtil.print(servletOutputStream, "出错啦", net.lizhaoweb.common.util.base.Constant.Charset.UTF8);
+        }
     }
 
     // 计算平铺柱形

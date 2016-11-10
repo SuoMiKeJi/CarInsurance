@@ -4,7 +4,6 @@
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/highcharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
-    <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/driving_behavior_analysis/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {

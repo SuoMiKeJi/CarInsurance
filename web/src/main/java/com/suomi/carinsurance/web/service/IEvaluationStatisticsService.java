@@ -10,6 +10,7 @@
  */
 package com.suomi.carinsurance.web.service;
 
+import com.suomi.carinsurance.export.excel.ExcelService;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
 import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
@@ -39,13 +40,22 @@ public interface IEvaluationStatisticsService {
     EvaluationStatistics find(SearchEvaluationStatistics search);
 
 
+//    /**
+//     * 查询数据。
+//     *
+//     * @param search 查询对象。
+//     * @return 返回数据列表。
+//     */
+//    List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
+
+
     /**
-     * 查询数据。
+     * 查询基础数据。
      *
      * @param search 查询对象。
      * @return 返回数据列表。
      */
-    List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
+    List<EvaluationStatistics> findAllBase(SearchEvaluationStatistics search);
 
     /**
      * 获取下拉列表数据。
@@ -65,13 +75,10 @@ public interface IEvaluationStatisticsService {
     /**
      * 车辆风险统计
      *
-     * @param request  请求对象
-     * @param response 响应对象
-     * @param search   查询条件
+     * @param search 查询条件
      * @return 是否跳转到页面
      */
-    boolean vehicleRiskRating(
-//            HttpServletRequest request,
-//            HttpServletResponse response,
-            SearchEvaluationStatistics search);
+    boolean vehicleRiskRating(SearchEvaluationStatistics search);
+
+    void exportExcel(String configKey, ExcelService excelService);
 }

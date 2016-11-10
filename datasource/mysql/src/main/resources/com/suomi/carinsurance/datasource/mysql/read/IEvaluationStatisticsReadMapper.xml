@@ -28,6 +28,17 @@
         SELECT base.GPS AS gpsId, base.ID AS vehicleId FROM total AS base
     </select>
 
+    <!-- 通过查询条件获取评估统计基础数据列表 -->
+    <select id="findAllBase" resultType="evaluationStatistics" parameterType="searchEvaluationStatistics">
+        SELECT
+        <include refid="baseField"/>
+        FROM total AS base
+        <if test="id!=null">AND base.auto_id=#{id}</if>
+        <if test="name!=null">AND base.ID LIKE CONCAT('%','${name}','%' )</if>
+        <if test="gpsId!=null">AND base.GPS=#{gpsId}</if>
+        <if test="vehicleId!=null">AND base.ID=#{vehicleId}</if>
+    </select>
+
     <!-- 通过查询条件获取评估统计数据列表 -->
     <select id="findAll" resultType="evaluationStatistics" parameterType="searchEvaluationStatistics">
         SELECT<include refid="baseField"/>,<include refid="speedLadder"/>,<include refid="accelerationLadder"/>,

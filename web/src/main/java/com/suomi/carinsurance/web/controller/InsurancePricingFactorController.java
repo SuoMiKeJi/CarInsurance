@@ -10,25 +10,21 @@
  */
 package com.suomi.carinsurance.web.controller;
 
-import com.suomi.carinsurance.export.ExcelWorkbook;
 import com.suomi.carinsurance.export.excel.ExcelService;
 import com.suomi.carinsurance.model.statistics.EvaluationStatistics;
 import com.suomi.carinsurance.search.statistics.SearchEvaluationStatistics;
-import com.suomi.carinsurance.web.Constant;
 import com.suomi.carinsurance.web.service.IEvaluationStatisticsService;
 import lombok.Setter;
+import net.lizhaoweb.spring.mvc.core.bean.DataDeliveryWrapper;
 import net.lizhaoweb.spring.mvc.core.controller.AbstractController;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.net.URLEncoder;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <h1>控制层 - 保险定价因子</h1>
@@ -43,6 +39,8 @@ import java.util.Map;
 @RequestMapping("/ipfc")
 public class InsurancePricingFactorController extends AbstractController {
 
+    private final static String MODEL = "insurance_pricing_factor";
+
     private static final String CONFIG_EXPORT_EXCEL_WORKBOOKMAP_KEY = InsurancePricingFactorController.class.getSimpleName();
 
     @Setter
@@ -51,38 +49,37 @@ public class InsurancePricingFactorController extends AbstractController {
     @Setter
     private ExcelService excelService;
 
+    /**
+     * 首页
+     *
+     * @return 跳转地址
+     */
+    @RequestMapping(value = "/index", method = {RequestMethod.GET})
+    public String index(ModelMap model) {
+        return String.format("/%s/index", MODEL);
+    }
+
+    /**
+     * 获取数据。
+     *
+     * @return 统计明细。
+     */
+    @ResponseBody
+    @RequestMapping(value = "/all.json", method = {RequestMethod.GET})
+    public DataDeliveryWrapper<List<EvaluationStatistics>> getData() {
+        DataDeliveryWrapper<List<EvaluationStatistics>> result = null;
+        try {
+            SearchEvaluationStatistics search = new SearchEvaluationStatistics();
+            List<EvaluationStatistics> data = service.findAllBase(search);
+            result = new DataDeliveryWrapper<List<EvaluationStatistics>>(200, "", data);
+        } catch (Exception e) {
+            result = new DataDeliveryWrapper<List<EvaluationStatistics>>(500, "出错啦", null);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/export.excel", method = {RequestMethod.GET})
     public void export(HttpServletRequest request, HttpServletResponse response) {
-        ServletOutputStream servletOutputStream = null;
-        try {
-            servletOutputStream = response.getOutputStream();
-            HttpSession session = request.getSession();
-            ServletContext application = session.getServletContext();
-
-            // 获取配置信息
-            Map<String, ExcelWorkbook> workbookMap = (Map<String, ExcelWorkbook>) application.getAttribute(Constant.Application.ServletContext.Key.EXPORT_EXCEL_WORKBOOK);
-            ExcelWorkbook workbookConfig = workbookMap.get(CONFIG_EXPORT_EXCEL_WORKBOOKMAP_KEY);
-
-            // 设置响应对象
-            response.setCharacterEncoding(net.lizhaoweb.common.util.base.Constant.Charset.UTF8);
-            String contentType = String.format(
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=%s",
-                    net.lizhaoweb.common.util.base.Constant.Charset.UTF8
-            );
-            response.setContentType(contentType);
-            String encodeFileName = URLEncoder.encode(
-                    workbookConfig.getName(),
-                    net.lizhaoweb.common.util.base.Constant.Charset.UTF8
-            );
-            response.setHeader("Content-Disposition", String.format("attachment;filename=%s.xls", encodeFileName));
-
-
-            // 生成 Excel
-            SearchEvaluationStatistics search = new SearchEvaluationStatistics();
-            List<EvaluationStatistics> data = service.findAll(search);
-            excelService.export(servletOutputStream, workbookConfig, data, EvaluationStatistics.class);
-        } catch (Exception e) {
-            this.print(servletOutputStream, "出错啦", net.lizhaoweb.common.util.base.Constant.Charset.UTF8);
-        }
+        service.exportExcel(CONFIG_EXPORT_EXCEL_WORKBOOKMAP_KEY, excelService);
     }
 }

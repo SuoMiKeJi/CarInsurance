@@ -39,9 +39,6 @@
     </bean>
 
     <!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" /> -->
-    <bean class="com.suomi.carinsurance.web.controller.EvaluationStatisticsController">
-        <property name="service" ref="evaluationStatisticsService"/>
-    </bean>
 
     <!-- 车辆风险评级 -->
     <bean class="com.suomi.carinsurance.web.controller.VehicleRiskRatingController">

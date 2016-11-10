@@ -45,6 +45,14 @@ public interface IEvaluationStatisticsReadMapper {
     List<EvaluationStatistics> findAll(SearchEvaluationStatistics search);
 
     /**
+     * 通过查询条件获取评估统计基础数据列表。
+     *
+     * @param search 查询条件。
+     * @return 评估统计数据列表。
+     */
+    List<EvaluationStatistics> findAllBase(SearchEvaluationStatistics search);
+
+    /**
      * 获取下拉列表数据。
      *
      * @return 下拉列表数据。

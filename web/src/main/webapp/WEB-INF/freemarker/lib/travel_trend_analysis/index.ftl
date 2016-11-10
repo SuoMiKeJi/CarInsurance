@@ -5,7 +5,6 @@
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/datepicker/WdatePicker.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
-    <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/common.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/travel_trend_analysis/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -104,46 +103,46 @@
 <#macro dataShowPaenl>
     <table class="data_table">
         <thead >
-        <tr>
-            <th width="10" >&nbsp;</th>
-            <th width="80" >GPS</th>
-            <th width="80" >车牌号</th>
-            <th width="60" >年月</th>
-            <th width="120" >里程(公里)</th>
-            <th width="100" >时长(小时)</th>
-            <th width="150" >平均速度(公里/小时)</th>
-            <th width="120" >平均加速度(米/秒<sup>2</sup>)</th>
-            <th width="120" >平均减速度(米/秒<sup>2</sup>)</th>
-        </tr>
+            <tr>
+                <th width="10" >&nbsp;</th>
+                <th width="80" >GPS</th>
+                <th width="80" >车牌号</th>
+                <th width="60" >年月</th>
+                <th width="120" >里程(<span>公里</span>)</th>
+                <th width="100" >时长(<span>小时</span>)</th>
+                <th width="150" >平均速度(<span>公里/小时</span>)</th>
+                <th width="120" >平均加速度(<span>米/秒<sup>2</sup></span>)</th>
+                <th width="120" >平均减速度(<span>米/秒<sup>2</sup></span>)</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td >&nbsp;</td>
-            <td data-name="gpsId">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="vehicleId">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="month">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="mileage">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="duration">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="avgSpeed">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="avgAcceleration">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-            <td data-name="avgDeceleration">
-                <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
-            </td>
-        </tr>
+            <tr>
+                <td >&nbsp;</td>
+                <td data-name="gpsId">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="vehicleId">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="month">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="mileage">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="duration">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="avgSpeed">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="avgAcceleration">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+                <td data-name="avgDeceleration">
+                    <img src="<@com.tags.spring.url value='/images/loading_95_7.gif' />" />
+                </td>
+            </tr>
         </tbody>
     </table>
 </#macro>
