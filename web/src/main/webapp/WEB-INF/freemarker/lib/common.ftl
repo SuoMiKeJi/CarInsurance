@@ -47,6 +47,7 @@
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/core/jquery.validate.min.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/jquery/plug-in/validate/localization/messages_zh.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/StringUtil.js' />"></script>
+            <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlData.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlForm.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jlUI.js' />"></script>
             <script type="text/javascript" charset="UTF-8" src="<@tags.spring.url value='/script/my-js/jquery.validate.plugin.js' />"></script>
@@ -123,21 +124,25 @@
     <!--left nav star-->
     <div class="st_tree" page-region="left" style="overflow-y:auto;">
         <ul class="site-stats" >
-            <li <#if selected == "VRRC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/vrrc/index' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
-            </li>
-            <li <#if selected == "DBAC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/dbac/index' />" onclick="javascript:$('body').showLoading();">驾驶行为分析</a>
-            </li>
-            <li <#if selected == "TTAC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/ttac/index' />" onclick="javascript:$('body').showLoading();">行驶趋势分析</a>
-            </li>
-            <li <#if selected == "IPFC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/ipfc/index' />" onclick="javascript:$('body').showLoading();">保险定价因子</a>
-            </li>
-            <li <#if selected == "VUVC">class="active"</#if>>
-                <a href="<@tags.spring.url value='/vuvc/index' />" onclick="javascript:$('body').showLoading();">汽车使用可视化</a>
-            </li>
+            <#if SESSION_USER??>
+                <li <#if selected == "VRRC">class="active"</#if>>
+                    <a href="<@tags.spring.url value='/vrrc/index' />" onclick="javascript:$('body').showLoading();">汽车风险评级</a>
+                </li>
+                <li <#if selected == "DBAC">class="active"</#if>>
+                    <a href="<@tags.spring.url value='/dbac/index' />" onclick="javascript:$('body').showLoading();">驾驶行为分析</a>
+                </li>
+                <li <#if selected == "TTAC">class="active"</#if>>
+                    <a href="<@tags.spring.url value='/ttac/index' />" onclick="javascript:$('body').showLoading();">行驶趋势分析</a>
+                </li>
+                <#if SESSION_USER.role_id == 0 >
+                    <li <#if selected == "IPFC">class="active"</#if>>
+                        <a href="<@tags.spring.url value='/ipfc/index' />" onclick="javascript:$('body').showLoading();">保险定价因子</a>
+                    </li>
+                </#if>
+                <li <#if selected == "VUVC">class="active"</#if>>
+                    <a href="<@tags.spring.url value='/vuvc/index' />" onclick="javascript:$('body').showLoading();">汽车使用可视化</a>
+                </li>
+            </#if>
         </ul>
     </div>
     <!--left nav end-->

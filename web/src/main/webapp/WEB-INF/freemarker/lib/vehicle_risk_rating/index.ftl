@@ -3,7 +3,6 @@
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/vehicle_risk_rating/index.css' />"/>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/plugins/Highcharts-5.0.2/code/highcharts.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlCharts.js' />"></script>
-    <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/vehicle_risk_rating/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {

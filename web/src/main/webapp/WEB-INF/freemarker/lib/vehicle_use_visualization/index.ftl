@@ -1,6 +1,5 @@
 <#macro content >
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/vehicle_use_visualization/index.css' />"/>
-    <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             // 加载下拉框数据

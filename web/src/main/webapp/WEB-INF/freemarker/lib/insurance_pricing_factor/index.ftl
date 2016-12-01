@@ -1,6 +1,5 @@
 <#macro content >
     <link rel="stylesheet" type="text/css" href="<@com.tags.spring.url value='/script/css/insurance_pricing_factor/index.css' />"/>
-    <script type="text/javascript" src="<@com.tags.spring.url value='/script/my-js/jlData.js' />"></script>
     <script type="text/javascript" src="<@com.tags.spring.url value='/script/web/insurance_pricing_factor/index.js' />"></script>
     <script type="text/javascript">
         $(document).ready(function () {
