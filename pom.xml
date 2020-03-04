@@ -214,7 +214,7 @@
         <spring.version>4.3.0.RELEASE</spring.version>
         <solr.version>4.10.4</solr.version>
         <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
-        <fasterxml.jackson.version>2.6.0</fasterxml.jackson.version>
+        <fasterxml.jackson.version>2.10.3</fasterxml.jackson.version>
     </properties>
 
     <dependencyManagement>
